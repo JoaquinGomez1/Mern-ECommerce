@@ -1,0 +1,16 @@
+.productsCarousel {
+  overflow: scroll;
+  scrollbar-width: none; /* Hide Scrollbar in firefox*/
+}
+
+.productsCarousel::-webkit-scrollbar {
+  display: none;
+  background: transparent;
+  width: 0;
+}
+
+@media (max-width: 1200px) {
+  .productsCarousel {
+    justify-content: unset !important;
+  }
+}

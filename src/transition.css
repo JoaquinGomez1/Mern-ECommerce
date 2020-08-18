@@ -1,0 +1,16 @@
+.transition {
+  animation-name: transition;
+  animation-duration: 0.6s;
+  overflow: hidden;
+}
+
+@keyframes transition {
+  from {
+    transform: translateX(30%);
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
