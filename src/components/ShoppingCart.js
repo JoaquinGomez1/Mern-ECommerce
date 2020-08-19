@@ -7,7 +7,7 @@ export default function ShoppingCart() {
   const [shoppingCart, setShoppingCart] = useContext(myShoppingCartContext);
 
   const calculatePrice = () => {
-    let arrayOfPrices = shoppingCart.map((item) => item.qty * item.price);
+    let arrayOfPrices = shoppingCart.map((item) => item.qty * item.price); // Returns an array of total price per item
     return arrayOfPrices.reduce((a, b) => {
       return a + b;
     });
@@ -19,9 +19,11 @@ export default function ShoppingCart() {
         {shoppingCart.map((each) => (
           <>
             <ProductCard
+              id={each.id}
               title={each.name}
               subtitle={each.price}
               image={each.image}
+              buyer
             ></ProductCard>
             <p>{each.qty}</p>
           </>
