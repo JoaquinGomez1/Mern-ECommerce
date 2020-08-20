@@ -101,7 +101,10 @@ export default function ProductCard(props) {
   };
 
   return (
-    <Card className={"transition"} style={{ minWidth: 310, margin: "10px" }}>
+    <Card
+      className={"productCard transition"}
+      style={{ minWidth: 310, margin: "10px" }}
+    >
       <CardActionArea>
         <CardMedia
           className={classes.media}
