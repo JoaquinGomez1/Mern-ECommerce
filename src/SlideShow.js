@@ -19,7 +19,7 @@ export default function SlideShow(props) {
       clearInterval(myInterval);
     };
     // eslint-disable-next-line
-  }, [state]);
+  }, [state, props.children, setState]);
 
   const moveNext = () => {
     if (state.current === state.total - 1) setState({ ...state, current: 0 });

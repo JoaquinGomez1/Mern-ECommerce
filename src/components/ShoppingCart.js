@@ -4,10 +4,10 @@ import ProductCard from "./ProductCard";
 import { Grid, Container } from "@material-ui/core";
 
 export default function ShoppingCart() {
-  const [shoppingCart, setShoppingCart] = useContext(myShoppingCartContext);
+  const { shoppingCartItems } = useContext(myShoppingCartContext);
 
   const calculatePrice = () => {
-    let arrayOfPrices = shoppingCart.map((item) => item.qty * item.price); // Returns an array of total price per item
+    let arrayOfPrices = shoppingCartItems.map((item) => item.qty * item.price); // Returns an array of total price per item
     return arrayOfPrices.reduce((a, b) => {
       return a + b;
     });
@@ -17,7 +17,7 @@ export default function ShoppingCart() {
     <React.Fragment>
       <Container className="componentTransition">
         <Grid container justify="center">
-          {shoppingCart.map((each) => (
+          {shoppingCartItems.map((each) => (
             <>
               <ProductCard
                 id={each.id}
@@ -32,7 +32,7 @@ export default function ShoppingCart() {
         </Grid>
         <Grid container>
           <h1>Total price:</h1>
-          <p>{shoppingCart.length > 0 ? calculatePrice() : null}</p>
+          <p>{shoppingCartItems.length > 0 ? calculatePrice() : null}</p>
         </Grid>
       </Container>
     </React.Fragment>

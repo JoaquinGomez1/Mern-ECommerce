@@ -25,14 +25,15 @@ export default function ProductCard(props) {
   const classes = useStyles();
 
   const { title, subtitle, image, id, buyer } = props;
-  const [shoppingCartItems, setShoppingCartItems] = useContext(
+  const { shoppingCartItems, setShoppingCartItems } = useContext(
     myShoppingCartContext
   );
 
   // Add one element
   const addItem = () => {
+    // eslint-disable-next-line
     const thisItem = shoppingCartItems.find((item) => {
-      if (item.id == id) return item;
+      if (item.id === id) return item;
     });
     const itemIndex = shoppingCartItems.indexOf(thisItem);
 
@@ -48,6 +49,7 @@ export default function ProductCard(props) {
 
   // Remove one element from any given item
   const removeItem = () => {
+    // eslint-disable-next-line
     const thisItem = shoppingCartItems.find(function (item) {
       if (item.id === id) return item;
     });

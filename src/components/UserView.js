@@ -10,17 +10,18 @@ export default function UserView() {
 
   const handleLogout = () => {
     setCurrentUser({});
+    localStorage.removeItem("user");
   };
 
   return (
     <>
       {/* Check if the user is logged in*/}
       {!currentUser.isLoggedIn ? (
-        history.push("/login")
+        history.push("/")
       ) : (
         <Container>
           <Grid container direction="column">
-            <h1>Welcome, {currentUser.name}</h1>
+            <h1>Welcome, {currentUser.username}</h1>
 
             <Grid item>
               <Button

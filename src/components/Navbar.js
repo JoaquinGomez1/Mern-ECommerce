@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useLayoutEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import { Grid } from "@material-ui/core";
@@ -8,16 +8,25 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { myUserContext } from "../context/UserContext";
 
 export default function Navbar() {
-  const [shoppingCartItems, setShoppingCartItems] = useContext(
-    myShoppingCartContext
-  );
+  const { shoppingCartItems } = useContext(myShoppingCartContext);
 
-  const { currentUser } = useContext(myUserContext);
+  const { currentUser, setCurrentUser } = useContext(myUserContext);
   const history = useHistory();
 
   const redirectTo = (route) => {
     history.push(route);
   };
+
+  useLayoutEffect(() => {
+    // Since navbar is the only consistent component trought the entire website.
+    // We use it to check if there is currently a user logged in and to set the current user into the context
+    const user = localStorage.getItem("user");
+    const parsedUser = JSON.parse(user);
+    if (parsedUser) {
+      setCurrentUser(parsedUser);
+    }
+    console.log(parsedUser);
+  }, []);
 
   return (
     <Grid

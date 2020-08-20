@@ -5,7 +5,7 @@ import { Button } from "@material-ui/core";
 import { myShoppingCartContext } from "../context/ShoppingCartContext";
 
 export default function BuyButton(props) {
-  const [shoppingCartItems, setShoppingCartItems] = useContext(
+  const { shoppingCartItems, setShoppingCartItems } = useContext(
     myShoppingCartContext
   );
 

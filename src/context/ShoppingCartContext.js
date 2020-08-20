@@ -7,7 +7,7 @@ export default function ShoppingCartContext(props) {
 
   return (
     <myShoppingCartContext.Provider
-      value={[shoppingCartItems, setShoppingCartItems]}
+      value={{ shoppingCartItems, setShoppingCartItems }}
       {...props}
     />
   );
