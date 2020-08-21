@@ -7,12 +7,6 @@
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -28,11 +22,17 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
+.errorMessage {
+  animation: 0.1s linear ErrorPopUp;
+}
+
+@keyframes ErrorPopUp {
   from {
-    transform: rotate(0deg);
+    transform: scale(0);
+    opacity: 0;
   }
   to {
-    transform: rotate(360deg);
+    transform: scale(1);
+    opacity: 1;
   }
 }

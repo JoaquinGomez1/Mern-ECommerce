@@ -1,13 +1,20 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import { Container, Grid, Button, TextField } from "@material-ui/core";
+import {
+  Container,
+  Grid,
+  Button,
+  TextField,
+  Typography,
+} from "@material-ui/core";
 import { myUserContext } from "../context/UserContext";
 
 export default function UserLogin() {
   const [loginData, setLoginData] = useState({ username: "", password: "" });
   const history = useHistory();
   const { currentUser, setCurrentUser } = useContext(myUserContext);
+  const [wasError, setWasError] = useState();
 
   const sendData = async (e) => {
     // Prevent Default Behaviour
@@ -24,9 +31,13 @@ export default function UserLogin() {
 
     const data = await req.json();
 
-    setCurrentUser(data);
-    localStorage.setItem("user", JSON.stringify(data));
-    console.log(data);
+    if (req.status < 300) {
+      setCurrentUser(data);
+      localStorage.setItem("user", JSON.stringify(data));
+      console.log(data);
+    } else {
+      setWasError(data.message);
+    }
   };
 
   const handleChange = (e) => {
@@ -58,11 +69,19 @@ export default function UserLogin() {
                 <TextField
                   id="login-password"
                   label="Password"
-                  style={{ width: "40%" }}
+                  style={{ width: "40%", padding: "1rem 0 " }}
                   type="password"
                   name="password"
                 />
-
+                {wasError ? (
+                  <Typography
+                    className="errorMessage"
+                    variant="h5"
+                    style={{ color: "#f02b66" }}
+                  >
+                    {wasError}
+                  </Typography>
+                ) : null}
                 <Button
                   variant="contained"
                   color="secondary"

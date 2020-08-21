@@ -1,10 +1,13 @@
 import React, { useContext, Children, useEffect } from "react";
 import { mySlideshowContext } from "./context/SlideshowContext.js";
+import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
+import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 
 export default function SlideShow(props) {
   const [state, setState] = useContext(mySlideshowContext);
 
-  const INTERVAL_DURATION = props.duration ? props.duration : 2000;
+  const defaultInterval = 2000;
+  const INTERVAL_DURATION = props.duration ? props.duration : defaultInterval;
 
   useEffect(() => {
     setState({
@@ -26,8 +29,10 @@ export default function SlideShow(props) {
     else setState({ ...state, current: state.current + 1 });
   };
 
-  const bullets = Array(state.total).fill("o");
-  bullets[state.current] = "◙";
+  const bullets = Array(state.total).fill(<RadioButtonUncheckedIcon />);
+  bullets[state.current] = (
+    <FiberManualRecordIcon style={{ fontSize: "30px" }} />
+  );
 
   return (
     <div style={{ marginTop: "20px" }}>

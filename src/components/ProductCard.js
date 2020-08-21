@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 export default function ProductCard(props) {
   const classes = useStyles();
 
-  const { title, subtitle, image, id, buyer } = props;
+  const { title, subtitle, image, id, buyer, qty } = props;
   const { shoppingCartItems, setShoppingCartItems } = useContext(
     myShoppingCartContext
   );
@@ -36,7 +36,6 @@ export default function ProductCard(props) {
       if (item.id === id) return item;
     });
     const itemIndex = shoppingCartItems.indexOf(thisItem);
-
     let shoppingCartCopy = [...shoppingCartItems];
 
     shoppingCartCopy[itemIndex] = {
@@ -75,21 +74,24 @@ export default function ProductCard(props) {
       return (
         <CardActions>
           <Grid container justify="center">
-            <Button
-              style={{ margin: "10px" }}
-              variant="contained"
-              onClick={removeItem}
-            >
-              -
-            </Button>
-            <Button
-              style={{ margin: "10px" }}
-              color="secondary"
-              variant="contained"
-              onClick={addItem}
-            >
-              +
-            </Button>
+            <Typography variant="h4">Quantity: {qty}</Typography>
+            <Grid container justify="center">
+              <Button
+                style={{ margin: "10px" }}
+                variant="contained"
+                onClick={removeItem}
+              >
+                -
+              </Button>
+              <Button
+                style={{ margin: "10px" }}
+                color="secondary"
+                variant="contained"
+                onClick={addItem}
+              >
+                +
+              </Button>
+            </Grid>
           </Grid>
         </CardActions>
       );

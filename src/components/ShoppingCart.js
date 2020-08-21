@@ -24,9 +24,9 @@ export default function ShoppingCart() {
                 title={each.name}
                 subtitle={each.price}
                 image={each.image}
+                qty={each.qty}
                 buyer
               ></ProductCard>
-              <p>{each.qty}</p>
             </>
           ))}
         </Grid>

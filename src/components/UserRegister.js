@@ -8,6 +8,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Typography,
 } from "@material-ui/core";
 
 import countries from "../static/contries.json";
@@ -16,6 +17,7 @@ import { myUserContext } from "../context/UserContext";
 export default function UserRegister() {
   const { currentUser, setCurrentUser } = useContext(myUserContext);
   const history = useHistory();
+  const [errorMessage, setErrorMessage] = useState();
   const [registerData, setRegisterData] = useState({
     username: "",
     password: "",
@@ -42,14 +44,11 @@ export default function UserRegister() {
     const response = await req.json();
 
     if (req.status < 300) {
-      console.log("here");
       setCurrentUser(response);
       localStorage.setItem("user", JSON.stringify(response));
     } else {
-      console.log(response);
+      setErrorMessage(response.message);
     }
-
-    console.log(req.status);
   };
 
   return (
@@ -66,56 +65,71 @@ export default function UserRegister() {
               justify="center"
               style={{ height: "calc(100vh - 80px)" }}
             >
-              <TextField
-                label="Username"
-                name="username"
-                onChange={handleChange}
-              />
-              <TextField
-                label="Password"
-                type="password"
-                name="password"
-                onChange={handleChange}
-              />
-              <TextField
-                label="Email"
-                type="email"
-                name="email"
-                onChange={handleChange}
-              />
+              <Grid container direction="column" style={{ width: "40%" }}>
+                <TextField
+                  label="Username"
+                  name="username"
+                  onChange={handleChange}
+                />
+                <TextField
+                  label="Password"
+                  type="password"
+                  name="password"
+                  onChange={handleChange}
+                />
+                <TextField
+                  label="Email"
+                  type="email"
+                  name="email"
+                  onChange={handleChange}
+                />
 
-              {/*TODO: Optimize mapping speed */}
-              <InputLabel id="country-select">Country</InputLabel>
-              <Select
-                labelId="country-select"
-                defaultValue="-"
-                name="country"
-                onChange={handleChange}
-              >
-                {countries.map((country) => {
-                  return (
-                    <MenuItem value={country.name}>{country.name}</MenuItem>
-                  );
-                })}
-              </Select>
-              <TextField
-                label="Address"
-                name="address"
-                onChange={handleChange}
-              />
-              <TextField
-                label="Phone Number"
-                name="phoneNumber"
-                onChange={handleChange}
-              />
-              <Button
-                color="secondary"
-                variant="contained"
-                style={{ marginTop: "50px" }}
-                onClick={handleSubmit}
-              >
-                Submit
-              </Button>
+                {/*TODO: Optimize mapping speed */}
+                <InputLabel id="country-select">Country</InputLabel>
+                <Select
+                  labelId="country-select"
+                  defaultValue="-"
+                  name="country"
+                  onChange={handleChange}
+                >
+                  {countries.map((country) => {
+                    return (
+                      <MenuItem value={country.name}>{country.name}</MenuItem>
+                    );
+                  })}
+                </Select>
+                <TextField
+                  label="Address"
+                  name="address"
+                  onChange={handleChange}
+                />
+                <TextField
+                  label="Phone Number"
+                  name="phoneNumber"
+                  onChange={handleChange}
+                />
+                {errorMessage ? (
+                  <Typography
+                    className="errorMessage"
+                    variant="h5"
+                    style={{ marginTop: "20px", color: "#ed0c5b" }}
+                  >
+                    {" "}
+                    {errorMessage}
+                  </Typography>
+                ) : null}
+
+                <Grid item>
+                  <Button
+                    color="secondary"
+                    variant="contained"
+                    style={{ marginTop: "50px" }}
+                    onClick={handleSubmit}
+                  >
+                    Submit
+                  </Button>
+                </Grid>
+              </Grid>
             </Grid>
           </form>
         </Container>
