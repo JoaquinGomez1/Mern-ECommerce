@@ -2,6 +2,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Ongoin Development
 
-This will be a fullstack E commerce website.
-The backend will be built using Nodejs and mongoose to handle MongoDB as it's database.
-Frontend is currently being developed with React v16.13
+This is the frontend of a fullstack E commerce web application, currently being developed with React v16.13.
+The backend will be built using Nodejs and MongoDB as it's database.
+ 
