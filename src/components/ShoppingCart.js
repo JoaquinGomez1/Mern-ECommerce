@@ -25,14 +25,19 @@ export default function ShoppingCart() {
                 subtitle={each.price}
                 image={each.image}
                 qty={each.qty}
-                buyer
+                inShoppingCart
               ></ProductCard>
             </>
           ))}
         </Grid>
         <Grid container>
           <h1>Total price:</h1>
-          <p>{shoppingCartItems.length > 0 ? calculatePrice() : null}</p>
+          <p>
+            {" "}
+            {shoppingCartItems.length > 0 ? (
+              <span>${calculatePrice()} </span>
+            ) : null}
+          </p>
         </Grid>
       </Container>
     </React.Fragment>

@@ -21,10 +21,12 @@ const useStyles = makeStyles({
   },
 });
 
+// --------------------------------- Component
+
 export default function ProductCard(props) {
   const classes = useStyles();
 
-  const { title, subtitle, image, id, buyer, qty } = props;
+  const { title, subtitle, image, id, inShoppingCart, qty } = props;
   const { shoppingCartItems, setShoppingCartItems } = useContext(
     myShoppingCartContext
   );
@@ -70,16 +72,17 @@ export default function ProductCard(props) {
   };
 
   const CheckForShoppingCart = () => {
-    if (buyer) {
+    if (inShoppingCart) {
       return (
         <CardActions>
           <Grid container justify="center">
-            <Typography variant="h4">Quantity: {qty}</Typography>
+            <Typography variant="h5">Quantity: {qty}</Typography>
             <Grid container justify="center">
               <Button
                 style={{ margin: "10px" }}
                 variant="contained"
                 onClick={removeItem}
+                size="large"
               >
                 -
               </Button>
@@ -87,6 +90,7 @@ export default function ProductCard(props) {
                 style={{ margin: "10px" }}
                 color="secondary"
                 variant="contained"
+                size="large"
                 onClick={addItem}
               >
                 +
@@ -110,11 +114,7 @@ export default function ProductCard(props) {
       style={{ minWidth: 310, margin: "10px" }}
     >
       <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={image}
-          title="Contemplative Reptile"
-        />
+        <CardMedia className={classes.media} image={image} title={title} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {title}

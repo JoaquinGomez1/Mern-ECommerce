@@ -1,9 +1,17 @@
-import React, { useContext, useLayoutEffect, useRef, useEffect } from "react";
+import React, {
+  useContext,
+  useLayoutEffect,
+  useRef,
+  useEffect,
+  useState,
+} from "react";
 import { useHistory } from "react-router-dom";
 
 // Material UI
 import { Grid } from "@material-ui/core";
 import { myShoppingCartContext } from "../context/ShoppingCartContext";
+import MenuIcon from "@material-ui/icons/Menu";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 
 // Context
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
@@ -13,10 +21,15 @@ import { myUserContext } from "../context/UserContext";
 import "../static/css/Navbar.css";
 
 export default function Navbar() {
+  const [modalOpen, setModalOpen] = useState(false);
   const { shoppingCartItems } = useContext(myShoppingCartContext);
   const { currentUser, setCurrentUser } = useContext(myUserContext);
   const history = useHistory();
+
   const pRef = useRef();
+  const modalRef = useRef();
+  const menuIconRef = useRef();
+  const liRef = useRef();
 
   const redirectTo = (route) => {
     history.push(route);
@@ -30,14 +43,26 @@ export default function Navbar() {
     if (parsedUser) {
       setCurrentUser(parsedUser);
     }
-    console.log(parsedUser);
-  }, []);
+  }, [setCurrentUser]);
 
   useEffect(() => {
-    if (shoppingCartItems.length >= 1)
+    // check if there is any items in the shopping cart
+    if (shoppingCartItems.length >= 1) {
       pRef.current.style.backgroundColor = "#ed0c5b";
-    else pRef.current.style.backgroundColor = "unset";
+      pRef.current.style.display = "block";
+    } else pRef.current.style.display = "none";
   }, [shoppingCartItems]);
+
+  useEffect(() => {
+    if (modalOpen) modalRef.current.style.display = "grid";
+    else modalRef.current.style.display = "none";
+  }, [modalOpen]);
+
+  const handleModal = (e) => {
+    if (e.target === menuIconRef.current) setModalOpen(true);
+    if (e.target === modalRef.current || e.target === liRef.current)
+      setModalOpen(false);
+  };
 
   return (
     <Grid
@@ -52,9 +77,14 @@ export default function Navbar() {
           onClick={() => {
             redirectTo("/");
           }}
+          className="navLogo"
         >
           E-Commerce
         </h2>
+      </Grid>
+
+      <Grid item className="NavProducts categories">
+        <h3 onClick={() => redirectTo("/products")}>Products</h3>
       </Grid>
 
       <Grid item className="categories">
@@ -69,7 +99,7 @@ export default function Navbar() {
         className="shoppingCartNav"
       >
         <p ref={pRef} style={{ fontWeight: "bold" }}>
-          {shoppingCartItems.length}
+          {shoppingCartItems.length > 0 ? shoppingCartItems.length : null}
         </p>
         <ShoppingCartIcon className="shoppingCartIcon"></ShoppingCartIcon>
       </Grid>
@@ -77,7 +107,7 @@ export default function Navbar() {
         className="navbar-userSection"
         style={{ display: "flex", alignItems: "center" }}
       >
-        {currentUser.isLoggedIn ? (
+        {currentUser ? (
           <Grid item>
             {" "}
             <h3
@@ -85,7 +115,9 @@ export default function Navbar() {
                 redirectTo("/user");
               }}
             >
-              View Profile
+              <AccountCircleIcon
+                style={{ transform: "scale(1.2)" }}
+              ></AccountCircleIcon>
             </h3>
           </Grid>
         ) : (
@@ -111,6 +143,59 @@ export default function Navbar() {
           </>
         )}
       </div>
+      <Grid item className="sideMenuContainer">
+        <MenuIcon
+          className="MenuIcon"
+          style={{ transform: "scale(1.2)" }}
+          onClick={handleModal}
+          ref={menuIconRef}
+        ></MenuIcon>
+
+        <div className="modalContainer" onClick={handleModal} ref={modalRef}>
+          <div className="modalContent">
+            <ul>
+              <li
+                onClick={() => {
+                  setModalOpen(false);
+                  redirectTo("/products");
+                }}
+              >
+                Products
+              </li>
+              <li>Categories</li>
+              {currentUser ? (
+                <li
+                  onClick={() => {
+                    setModalOpen(false);
+                    redirectTo("/user");
+                  }}
+                >
+                  Profile
+                </li>
+              ) : (
+                <>
+                  <li
+                    onClick={() => {
+                      setModalOpen(false);
+                      redirectTo("/login");
+                    }}
+                  >
+                    Log in
+                  </li>
+                  <li
+                    onClick={() => {
+                      setModalOpen(false);
+                      redirectTo("/register");
+                    }}
+                  >
+                    Sign Up
+                  </li>
+                </>
+              )}
+            </ul>
+          </div>
+        </div>
+      </Grid>
     </Grid>
   );
 }

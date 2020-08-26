@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import ProductCard from "./ProductCard";
 
 import { MainProductsListContext } from "../context/MainProductsContext";
 import { mySlideshowContext } from "../context/SlideshowContext.js";
@@ -7,11 +6,10 @@ import { mySlideshowContext } from "../context/SlideshowContext.js";
 import "../static/css/ProductCarousel.css";
 
 export default function ProductsCaroursel() {
-  const [products, setProducts] = useContext(MainProductsListContext);
+  const [products] = useContext(MainProductsListContext);
   const [slideShow, setSlideshow] = useContext(mySlideshowContext);
 
   const setCurrentSliderElement = (index) => {
-    console.log("clicked");
     setSlideshow({ ...slideShow, current: index });
   };
 
@@ -27,8 +25,9 @@ export default function ProductsCaroursel() {
         justifyContent: "center",
       }}
     >
-      {products.map((product, index) => (
+      {products.slice(0, 4).map((product, index) => (
         <img
+          key={product.id}
           style={{
             width: "310px",
             height: "210px",
@@ -41,6 +40,7 @@ export default function ProductsCaroursel() {
             setCurrentSliderElement(index);
           }}
           src={product.img}
+          alt={product.title}
         ></img>
       ))}
     </div>

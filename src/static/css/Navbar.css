@@ -7,7 +7,23 @@
   position: relative;
 }
 
+.NavBarContainer .MuiGrid-item > h3:hover,
+.NavBarContainer .MuiGrid-item > h2:hover,
+.MenuIcon:hover,
+.shoppingCartIcon:hover {
+  cursor: pointer;
+  user-select: none;
+  color: #f50057;
+}
+
+/* Do not change the font color on element responsible for
+ displaying the ammount of items in the shopping cart*/
+.NavBarContainer .MuiGrid-item > p:hover {
+  color: unset;
+}
+
 .shoppingCartNav p {
+  background-color: #f50057;
   border-radius: 50%;
   padding: 1px 4px 1px 3px;
   text-align: center;
@@ -20,4 +36,84 @@
   position: absolute;
   left: -0.8rem;
   top: 30px;
+}
+
+.sideMenuContainer,
+.MuiGrid-item {
+  display: grid;
+  place-items: center;
+  margin-left: 20px;
+}
+
+.MenuIcon {
+  margin: 20px;
+  display: none !important;
+}
+
+.modalContainer {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.modalContent {
+  display: grid;
+  position: relative;
+  right: 0;
+  top: 0;
+  background-color: #f1f1f1;
+  place-items: center;
+  justify-items: center;
+  width: 60%;
+  height: 100%;
+}
+
+.modalContent > ul {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  margin-left: -40px;
+  padding: 0;
+  display: grid;
+  text-align: center;
+}
+.modalContent > ul > li {
+  list-style: none;
+  padding: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  max-width: 100%;
+  min-width: 100%;
+  font-weight: 700;
+}
+
+@media (max-width: 900px) {
+  .MenuIcon {
+    display: block !important;
+    width: 100%;
+    height: 100%;
+  }
+  .categories {
+    display: none;
+  }
+
+  .navLogo {
+    font-size: 22px;
+  }
+
+  .navbar-userSection > * {
+    display: none;
+  }
+
+  .modalContent li:hover,
+  .modalContent li:active {
+    background-color: rgba(0, 0, 0, 0.08);
+    color: #f50057;
+    cursor: pointer;
+  }
 }

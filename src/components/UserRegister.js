@@ -18,6 +18,7 @@ export default function UserRegister() {
   const { currentUser, setCurrentUser } = useContext(myUserContext);
   const history = useHistory();
   const [errorMessage, setErrorMessage] = useState();
+
   const [registerData, setRegisterData] = useState({
     username: "",
     password: "",
@@ -34,7 +35,7 @@ export default function UserRegister() {
   };
 
   const handleSubmit = async () => {
-    const req = await fetch("http://localhost:3100/register", {
+    const req = await fetch("http://192.168.0.8:3100/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +54,7 @@ export default function UserRegister() {
 
   return (
     <>
-      {currentUser.isLoggedIn ? (
+      {currentUser ? (
         history.push("/user")
       ) : (
         <Container className="componentTransition">

@@ -21,7 +21,7 @@ export default function UserLogin() {
     e.preventDefault();
 
     // Send post request to the server
-    const req = await fetch("http://localhost:3100/login", {
+    const req = await fetch("http://192.168.0.8:3100/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +34,6 @@ export default function UserLogin() {
     if (req.status < 300) {
       setCurrentUser(data);
       localStorage.setItem("user", JSON.stringify(data));
-      console.log(data);
     } else {
       setWasError(data.message);
     }
@@ -47,7 +46,7 @@ export default function UserLogin() {
 
   return (
     <>
-      {currentUser.isLoggedIn ? (
+      {currentUser ? (
         history.push("/user")
       ) : (
         <Container className="componentTransition">

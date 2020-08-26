@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 import { Container, Grid, Button } from "@material-ui/core";
@@ -9,17 +9,17 @@ export default function UserView() {
   const history = useHistory();
 
   const handleLogout = () => {
-    setCurrentUser({});
+    setCurrentUser();
     localStorage.removeItem("user");
   };
 
   return (
     <>
       {/* Check if the user is logged in*/}
-      {!currentUser.isLoggedIn ? (
+      {!currentUser ? (
         history.push("/")
       ) : (
-        <Container>
+        <Container className="componentTransition">
           <Grid container direction="column">
             <h1>Welcome, {currentUser.username}</h1>
 

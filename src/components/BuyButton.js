@@ -1,7 +1,5 @@
-import React, { useContext, useEffect } from "react";
-
+import React, { useContext } from "react";
 import { Button } from "@material-ui/core";
-
 import { myShoppingCartContext } from "../context/ShoppingCartContext";
 
 export default function BuyButton(props) {
@@ -11,11 +9,13 @@ export default function BuyButton(props) {
 
   const addItem = () => {
     // Find if the item exists
+    // eslint-disable-next-line
     const itemExists = shoppingCartItems.find(function (item) {
-      if (item.id == props.id) return item;
+      if (item.id === props.id) return item;
     });
 
     if (itemExists) {
+      // Get index of the item and add 1 to its quantity
       const itemIndex = shoppingCartItems.indexOf(itemExists);
       let shoppingCartCopy = [...shoppingCartItems];
 
@@ -26,6 +26,7 @@ export default function BuyButton(props) {
 
       setShoppingCartItems(shoppingCartCopy);
     } else {
+      // If the item does not exists then just added it to the shopping cart
       setShoppingCartItems([
         ...shoppingCartItems,
         {
@@ -46,7 +47,7 @@ export default function BuyButton(props) {
       color="secondary"
       onClick={addItem}
     >
-      Buy
+      Add To Cart
     </Button>
   );
 }
