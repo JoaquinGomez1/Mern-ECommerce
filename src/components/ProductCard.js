@@ -1,5 +1,5 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState, useLayoutEffect } from "react";
+
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -22,6 +22,7 @@ export default function ProductCard(props) {
   const history = useHistory();
   const { title, subtitle, image, id, inShoppingCart, qty, isInStock } = props;
   const { addItem, removeOneItem, removeItem, addToFav } = useShoppingCart(id);
+  const [compName, setCompName] = useState("transition");
 
   const redirectTo = (url) => {
     history.push(url);
@@ -80,11 +81,12 @@ export default function ProductCard(props) {
     }
   };
 
+  useLayoutEffect(() => {
+    return setCompName("");
+  }, []);
+
   return (
-    <Card
-      className={"productCard transition"}
-      style={{ width: 310, margin: "10px" }}
-    >
+    <Card className={`transition`} style={{ width: 310, margin: "10px" }}>
       <CardActionArea
         onClick={() => {
           redirectTo(`/products/${id}`);

@@ -1,5 +1,6 @@
 {
   "name": "slideshow",
+  "proxy": "http://localhost:3100",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -1,19 +1,13 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { myShoppingCartContext } from "../context/ShoppingCartContext";
 
 export default function useShoppingCart(id) {
   const { shoppingCartItems, setShoppingCartItems } = useContext(
     myShoppingCartContext
   );
-  const [thisItem, setThisItem] = useState({});
-
-  useEffect(() => {
-    setThisItem(
-      shoppingCartItems.find((item) => {
-        if (item.id === id) return item;
-      })
-    );
-  }, []);
+  const thisItem = shoppingCartItems.find((item) => {
+    if (item.id === id) return item;
+  });
 
   // Add one element
   const addItem = () => {
@@ -30,11 +24,6 @@ export default function useShoppingCart(id) {
 
   // Remove one element from any given item
   const removeOneItem = () => {
-    // eslint-disable-next-line
-    const thisItem = shoppingCartItems.find(function (item) {
-      if (item.id === id) return item;
-    });
-
     const itemIndex = shoppingCartItems.indexOf(thisItem);
     let shoppingCartCopy = [...shoppingCartItems];
 
@@ -54,14 +43,14 @@ export default function useShoppingCart(id) {
     setShoppingCartItems(filteredCart);
   };
 
-  const addToFav = async () => {
+  const addToFav = () => {
     let userId = JSON.parse(localStorage.getItem("user"));
     if (!userId) return "Login first";
 
     userId = userId._id;
 
     const body = { userId, item: thisItem };
-    await fetch("http://192.168.0.8:3100/favorites", {
+    fetch("http://192.168.0.8:3100/favorites", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -23,7 +23,7 @@ const useFetch = (url, body) => {
     setIsLoading(false);
   };
 
-  return { data, isLoading, errorMessage, req };
+  return { data, setData, isLoading, setIsLoading, errorMessage, req };
 };
 
 export default useFetch;

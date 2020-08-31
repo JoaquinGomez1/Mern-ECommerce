@@ -40,8 +40,6 @@ export default function BuyButton(props) {
     }
   };
 
-  console.log(props.isInStock === true && props.qty >= 1);
-
   return (
     <Button
       size="large"

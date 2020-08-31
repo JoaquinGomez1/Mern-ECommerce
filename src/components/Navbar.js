@@ -108,8 +108,7 @@ export default function Navbar() {
         style={{ display: "flex", alignItems: "center" }}
       >
         {currentUser ? (
-          <Grid item>
-            {" "}
+          <Grid item style={{ display: "grid", placeItems: "center" }}>
             <h3
               onClick={() => {
                 redirectTo("/user");
