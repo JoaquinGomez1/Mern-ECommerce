@@ -72,6 +72,7 @@
   justify-items: center;
   width: 60%;
   height: 100%;
+  animation: slideLeft 0.1s linear;
 }
 
 .modalContent > ul {
@@ -90,6 +91,17 @@
   max-width: 100%;
   min-width: 100%;
   font-weight: 700;
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0.5;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @media (max-width: 900px) {

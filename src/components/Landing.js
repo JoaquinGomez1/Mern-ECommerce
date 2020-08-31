@@ -28,6 +28,8 @@ export default function Landing() {
               title={product.name}
               subtitle={product.price}
               image={product.img}
+              isInStock={product.isInStock}
+              qty={product.qty}
             ></ProductCard>
           ))}
         </Slideshow>

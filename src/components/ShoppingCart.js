@@ -26,6 +26,7 @@ export default function ShoppingCart() {
                 image={each.image}
                 qty={each.qty}
                 inShoppingCart
+                isInStock={each.isInStock}
               ></ProductCard>
             </>
           ))}

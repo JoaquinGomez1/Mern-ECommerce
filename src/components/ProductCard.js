@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -9,92 +9,57 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Grid } from "@material-ui/core";
 
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import DeleteIcon from "@material-ui/icons/Delete";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
+
 import BuyButton from "./BuyButton";
-import { myShoppingCartContext } from "../context/ShoppingCartContext";
-
-const useStyles = makeStyles({
-  root: {
-    minWidth: 310,
-  },
-  media: {
-    height: 180,
-  },
-});
-
-// --------------------------------- Component
+import { useHistory } from "react-router-dom";
+import useShoppingCart from "../hooks/useShoppingCart";
 
 export default function ProductCard(props) {
-  const classes = useStyles();
+  const history = useHistory();
+  const { title, subtitle, image, id, inShoppingCart, qty, isInStock } = props;
+  const { addItem, removeOneItem, removeItem, addToFav } = useShoppingCart(id);
 
-  const { title, subtitle, image, id, inShoppingCart, qty } = props;
-  const { shoppingCartItems, setShoppingCartItems } = useContext(
-    myShoppingCartContext
-  );
-
-  // Add one element
-  const addItem = () => {
-    // eslint-disable-next-line
-    const thisItem = shoppingCartItems.find((item) => {
-      if (item.id === id) return item;
-    });
-    const itemIndex = shoppingCartItems.indexOf(thisItem);
-    let shoppingCartCopy = [...shoppingCartItems];
-
-    shoppingCartCopy[itemIndex] = {
-      ...shoppingCartCopy[itemIndex],
-      qty: shoppingCartCopy[itemIndex].qty + 1,
-    };
-
-    setShoppingCartItems(shoppingCartCopy);
-  };
-
-  // Remove one element from any given item
-  const removeItem = () => {
-    // eslint-disable-next-line
-    const thisItem = shoppingCartItems.find(function (item) {
-      if (item.id === id) return item;
-    });
-
-    const itemIndex = shoppingCartItems.indexOf(thisItem);
-    let shoppingCartCopy = [...shoppingCartItems];
-
-    // Should be thisItem.qty (withouth substracting 1) TODO: // Fix this issue later
-    if (thisItem.qty - 1 < 1) {
-      const filteredCart = shoppingCartItems.filter((each) => each.id !== id);
-      setShoppingCartItems(filteredCart);
-    } else {
-      shoppingCartCopy[itemIndex] = {
-        ...shoppingCartCopy[itemIndex],
-        qty: shoppingCartCopy[itemIndex].qty - 1,
-      };
-      setShoppingCartItems(shoppingCartCopy);
-    }
+  const redirectTo = (url) => {
+    history.push(url);
   };
 
   const CheckForShoppingCart = () => {
     if (inShoppingCart) {
       return (
-        <CardActions>
+        <CardActions style={{ padding: "20px 5px", marginTop: "10px" }}>
           <Grid container justify="center">
             <Typography variant="h5">Quantity: {qty}</Typography>
-            <Grid container justify="center">
-              <Button
-                style={{ margin: "10px" }}
-                variant="contained"
-                onClick={removeItem}
-                size="large"
-              >
-                -
+            <Grid
+              container
+              direction="row"
+              alignItems="center"
+              justify="space-between"
+            >
+              <Button onClick={removeItem}>
+                <DeleteIcon></DeleteIcon>
               </Button>
-              <Button
-                style={{ margin: "10px" }}
-                color="secondary"
-                variant="contained"
-                size="large"
-                onClick={addItem}
-              >
-                +
-              </Button>
+              <Grid item style={{ display: "flex" }}>
+                <Button
+                  style={{ margin: "0px 10px" }}
+                  onClick={removeOneItem}
+                  size="large"
+                >
+                  <RemoveCircleIcon />
+                </Button>
+                <Button color="secondary" size="large" onClick={addItem}>
+                  <AddCircleIcon />
+                </Button>
+              </Grid>
+
+              <Grid item style={{ margin: "0 5px" }}>
+                <Button>
+                  <FavoriteBorderIcon onClick={addToFav} />
+                </Button>
+              </Grid>
             </Grid>
           </Grid>
         </CardActions>
@@ -102,7 +67,14 @@ export default function ProductCard(props) {
     } else {
       return (
         <CardActions>
-          <BuyButton id={id} name={title} price={subtitle} image={image} />
+          <BuyButton
+            isInStock={isInStock}
+            id={id}
+            name={title}
+            price={subtitle}
+            image={image}
+            qty={qty}
+          />
         </CardActions>
       );
     }
@@ -111,10 +83,14 @@ export default function ProductCard(props) {
   return (
     <Card
       className={"productCard transition"}
-      style={{ minWidth: 310, margin: "10px" }}
+      style={{ width: 310, margin: "10px" }}
     >
-      <CardActionArea>
-        <CardMedia className={classes.media} image={image} title={title} />
+      <CardActionArea
+        onClick={() => {
+          redirectTo(`/products/${id}`);
+        }}
+      >
+        <CardMedia style={{ height: 180 }} image={image} title={title} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {title}

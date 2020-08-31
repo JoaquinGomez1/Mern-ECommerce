@@ -40,12 +40,15 @@ export default function BuyButton(props) {
     }
   };
 
+  console.log(props.isInStock === true && props.qty >= 1);
+
   return (
     <Button
       size="large"
       variant="contained"
       color="secondary"
       onClick={addItem}
+      disabled={props.isInStock === true && props.qty >= 1 ? false : true} // If outOfStock make button disabled
     >
       Add To Cart
     </Button>

@@ -9,7 +9,7 @@ export default function ProductsListing() {
   const fetchData = async () => {
     const req = await fetch("http://192.168.0.8:3100/products");
     const data = await req.json();
-    setProducts(data);
+    setProducts(data.results);
     setLoading(false);
   };
 
@@ -32,6 +32,7 @@ export default function ProductsListing() {
                 subtitle={each.price}
                 image={each.img}
                 qty={each.qty}
+                isInStock={each.isInStock}
               />
             </Grid>
           ))}

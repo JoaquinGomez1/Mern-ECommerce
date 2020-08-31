@@ -57,7 +57,10 @@ export default function UserRegister() {
       {currentUser ? (
         history.push("/user")
       ) : (
-        <Container className="componentTransition">
+        <Container
+          className="componentTransition"
+          style={{ minHeigth: "100vh" }}
+        >
           <form id="UserRegister">
             <Grid
               container

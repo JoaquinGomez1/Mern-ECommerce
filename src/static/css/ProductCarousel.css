@@ -1,6 +1,7 @@
 .productsCarousel {
-  overflow: scroll;
+  overflow-x: scroll;
   scrollbar-width: none; /* Hide Scrollbar in firefox*/
+  white-space: nowrap;
 }
 
 .productsCarousel::-webkit-scrollbar {
