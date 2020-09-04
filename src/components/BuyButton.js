@@ -46,7 +46,7 @@ export default function BuyButton(props) {
       variant="contained"
       color="secondary"
       onClick={addItem}
-      disabled={props.isInStock === true && props.qty >= 1 ? false : true} // If outOfStock make button disabled
+      disabled={props.isInStock && props.qty >= 1 ? false : true} // If outOfStock make button disabled
     >
       Add To Cart
     </Button>

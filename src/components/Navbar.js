@@ -46,7 +46,7 @@ export default function Navbar() {
   }, [setCurrentUser]);
 
   useEffect(() => {
-    // check if there is any items in the shopping cart
+    // check if there is any items in the shopping cart and change its styling
     if (shoppingCartItems.length >= 1) {
       pRef.current.style.backgroundColor = "#ed0c5b";
       pRef.current.style.display = "block";
@@ -144,10 +144,9 @@ export default function Navbar() {
       </div>
       <Grid item className="sideMenuContainer">
         <MenuIcon
-          className="MenuIcon"
-          style={{ transform: "scale(1.2)" }}
           onClick={handleModal}
           ref={menuIconRef}
+          className="MenuIcon"
         ></MenuIcon>
 
         <div className="modalContainer" onClick={handleModal} ref={modalRef}>

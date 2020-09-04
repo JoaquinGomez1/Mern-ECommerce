@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { useHistory } from "react-router-dom";
 import { Grid } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 
 export default function SearchBar() {
-  const [searchInput, setSearchInput] = useState({ value: "" });
-
+  const [searchInput, setSearchInput] = useState("");
+  const URL = "/products?search=";
+  const history = useHistory();
+  const iconRef = useRef();
   const inputStyle = {
     width: "100%",
     padding: "18px 5px",
@@ -15,7 +18,11 @@ export default function SearchBar() {
     color: "rgba(0,0,0,.7)",
   };
 
-  const showProduct = () => {};
+  const fetchProduct = async () => {
+    if (!searchInput) return null;
+    const searchUrl = URL + searchInput;
+    history.push(searchUrl);
+  };
 
   return (
     <Grid container className="SearchBar" justify="center">
@@ -23,13 +30,17 @@ export default function SearchBar() {
         <input
           className="SearchBar-input"
           onChange={(e) => {
-            setSearchInput({ ...searchInput, value: e.target.value });
+            setSearchInput(e.target.value);
           }}
           style={inputStyle}
         ></input>
         <SearchIcon
-          onClick={showProduct}
-          style={{ backgroundColor: "#f1f1f1", padding: "18.7px" }}
+          id="searchIcon"
+          onClick={fetchProduct}
+          style={{
+            backgroundColor: "#e9e9e9",
+            padding: "18.7px",
+          }}
         ></SearchIcon>
       </Grid>
     </Grid>

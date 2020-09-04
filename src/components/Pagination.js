@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import useFetch from "../hooks/useFetch";
-import { Button, Grid, Container } from "@material-ui/core";
-import ProductCard from "./ProductCard";
+import { Button, Grid, Container, Typography } from "@material-ui/core";
 
-export default function Pagination() {
-  const { data, setData, isLoading } = useFetch(
-    "http://192.168.0.8:3100/products"
-  );
+export default function Pagination(props) {
+  // This component asumes that the url provided can handle pagination
+  const { data, setData } = props;
+  const regex = /[?]/;
+  let url = regex.exec(props.url) ? props.url + "&page=" : props.url + "?page=";
   const [currentPage, setCurrentPage] = useState(1);
   const [nextPage, setNextPage] = useState();
   const [prevPage, setPrevPage] = useState();
@@ -19,23 +18,21 @@ export default function Pagination() {
   }, [setNextPage, setPrevPage, data]);
 
   const NewFetch = async (param) => {
+    let pageToGo = currentPage;
     if (param === "next") {
       if (nextPage) {
-        const req = await fetch(
-          `http://192.168.0.8:3100/products?page=${currentPage + 1}`
-        );
-        const data = await req.json();
-        setCurrentPage(currentPage + 1);
-        setData(data);
+        pageToGo++;
+        url = url + pageToGo;
       }
-    } else if (prevPage) {
-      const req = await fetch(
-        `http://192.168.0.8:3100/products?page=${currentPage - 1}`
-      );
-      const data = await req.json();
-      setCurrentPage(currentPage - 1);
-      setData(data);
     }
+    if (prevPage) {
+      pageToGo--;
+      url = url + pageToGo;
+    }
+    const req = await fetch(url);
+    const data = await req.json();
+    setData(data);
+    setCurrentPage(pageToGo);
   };
 
   return (
@@ -49,6 +46,7 @@ export default function Pagination() {
         >
           Previous
         </Button>
+        <Typography variant="h6">Page: {currentPage}</Typography>
         <Button
           color="secondary"
           variant="contained"
@@ -59,17 +57,7 @@ export default function Pagination() {
         </Button>
       </Grid>
       <Grid container justify="center">
-        {!isLoading &&
-          data.results.map((each) => (
-            <ProductCard
-              id={each.id}
-              title={each.name}
-              subtitle={each.price}
-              image={each.img}
-              qty={each.qty}
-              isInStock={each.isInStock}
-            />
-          ))}
+        {props.children}
       </Grid>
     </Container>
   );

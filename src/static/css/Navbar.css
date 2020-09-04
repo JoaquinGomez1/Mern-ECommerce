@@ -48,6 +48,7 @@
 .MenuIcon {
   margin: 20px;
   display: none !important;
+  pointer-events: stroke;
 }
 
 .modalContainer {
@@ -109,6 +110,8 @@
     display: block !important;
     width: 100%;
     height: 100%;
+    pointer-events: all;
+    transform: scale(1.3);
   }
   .categories {
     display: none;

@@ -1,19 +1,19 @@
 import React from "react";
 import useFetch from "../hooks/useFetch";
 import { Grid, Typography } from "@material-ui/core";
+import BuyButton from "./BuyButton";
 
 export default function ProductReview(props) {
   const url = `http://192.168.0.8:3100/products/${props.match.params.id}`;
   const { data, isLoading, errorMessage } = useFetch(url);
-
-  console.log(props.match.params.id);
 
   if (errorMessage) {
     return <h1>{errorMessage}</h1>;
   }
 
   if (!isLoading) {
-    if (data.qty === 0) {
+    console.log(data);
+    if (data.qty <= 0) {
       data.isInStock = false;
     }
   }
@@ -38,17 +38,27 @@ export default function ProductReview(props) {
               </Typography>
 
               {data.isInStock && (
-                <Typography
-                  variant="h6"
-                  style={{
-                    color:
-                      data.qty < 1 || !data.isInStock
-                        ? "red"
-                        : "rgba(0,0,0,.5)",
-                  }}
-                >
-                  Products available: {data.qty}
-                </Typography>
+                <>
+                  <Typography
+                    variant="h6"
+                    style={{
+                      color:
+                        data.qty < 1 || !data.isInStock
+                          ? "red"
+                          : "rgba(0,0,0,.5)",
+                    }}
+                  >
+                    Products available: {data.qty}
+                  </Typography>
+                  <BuyButton
+                    id={data.id}
+                    image={data.img}
+                    name={data.name}
+                    price={data.price}
+                    isInStock={data.isInStock}
+                    qty={data.qty}
+                  ></BuyButton>
+                </>
               )}
 
               {!data.isInStock && (
@@ -59,7 +69,7 @@ export default function ProductReview(props) {
             </Grid>
           </Grid>
         </>
-      )}{" "}
+      )}
     </div>
   );
 }
