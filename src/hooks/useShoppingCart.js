@@ -6,7 +6,8 @@ export default function useShoppingCart(id) {
     myShoppingCartContext
   );
   const thisItem = shoppingCartItems.find((item) => {
-    if (item.id === id) return item;
+    console.log(item);
+    if (item._id === id) return item;
   });
 
   // Add one element
@@ -39,12 +40,12 @@ export default function useShoppingCart(id) {
   };
 
   const removeItem = () => {
-    const filteredCart = shoppingCartItems.filter((each) => each.id !== id);
+    const filteredCart = shoppingCartItems.filter((each) => each._id !== id);
     setShoppingCartItems(filteredCart);
   };
 
-  const addToFav = () => {
-    let userId = JSON.parse(localStorage.getItem("user"));
+  const addToFav = async () => {
+    let userId = await JSON.parse(localStorage.getItem("user"));
     if (!userId) return "Login first";
 
     userId = userId._id;

@@ -20,7 +20,7 @@ export default function ShoppingCart() {
           {shoppingCartItems.map((each) => (
             <>
               <ProductCard
-                id={each.id}
+                _id={each._id}
                 title={each.name}
                 subtitle={each.price}
                 image={each.image}

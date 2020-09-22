@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Grid } from "@material-ui/core";
 
-import Slideshow from "../SlideShow";
+import Slideshow from "./SlideShow";
 import ProductCard from "./ProductCard";
 import ProductCarousel from "./ProductsCaroursel";
 import SearchBar from "./SearchBar";
@@ -22,9 +22,9 @@ export default function Landing() {
         <Slideshow duration={5000}>
           {products.map((product) => (
             <ProductCard
-              key={product.id}
+              key={product._id}
               className="transition"
-              id={product.id}
+              _id={product._id}
               title={product.name}
               subtitle={product.price}
               image={product.img}

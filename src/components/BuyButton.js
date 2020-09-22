@@ -7,11 +7,13 @@ export default function BuyButton(props) {
     myShoppingCartContext
   );
 
+  // This function will add 1 to the qty of an existing item
+  // or it will create a new item object in the shopping Cart array
   const addItem = () => {
     // Find if the item exists
     // eslint-disable-next-line
     const itemExists = shoppingCartItems.find(function (item) {
-      if (item.id === props.id) return item;
+      if (item._id === props._id) return item;
     });
 
     if (itemExists) {
@@ -30,7 +32,7 @@ export default function BuyButton(props) {
       setShoppingCartItems([
         ...shoppingCartItems,
         {
-          id: props.id,
+          _id: props._id,
           name: props.name,
           qty: 1,
           price: props.price,

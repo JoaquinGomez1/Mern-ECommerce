@@ -12,7 +12,6 @@ export default function ProductReview(props) {
   }
 
   if (!isLoading) {
-    console.log(data);
     if (data.qty <= 0) {
       data.isInStock = false;
     }
@@ -51,7 +50,7 @@ export default function ProductReview(props) {
                     Products available: {data.qty}
                   </Typography>
                   <BuyButton
-                    id={data.id}
+                    _id={data._id}
                     image={data.img}
                     name={data.name}
                     price={data.price}

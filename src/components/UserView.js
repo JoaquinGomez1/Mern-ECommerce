@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
-
 import { Container, Grid, Button } from "@material-ui/core";
 import { myUserContext } from "../context/UserContext";
 
@@ -9,7 +8,7 @@ export default function UserView() {
   const history = useHistory();
 
   const handleLogout = () => {
-    setCurrentUser();
+    setCurrentUser(); // ---> Sets current user to undefined
     localStorage.removeItem("user");
   };
 
@@ -23,6 +22,17 @@ export default function UserView() {
           <Grid container direction="column">
             <h1>Welcome, {currentUser.username}</h1>
 
+            <Grid item>
+              <Button
+                color="primary"
+                style={{ marginBottom: "50px" }}
+                onClick={() => {
+                  history.push("/user/favorites");
+                }}
+              >
+                View Favorites
+              </Button>
+            </Grid>
             <Grid item>
               <Button
                 variant="contained"

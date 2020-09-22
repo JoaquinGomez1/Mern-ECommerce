@@ -7,7 +7,6 @@ export default function SearchBar() {
   const [searchInput, setSearchInput] = useState("");
   const URL = "/products?search=";
   const history = useHistory();
-  const iconRef = useRef();
   const inputStyle = {
     width: "100%",
     padding: "18px 5px",

@@ -29,7 +29,7 @@ export default function ProductsCaroursel() {
       >
         {products.slice(0, 4).map((product, index) => (
           <img
-            key={product.id}
+            key={product._id}
             style={{
               width: "310px",
               height: "210px",

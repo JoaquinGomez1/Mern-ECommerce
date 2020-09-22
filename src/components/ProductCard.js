@@ -1,13 +1,15 @@
 import React, { useState, useLayoutEffect } from "react";
 
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import { Grid } from "@material-ui/core";
+import {
+  Grid,
+  Typography,
+  Button,
+  CardMedia,
+  CardContent,
+  CardActions,
+  CardActionArea,
+  Card,
+} from "@material-ui/core";
 
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -20,8 +22,8 @@ import useShoppingCart from "../hooks/useShoppingCart";
 
 export default function ProductCard(props) {
   const history = useHistory();
-  const { title, subtitle, image, id, inShoppingCart, qty, isInStock } = props;
-  const { addItem, removeOneItem, removeItem, addToFav } = useShoppingCart(id);
+  const { title, subtitle, image, _id, inShoppingCart, qty, isInStock } = props;
+  const { addItem, removeOneItem, removeItem, addToFav } = useShoppingCart(_id);
   const [compName, setCompName] = useState("transition");
 
   const redirectTo = (url) => {
@@ -70,7 +72,7 @@ export default function ProductCard(props) {
         <CardActions>
           <BuyButton
             isInStock={isInStock}
-            id={id}
+            _id={_id}
             name={title}
             price={subtitle}
             image={image}
@@ -86,10 +88,10 @@ export default function ProductCard(props) {
   }, []);
 
   return (
-    <Card className={`transition`} style={{ width: 310, margin: "10px" }}>
+    <Card className="transition" style={{ width: 310, margin: "10px" }}>
       <CardActionArea
         onClick={() => {
-          redirectTo(`/products/${id}`);
+          redirectTo(`/products/${_id}`);
         }}
       >
         <CardMedia style={{ height: 180 }} image={image} title={title} />

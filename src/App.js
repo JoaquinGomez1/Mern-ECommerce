@@ -19,6 +19,7 @@ import SlideshowContext from "./context/SlideshowContext";
 import ShoppingCartContext from "./context/ShoppingCartContext";
 import UserContext from "./context/UserContext";
 import UserView from "./components/UserView";
+import ViewFavorites from "./components/ViewFavorites";
 
 function App() {
   return (
@@ -37,7 +38,8 @@ function App() {
                   <Route path="/products/:id" component={ProductReview} />
                   <Route path="/login" component={UserLogin} />
                   <Route path="/register" component={UserRegister} />
-                  <Route path="/user" component={UserView} />
+                  <Route path="/user" exact component={UserView} />
+                  <Route path="/user/favorites" component={ViewFavorites} />
                   <Route path="*" component={NotFound404} />
                 </Switch>
               </Router>

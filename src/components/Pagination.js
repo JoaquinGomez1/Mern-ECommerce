@@ -5,7 +5,7 @@ export default function Pagination(props) {
   // This component asumes that the url provided can handle pagination
   const { data, setData } = props;
   const regex = /[?]/;
-  let url = regex.exec(props.url) ? props.url + "&page=" : props.url + "?page=";
+  let url = regex.exec(props.url) ? props.url + "&page=" : props.url + "?page="; // We look if there is already a query in the url
   const [currentPage, setCurrentPage] = useState(1);
   const [nextPage, setNextPage] = useState();
   const [prevPage, setPrevPage] = useState();
