@@ -5,19 +5,24 @@ export default function useShoppingCart(id) {
   const { shoppingCartItems, setShoppingCartItems } = useContext(
     myShoppingCartContext
   );
-  const thisItem = shoppingCartItems.find((item) => {
-    console.log(item);
-    if (item._id === id) return item;
-  });
+
+  // Utility function reused by each function in this file
+  const findThisItem = () => {
+    return shoppingCartItems.find((item) => {
+      if (item._id === id) return item;
+    });
+  };
 
   // Add one element
   const addItem = () => {
+    const thisItem = findThisItem();
     const itemIndex = shoppingCartItems.indexOf(thisItem);
     let shoppingCartCopy = [...shoppingCartItems];
+    const selectedItem = shoppingCartCopy[itemIndex];
 
     shoppingCartCopy[itemIndex] = {
       ...shoppingCartCopy[itemIndex],
-      qty: shoppingCartCopy[itemIndex].qty + 1,
+      qty: selectedItem.qty + 1,
     };
 
     setShoppingCartItems(shoppingCartCopy);
@@ -25,6 +30,7 @@ export default function useShoppingCart(id) {
 
   // Remove one element from any given item
   const removeOneItem = () => {
+    const thisItem = findThisItem();
     const itemIndex = shoppingCartItems.indexOf(thisItem);
     let shoppingCartCopy = [...shoppingCartItems];
 
@@ -45,6 +51,7 @@ export default function useShoppingCart(id) {
   };
 
   const addToFav = async () => {
+    const thisItem = findThisItem();
     let userId = await JSON.parse(localStorage.getItem("user"));
     if (!userId) return "Login first";
 
@@ -60,5 +67,5 @@ export default function useShoppingCart(id) {
     });
   };
 
-  return { addItem, removeOneItem, removeItem, addToFav };
+  return { addItem, removeOneItem, removeItem, addToFav, findThisItem };
 }

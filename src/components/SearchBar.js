@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import { Grid } from "@material-ui/core";
+import { Grid, TextField } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 
 export default function SearchBar() {
@@ -24,23 +24,19 @@ export default function SearchBar() {
   };
 
   return (
-    <Grid container className="SearchBar" justify="center">
+    <Grid container className='SearchBar' justify='center'>
       <Grid item style={{ display: "flex" }}>
-        <input
-          className="SearchBar-input"
+        <TextField
+          label='Search'
+          variant='outlined'
           onChange={(e) => {
             setSearchInput(e.target.value);
           }}
-          style={inputStyle}
-        ></input>
-        <SearchIcon
-          id="searchIcon"
-          onClick={fetchProduct}
-          style={{
-            backgroundColor: "#e9e9e9",
-            padding: "18.7px",
-          }}
-        ></SearchIcon>
+        />
+
+        <div id='searchIconWrapper' onClick={fetchProduct}>
+          <SearchIcon id='searchIcon' />
+        </div>
       </Grid>
     </Grid>
   );

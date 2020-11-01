@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from "react";
+import React from "react";
 
 import {
   Grid,
@@ -17,31 +17,23 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 
 import BuyButton from "./BuyButton";
-import { useHistory } from "react-router-dom";
 import useShoppingCart from "../hooks/useShoppingCart";
 
 export default function ProductCard(props) {
-  const history = useHistory();
   const { title, subtitle, image, _id, inShoppingCart, qty, isInStock } = props;
   const { addItem, removeOneItem, removeItem, addToFav } = useShoppingCart(_id);
-  const [compName, setCompName] = useState("transition");
-
-  const redirectTo = (url) => {
-    history.push(url);
-  };
 
   const CheckForShoppingCart = () => {
     if (inShoppingCart) {
       return (
         <CardActions style={{ padding: "20px 5px", marginTop: "10px" }}>
-          <Grid container justify="center">
-            <Typography variant="h5">Quantity: {qty}</Typography>
+          <Grid container justify='center'>
+            <Typography variant='h5'>Quantity: {qty}</Typography>
             <Grid
               container
-              direction="row"
-              alignItems="center"
-              justify="space-between"
-            >
+              direction='row'
+              alignItems='center'
+              justify='space-between'>
               <Button onClick={removeItem}>
                 <DeleteIcon></DeleteIcon>
               </Button>
@@ -49,11 +41,10 @@ export default function ProductCard(props) {
                 <Button
                   style={{ margin: "0px 10px" }}
                   onClick={removeOneItem}
-                  size="large"
-                >
+                  size='large'>
                   <RemoveCircleIcon />
                 </Button>
-                <Button color="secondary" size="large" onClick={addItem}>
+                <Button color='secondary' size='large' onClick={addItem}>
                   <AddCircleIcon />
                 </Button>
               </Grid>
@@ -83,24 +74,16 @@ export default function ProductCard(props) {
     }
   };
 
-  useLayoutEffect(() => {
-    return setCompName("");
-  }, []);
-
   return (
-    <Card className="transition" style={{ width: 310, margin: "10px" }}>
-      <CardActionArea
-        onClick={() => {
-          redirectTo(`/products/${_id}`);
-        }}
-      >
+    <Card className='transition' style={{ width: 310, margin: "10px" }}>
+      <CardActionArea onClick={props.onCardAreaClick}>
         <CardMedia style={{ height: 180 }} image={image} title={title} />
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant='h5' component='h2'>
             {title}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            ${subtitle}
+          <Typography variant='body2' color='textSecondary' component='p'>
+            {subtitle ? `$${subtitle}` : null}
           </Typography>
         </CardContent>
       </CardActionArea>

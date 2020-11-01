@@ -18,27 +18,26 @@ export default function UserView() {
       {!currentUser ? (
         history.push("/")
       ) : (
-        <Container className="componentTransition">
-          <Grid container direction="column">
+        <Container className='componentTransition'>
+          <Grid container direction='column'>
             <h1>Welcome, {currentUser.username}</h1>
 
             <Grid item>
               <Button
-                color="primary"
+                variant='contained'
+                color='primary'
                 style={{ marginBottom: "50px" }}
                 onClick={() => {
                   history.push("/user/favorites");
-                }}
-              >
+                }}>
                 View Favorites
               </Button>
             </Grid>
             <Grid item>
               <Button
-                variant="contained"
-                color="secondary"
-                onClick={handleLogout}
-              >
+                variant='contained'
+                color='secondary'
+                onClick={handleLogout}>
                 Log Out
               </Button>
             </Grid>

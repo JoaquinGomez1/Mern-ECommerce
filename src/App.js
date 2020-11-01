@@ -12,6 +12,7 @@ import ProductsListing from "./components/ProductsListing";
 import NotFound404 from "./components/NotFound404";
 import UserLogin from "./components/UserLogin";
 import UserRegister from "./components/UserRegister";
+import CategoriesPage from "./components/CategoriesPage";
 
 // Context
 import MainProductsContext from "./context/MainProductsContext";
@@ -27,20 +28,20 @@ function App() {
       <SlideshowContext>
         <ShoppingCartContext>
           <UserContext>
-            <div className="App">
+            <div className='App'>
               <Router>
                 <Navbar />
-
                 <Switch>
-                  <Route path="/" exact component={Landing} />
-                  <Route path="/shoppingcart" exact component={ShoppingCart} />
-                  <Route path="/products" exact component={ProductsListing} />
-                  <Route path="/products/:id" component={ProductReview} />
-                  <Route path="/login" component={UserLogin} />
-                  <Route path="/register" component={UserRegister} />
-                  <Route path="/user" exact component={UserView} />
-                  <Route path="/user/favorites" component={ViewFavorites} />
-                  <Route path="*" component={NotFound404} />
+                  <Route path='/' exact component={Landing} />
+                  <Route path='/shoppingcart' exact component={ShoppingCart} />
+                  <Route path='/products' exact component={ProductsListing} />
+                  <Route path='/products/:id' component={ProductReview} />
+                  <Route path='/login' component={UserLogin} />
+                  <Route path='/register' component={UserRegister} />
+                  <Route path='/user' exact component={UserView} />
+                  <Route path='/user/favorites' component={ViewFavorites} />
+                  <Route path='/categories' component={CategoriesPage} />
+                  <Route path='*' component={NotFound404} />
                 </Switch>
               </Router>
             </div>

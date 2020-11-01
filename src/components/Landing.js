@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Grid } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 
 import Slideshow from "./SlideShow";
 import ProductCard from "./ProductCard";
@@ -12,25 +13,31 @@ import { MainProductsListContext } from "../context/MainProductsContext";
 
 export default function Landing() {
   const [products] = useContext(MainProductsListContext);
+  const history = useHistory();
+
+  const redirecTo = (id) => {
+    history.push(`/products/${id}`);
+  };
 
   return (
-    <div className="componentTransition">
-      <Grid container justify="center">
+    <div className='componentTransition'>
+      <Grid container justify='center' style={{ margin: "1rem 0" }}>
         <SearchBar />
       </Grid>
-      <Grid container justify="center" style={{ overflow: "hidden" }}>
+      <Grid container justify='center' style={{ overflow: "hidden" }}>
         <Slideshow duration={5000}>
           {products.map((product) => (
             <ProductCard
               key={product._id}
-              className="transition"
+              className='transition'
               _id={product._id}
               title={product.name}
               subtitle={product.price}
               image={product.img}
               isInStock={product.isInStock}
               qty={product.qty}
-            ></ProductCard>
+              onCardAreaClick={() => redirecTo(product._id)}
+            />
           ))}
         </Slideshow>
 

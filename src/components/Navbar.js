@@ -13,15 +13,11 @@ import { myUserContext } from "../context/UserContext";
 import "../static/css/Navbar.css";
 
 export default function Navbar() {
-  const [modalOpen, setModalOpen] = useState(false);
   const { shoppingCartItems } = useContext(myShoppingCartContext);
   const { currentUser, setCurrentUser } = useContext(myUserContext);
   const history = useHistory();
 
   const pRef = useRef();
-  const modalRef = useRef();
-  const menuIconRef = useRef();
-  const liRef = useRef();
 
   const redirectTo = (route) => {
     history.push(route);
@@ -45,26 +41,11 @@ export default function Navbar() {
     } else pRef.current.style.display = "none";
   }, [shoppingCartItems]);
 
-  useEffect(() => {
-    if (modalOpen) modalRef.current.style.display = "grid";
-    else modalRef.current.style.display = "none";
-  }, [modalOpen]);
-
-  const handleModal = (e) => {
-    if (e.target === menuIconRef.current) setModalOpen(true);
-    if (e.target === modalRef.current || e.target === liRef.current)
-      setModalOpen(false);
-  };
-
   return (
     <NavbarView
-      handleModal={handleModal}
       redirectTo={redirectTo}
       currentUser={currentUser}
-      modalRef={modalRef}
       pRef={pRef}
-      shoppingCartItems={shoppingCartItems}
-      menuIconRef={menuIconRef}
-    ></NavbarView>
+      shoppingCartItems={shoppingCartItems}></NavbarView>
   );
 }
