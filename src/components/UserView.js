@@ -20,7 +20,7 @@ export default function UserView() {
       ) : (
         <Container className='componentTransition'>
           <Grid container direction='column'>
-            <h1>Welcome, {currentUser.username}</h1>
+            <h2>Welcome, {currentUser.username}</h2>
 
             <Grid item>
               <Button
