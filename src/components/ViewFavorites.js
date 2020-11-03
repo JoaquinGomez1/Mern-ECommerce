@@ -38,16 +38,16 @@ export default function ViewFavorites() {
         <Grid container>
           {!isLoading && (
             <Pagination>
-              {data.map((each) => (
-                <ProductCard
-                  _id={each._id}
-                  title={each.name}
-                  subtitle={each.price}
-                  qty={1}
-                  isInStock={true}
-                  image={each.img}
-                ></ProductCard>
-              ))}
+              {data &&
+                data.map((each) => (
+                  <ProductCard
+                    _id={each._id}
+                    title={each.name}
+                    subtitle={each.price}
+                    qty={1}
+                    isInStock={true}
+                    image={each.img}></ProductCard>
+                ))}
             </Pagination>
           )}
         </Grid>

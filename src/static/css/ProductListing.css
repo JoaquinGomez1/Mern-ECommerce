@@ -1,0 +1,8 @@
+.product-listing-container {
+  display: flex;
+}
+@media (max-width: 760px) {
+  .product-listing-container {
+    flex-direction: column !important;
+  }
+}

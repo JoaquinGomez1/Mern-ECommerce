@@ -235,3 +235,11 @@
     display: flex;
   }
 }
+
+@media (max-width: 800px) {
+  .NavBarContainer {
+    position: fixed;
+    z-index: 5;
+    bottom: 0;
+  }
+}

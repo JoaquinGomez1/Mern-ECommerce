@@ -4,6 +4,7 @@ import { Grid, Button } from "@material-ui/core";
 import Pagination from "./Pagination";
 import useFetch from "../hooks/useFetch";
 import { useHistory, Link } from "react-router-dom";
+import "../static/css/ProductListing.css";
 
 export default function ProductsListing({ location }) {
   let url = "http://192.168.0.8:3100/products";

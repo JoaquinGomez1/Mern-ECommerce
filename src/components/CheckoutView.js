@@ -6,8 +6,9 @@ import {
   List,
   Avatar,
   Button,
-  Grid,
+  Typography,
 } from "@material-ui/core";
+import CardPayment from "./CardPayment";
 
 export default function CheckoutView() {
   const { shoppingCartItems, setShoppingCartItems } = useContext(
@@ -23,10 +24,13 @@ export default function CheckoutView() {
     });
   };
 
-  const calculatePricePerUnit = () => {};
+  const calcBachPrice = (qty, unitPrice) => {
+    return qty * unitPrice;
+  };
 
   useEffect(() => {
     setTotalPrice(calculatePrice());
+    //eslint-disable-next-line
   }, [shoppingCartItems]);
 
   shoppingCartItems.length > 0 && console.log(shoppingCartItems[0]);
@@ -54,14 +58,15 @@ export default function CheckoutView() {
               style={{ marginRight: ".8rem" }}
             />
             <ListItemText primary={each.name} secondary={`x${each.qty}`} />
+            <Typography>${calcBachPrice(each.qty, each.price)}</Typography>
           </ListItem>
         ))}
       </List>
 
       <div
         className='checkout-bottom'
-        style={{ display: "flex", flexWrap: "wrap" }}>
-        <h4 style={{ margin: "0 1rem 0" }}>Total Price: {totalPrice}</h4>
+        style={{ display: "flex", flexWrap: "wrap", alignItems: "center" }}>
+        <h4 style={{ margin: "0 1rem 0" }}>Total Price: ${totalPrice}</h4>
         <Button
           onClick={() => setShoppingCartItems([])}
           variant='contained'
@@ -70,9 +75,7 @@ export default function CheckoutView() {
           style={{ margin: "0 1rem 0" }}>
           Clear Cart
         </Button>
-        <Button variant='contained' color='primary'>
-          Buy Now
-        </Button>
+        <CardPayment actionName='Buy Now' />
       </div>
     </div>
   );

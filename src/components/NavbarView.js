@@ -4,8 +4,6 @@ import { Grid } from "@material-ui/core";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import MobileMenu from "./MobileMenu";
-import DropdownMenu from "./DropdownMenu";
-import MenuItem from "@material-ui/core/MenuItem";
 import { NavLink } from "react-router-dom";
 
 export default function NavbarView({
@@ -27,7 +25,7 @@ export default function NavbarView({
             redirectTo("/");
           }}
           className='navLogo'>
-          E-Commerce
+          Electroniks
         </h2>
       </Grid>
 

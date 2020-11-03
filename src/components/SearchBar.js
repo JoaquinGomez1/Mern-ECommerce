@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Grid, TextField } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";

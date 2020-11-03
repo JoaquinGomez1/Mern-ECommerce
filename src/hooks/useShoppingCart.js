@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { myShoppingCartContext } from "../context/ShoppingCartContext";
 
-export default function useShoppingCart(id) {
+export default function useShoppingCart(id, itemObject) {
   const { shoppingCartItems, setShoppingCartItems } = useContext(
     myShoppingCartContext
   );
@@ -10,7 +10,29 @@ export default function useShoppingCart(id) {
   const findThisItem = () => {
     return shoppingCartItems.find((item) => {
       if (item._id === id) return item;
+      else return null;
     });
+  };
+
+  // This function will add 1 to the qty of an existing item
+  // or it will create a new item object in the shopping Cart array
+  const addToShoppingCart = () => {
+    const itemExists = findThisItem();
+    if (itemExists) {
+      addItem();
+    } else {
+      // If the item does not exists then just add it to the shopping cart
+      setShoppingCartItems([
+        ...shoppingCartItems,
+        {
+          _id: itemObject._id,
+          name: itemObject.name,
+          qty: 1,
+          price: itemObject.price,
+          image: itemObject.image,
+        },
+      ]);
+    }
   };
 
   // Add one element
@@ -67,5 +89,12 @@ export default function useShoppingCart(id) {
     });
   };
 
-  return { addItem, removeOneItem, removeItem, addToFav, findThisItem };
+  return {
+    addItem,
+    addToShoppingCart,
+    removeOneItem,
+    removeItem,
+    addToFav,
+    findThisItem,
+  };
 }

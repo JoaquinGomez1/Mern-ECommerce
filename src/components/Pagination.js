@@ -9,6 +9,7 @@ export default function Pagination(props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [nextPage, setNextPage] = useState();
   const [prevPage, setPrevPage] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (data) {
@@ -18,6 +19,7 @@ export default function Pagination(props) {
   }, [setNextPage, setPrevPage, data]);
 
   const NewFetch = async (param) => {
+    setIsLoading(true);
     let pageToGo = currentPage;
     if (param === "next") {
       if (nextPage) {
@@ -33,31 +35,30 @@ export default function Pagination(props) {
     const data = await req.json();
     setData(data);
     setCurrentPage(pageToGo);
+    setIsLoading(false);
   };
 
   return (
     <Container style={{ minWidth: "90%" }}>
-      <Grid container justify="space-between">
+      <Grid container justify='space-between'>
         <Button
-          color="secondary"
-          variant="contained"
+          color='secondary'
+          variant='contained'
           disabled={prevPage ? false : true}
-          onClick={NewFetch}
-        >
+          onClick={NewFetch}>
           Previous
         </Button>
-        <Typography variant="h6">Page: {currentPage}</Typography>
+        <Typography variant='h6'>Page: {currentPage}</Typography>
         <Button
-          color="secondary"
-          variant="contained"
+          color='secondary'
+          variant='contained'
           disabled={nextPage ? false : true}
-          onClick={() => NewFetch("next")}
-        >
+          onClick={() => NewFetch("next")}>
           Next
         </Button>
       </Grid>
-      <Grid container justify="center">
-        {props.children}
+      <Grid container justify='center'>
+        {!isLoading ? props.children : <h2>Loading...</h2>}
       </Grid>
     </Container>
   );

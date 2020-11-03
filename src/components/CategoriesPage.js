@@ -41,8 +41,10 @@ export default function CategoriesPage() {
             data.results.map((each) => {
               return !wasFetched ? (
                 <ProductCard
+                  key={each._id}
                   _id={each._id}
                   title={each.name}
+                  image={null}
                   onCardAreaClick={() => lookForCategory(each.name)}
                 />
               ) : (

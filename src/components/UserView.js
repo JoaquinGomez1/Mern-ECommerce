@@ -36,6 +36,17 @@ export default function UserView() {
             <Grid item>
               <Button
                 variant='contained'
+                color='primary'
+                style={{ marginBottom: "50px" }}
+                onClick={() => {
+                  history.push("/user/history");
+                }}>
+                View Shopping History
+              </Button>
+            </Grid>
+            <Grid item>
+              <Button
+                variant='contained'
                 color='secondary'
                 onClick={handleLogout}>
                 Log Out

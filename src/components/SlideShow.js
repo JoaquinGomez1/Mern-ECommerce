@@ -29,7 +29,7 @@ export default function SlideShow(props) {
     //Create a new array from the html collection of children of the div that contains each child
     //and get the index of the one that was clicked
     const index = Array.from(e.currentTarget.children).indexOf(e.target);
-    if (index != -1) {
+    if (index !== -1) {
       setState({
         ...state,
         current: index,

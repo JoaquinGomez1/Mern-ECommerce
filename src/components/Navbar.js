@@ -1,10 +1,4 @@
-import React, {
-  useContext,
-  useLayoutEffect,
-  useRef,
-  useEffect,
-  useState,
-} from "react";
+import React, { useContext, useLayoutEffect, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 import NavbarView from "./NavbarView";

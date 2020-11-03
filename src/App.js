@@ -13,6 +13,7 @@ import NotFound404 from "./components/NotFound404";
 import UserLogin from "./components/UserLogin";
 import UserRegister from "./components/UserRegister";
 import CategoriesPage from "./components/CategoriesPage";
+import ShoppingHistory from "./components/ShoppingHistory";
 
 // Context
 import MainProductsContext from "./context/MainProductsContext";
@@ -34,13 +35,29 @@ function App() {
                 <Switch>
                   <Route path='/' exact component={Landing} />
                   <Route path='/shoppingcart' exact component={ShoppingCart} />
-                  <Route path='/products' exact component={ProductsListing} />
+                  <Route
+                    path='/products'
+                    key='products'
+                    exact
+                    component={ProductsListing}
+                  />
                   <Route path='/products/:id' component={ProductReview} />
                   <Route path='/login' component={UserLogin} />
                   <Route path='/register' component={UserRegister} />
                   <Route path='/user' exact component={UserView} />
                   <Route path='/user/favorites' component={ViewFavorites} />
-                  <Route path='/categories' component={CategoriesPage} />
+                  <Route
+                    path='/categories'
+                    exact
+                    key='categories'
+                    component={CategoriesPage}
+                  />
+                  <Route
+                    path='/categories/search'
+                    key='catSearch'
+                    component={CategoriesPage}
+                  />
+                  <Route path='/user/history' component={ShoppingHistory} />
                   <Route path='*' component={NotFound404} />
                 </Switch>
               </Router>

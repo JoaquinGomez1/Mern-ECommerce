@@ -11,7 +11,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 export default function CardActionsShoppingcart({ _id, qty }) {
   const { addItem, removeOneItem, removeItem, addToFav } = useShoppingCart(_id);
   return (
-    <CardActions style={{ padding: "20px 5px", marginTop: "10px" }}>
+    <CardActions>
       <Grid container justify='center'>
         <Typography variant='h5'>Quantity: {qty}</Typography>
         <Grid

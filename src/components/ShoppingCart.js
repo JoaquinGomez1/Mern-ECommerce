@@ -1,13 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { myShoppingCartContext } from "../context/ShoppingCartContext";
 import ProductCard from "./ProductCard";
-import {
-  Grid,
-  Container,
-  Typography,
-  Button,
-  SwipeableDrawer,
-} from "@material-ui/core";
+import { Grid, Typography, Button, SwipeableDrawer } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import CheckoutView from "./CheckoutView";
 import CardActions from "./CardActionsShoppingcart";
@@ -43,6 +37,7 @@ export default function ShoppingCart() {
 
   useEffect(() => {
     setTotalPrice(calculatePrice());
+    //eslint-disable-next-line
   }, [shoppingCartItems]);
 
   return (
@@ -90,7 +85,7 @@ export default function ShoppingCart() {
                   variant='contained'
                   color='secondary'
                   size='large'
-                  style={{ marginBottom: "2rem" }}
+                  style={{ marginBottom: "6rem" }}
                   onClick={handleSwipeableDrawer}>
                   Proceed To Checkout
                 </Button>

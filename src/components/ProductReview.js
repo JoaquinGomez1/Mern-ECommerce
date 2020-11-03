@@ -33,7 +33,7 @@ export default function ProductReview(props) {
             container
             style={{ maxWidth: "1000px", margin: "0 auto" }}
             justify='center'>
-            <Box display='flex'>
+            <Box display='flex' className='product-listing-container'>
               <img
                 style={{ maxWidth: "100%" }}
                 src={data.img}
@@ -70,7 +70,8 @@ export default function ProductReview(props) {
                         name={data.name}
                         price={data.price}
                         isInStock={data.isInStock}
-                        qty={data.qty}></BuyButton>
+                        qty={data.qty}
+                      />
                     </>
                   )}
 
