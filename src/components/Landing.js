@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import Slideshow from "./SlideShow";
 import ProductCard from "./ProductCard";
-import ProductCarousel from "./ProductsCaroursel";
+import FeaturedProducts from "./FeaturedProducts";
 import SearchBar from "./SearchBar";
 
 import "../transition.css";
@@ -40,9 +40,8 @@ export default function Landing() {
             />
           ))}
         </Slideshow>
-
-        <ProductCarousel></ProductCarousel>
       </Grid>
+      <FeaturedProducts style={{ margin: "0 auto" }} />
     </div>
   );
 }

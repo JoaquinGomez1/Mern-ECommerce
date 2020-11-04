@@ -7,5 +7,4 @@ export default function CustomNavLink({ route, text, exact, onClick }) {
       <li onClick={onClick}>{text}</li>
     </NavLink>
   );
-  
 }

@@ -17,7 +17,7 @@ export default function ProductReview(props) {
     }
   }
 
-  if (!data) {
+  if (!data && !isLoading) {
     return (
       <Typography style={{ margin: "calc(25% - 80px) auto" }} variant='h3'>
         Sorry We could not find that item

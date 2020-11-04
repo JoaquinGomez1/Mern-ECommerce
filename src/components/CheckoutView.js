@@ -33,8 +33,6 @@ export default function CheckoutView() {
     //eslint-disable-next-line
   }, [shoppingCartItems]);
 
-  shoppingCartItems.length > 0 && console.log(shoppingCartItems[0]);
-
   return (
     <div
       className='shoppingcart-drawer'
