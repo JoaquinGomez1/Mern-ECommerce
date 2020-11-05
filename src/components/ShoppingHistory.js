@@ -49,7 +49,7 @@ const DateCard = ({ data }) => {
           ))}
       </div>
       <Typography variant='h5' className='date-card-date'>
-        Bougth on Date: {date}
+        Bought on Date: {date}
       </Typography>
     </div>
   );
