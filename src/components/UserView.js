@@ -9,6 +9,7 @@ export default function UserView() {
 
   const handleLogout = () => {
     setCurrentUser(); // ---> Sets current user to undefined
+    fetch("/logout");
     localStorage.removeItem("user");
   };
 

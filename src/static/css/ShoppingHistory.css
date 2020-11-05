@@ -1,0 +1,33 @@
+.shoppingHistory-page {
+  padding: 2rem 0;
+  overflow-x: hidden;
+}
+
+.date-card-container {
+  padding: 1rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 2px solid grey;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.date-card-row {
+  color: rgba(0, 0, 0, 0.6) !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 120%;
+}
+
+.date-card-row > *,
+.date-card-text {
+  margin: 5px 0rem;
+  font-size: 0.9rem;
+}

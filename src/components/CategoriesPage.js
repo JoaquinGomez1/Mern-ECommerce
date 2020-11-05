@@ -6,7 +6,7 @@ import ProductCard from "./ProductCard";
 import { useHistory } from "react-router-dom";
 
 export default function CategoriesPage() {
-  const url = "http://192.168.0.8:3100/categories";
+  const url = "/categories";
   const { data, setData, isLoading } = useFetch(url);
   const [wasFetched, setWasFetched] = useState(false);
 

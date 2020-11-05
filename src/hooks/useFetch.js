@@ -1,4 +1,4 @@
-import { useState, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 
 const useFetch = (url, body) => {
   const [data, setData] = useState();
@@ -6,7 +6,8 @@ const useFetch = (url, body) => {
   const [errorMessage, setErrorMessage] = useState();
   const [req, setReq] = useState();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
+    let fetchEnabled = true;
     const fetchData = async () => {
       try {
         const req = body ? await fetch(url, body) : await fetch(url);
@@ -20,10 +21,23 @@ const useFetch = (url, body) => {
       setIsLoading(false);
     };
 
-    fetchData();
+    fetchEnabled && fetchData();
+
+    // Prevent fetching to the server if the component is unmounted
+    return () => {
+      fetchEnabled = false;
+    };
   }, [body, url]);
 
-  return { data, setData, isLoading, setIsLoading, errorMessage, req };
+  return {
+    data,
+    setData,
+    isLoading,
+    setIsLoading,
+    errorMessage,
+    setErrorMessage,
+    req,
+  };
 };
 
 export default useFetch;

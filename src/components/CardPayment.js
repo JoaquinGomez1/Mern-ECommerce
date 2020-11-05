@@ -19,25 +19,36 @@ export default function CardPayment(props) {
 
   const addToShoppingHistory = async () => {
     if (currentUser) {
+      const { shoppingHistory } = currentUser;
       const today = FormatedTodayDate();
-      const shoppingHistory = {
+      const shoppingDetails = {
         products: [...shoppingCartItems],
         date: today,
       };
 
-      setCurrentUser({ ...currentUser, shoppingHistory });
+      const shoppingHistoryCopy = Array.isArray(shoppingHistory)
+        ? [...shoppingHistory]
+        : [];
+      shoppingHistoryCopy.push(shoppingDetails);
+
+      setCurrentUser({
+        ...currentUser,
+        shoppingHistory: shoppingHistoryCopy,
+      });
 
       const reqHeaders = {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(shoppingHistory),
+        body: JSON.stringify({ shoppingHistory: shoppingDetails }),
       };
 
-      fetch("http://192.168.0.8:3100/user/updateShoppingHistory", reqHeaders);
+      const req = await fetch("/user/historyy", reqHeaders);
+      const res = await req.json();
+      console.log(res);
 
-      const data = JSON.stringify({ ...currentUser, shoppingHistory });
+      const data = JSON.stringify({ ...currentUser, shoppingDetails });
       localStorage.setItem("user", data);
     }
     handleClose();
@@ -48,11 +59,7 @@ export default function CardPayment(props) {
       <Button variant='contained' color='primary' onClick={handleOpen}>
         {props.actionName}
       </Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby='simple-modal-title'
-        aria-describedby='simple-modal-description'>
+      <Modal open={open} onClose={handleClose}>
         <form
           style={{
             margin: "0 auto",

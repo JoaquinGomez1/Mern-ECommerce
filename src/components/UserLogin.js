@@ -12,6 +12,7 @@ export default function UserLogin() {
   const reqHeaders = {
     method: "POST",
     headers: {
+      "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(loginData),
@@ -19,12 +20,13 @@ export default function UserLogin() {
 
   const sendData = async (e) => {
     e.preventDefault();
-    const req = await fetch("http://192.168.0.8:3100/login", reqHeaders);
+    const req = await fetch("/login", reqHeaders);
     const data = await req.json();
 
-    if (req.status < 300) {
+    if (req.status === 200) {
       setCurrentUser(data);
       localStorage.setItem("user", JSON.stringify(data));
+      console.log(data);
     } else {
       setWasError(data.message);
     }
@@ -44,7 +46,7 @@ export default function UserLogin() {
           wasError={wasError}
           handleChange={handleChange}
           sendData={sendData}
-        ></LoginForm>
+        />
       )}
     </>
   );

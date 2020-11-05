@@ -7,7 +7,7 @@ import { useHistory, Link } from "react-router-dom";
 import "../static/css/ProductListing.css";
 
 export default function ProductsListing({ location }) {
-  let url = "http://192.168.0.8:3100/products";
+  let url = "/products";
   if (location.search) url += location.search;
   const { data, setData, isLoading } = useFetch(url);
 
@@ -26,6 +26,7 @@ export default function ProductsListing({ location }) {
             data.results &&
             data.results.map((each) => (
               <ProductCard
+                key={each._id}
                 _id={each._id}
                 title={each.name}
                 subtitle={each.price}

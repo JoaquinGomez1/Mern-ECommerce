@@ -56,12 +56,12 @@ export default function ShoppingCart() {
           <Grid container justify='center'>
             {shoppingCartItems.length <= 0 ? (
               <h1 style={{ color: "#f50057" }}>
-                {" "}
                 The are no items in the Shopping Cart yet
               </h1>
             ) : (
               shoppingCartItems.map((each) => (
                 <ProductCard
+                  key={each._id}
                   _id={each._id}
                   title={each.name}
                   subtitle={each.price}

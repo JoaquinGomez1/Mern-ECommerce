@@ -31,7 +31,7 @@ export default function UserRegister() {
   };
 
   const handleSubmit = async () => {
-    const req = await fetch("http://192.168.0.8:3100/register", reqHeaders);
+    const req = await fetch("/register", reqHeaders);
     const response = await req.json();
 
     if (req.status < 300) {
@@ -50,8 +50,7 @@ export default function UserRegister() {
         <RegisterForm
           handleSubmit={handleSubmit}
           handleChange={handleChange}
-          errorMessage={errorMessage}
-        ></RegisterForm>
+          errorMessage={errorMessage}></RegisterForm>
       )}
     </>
   );
