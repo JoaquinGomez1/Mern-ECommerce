@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Typography, Avatar } from "@material-ui/core";
 import useFetch from "../hooks/useFetch";
 import Pagination from "./Pagination";
@@ -7,10 +7,6 @@ import "../static/css/ShoppingHistory.css";
 export default function ShoppingHistory() {
   const url = "/user/history";
   const { data, isLoading, errorMessage } = useFetch(url);
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   return (
     <div className='shoppingHistory-page'>

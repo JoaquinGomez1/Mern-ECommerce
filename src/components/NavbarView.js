@@ -6,12 +6,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import MobileMenu from "./MobileMenu";
 import { NavLink } from "react-router-dom";
 
-export default function NavbarView({
-  redirectTo,
-  currentUser,
-  pRef,
-  shoppingCartItems,
-}) {
+export default function NavbarView({ currentUser, pRef, shoppingCartItems }) {
   return (
     <Grid
       container
@@ -20,67 +15,53 @@ export default function NavbarView({
       style={{ backgroundColor: "#141414", color: "#e2e2e2", height: "80px" }}
       className='NavBarContainer'>
       <Grid item>
-        <h2
-          onClick={() => {
-            redirectTo("/");
-          }}
-          className='navLogo'>
-          Electroniks
-        </h2>
-      </Grid>
-
-      <Grid item className='NavProducts categories'>
-        <h3 onClick={() => redirectTo("/products")}>Products</h3>
-      </Grid>
-
-      <Grid item className='categories'>
-        <NavLink
-          to='/categories'
-          style={{ color: "rgba(255,255,255,0.9)", textDecoration: "none" }}>
-          <h3>Categories</h3>{" "}
+        <NavLink to='/' exact activeClassName='activeLink'>
+          <h2 className='navLogo'>Electroniks</h2>
         </NavLink>
       </Grid>
 
-      <Grid
-        item
-        onClick={() => {
-          redirectTo("/shoppingcart");
-        }}
-        className='shoppingCartNav'>
-        <p ref={pRef} style={{ fontWeight: "bold" }}>
-          {shoppingCartItems.length > 0 ? shoppingCartItems.length : null}
-        </p>
-        <ShoppingCartIcon className='shoppingCartIcon' />
+      <Grid item className='NavProducts categories'>
+        <NavLink to='/products' activeClassName='activeLink'>
+          <h3>Products</h3>
+        </NavLink>
+      </Grid>
+
+      <Grid item className='categories'>
+        <NavLink to='/categories' activeClassName='activeLink'>
+          <h3>Categories</h3>
+        </NavLink>
+      </Grid>
+
+      <Grid item className='shoppingCartNav'>
+        <NavLink activeClassName='activeLink' to='/shoppingCart'>
+          <p ref={pRef} style={{ fontWeight: "bold", color: "white" }}>
+            {shoppingCartItems.length > 0 ? shoppingCartItems.length : null}
+          </p>
+          <ShoppingCartIcon className='shoppingCartIcon' />
+        </NavLink>
       </Grid>
       <div
         className='navbar-userSection'
         style={{ display: "flex", alignItems: "center" }}>
         {currentUser ? (
           <Grid item style={{ display: "grid", placeItems: "center" }}>
-            <h3
-              onClick={() => {
-                redirectTo("/user");
-              }}>
-              <AccountCircleIcon style={{ transform: "scale(1.2)" }} />
-            </h3>
+            <NavLink activeClassName='activeLink' to='/user'>
+              <h3>
+                <AccountCircleIcon style={{ transform: "scale(1.2)" }} />
+              </h3>
+            </NavLink>
           </Grid>
         ) : (
           <>
             <Grid item style={{ padding: "0 10px" }}>
-              <h3
-                onClick={() => {
-                  redirectTo("/login");
-                }}>
-                Login
-              </h3>
+              <NavLink to='/login' activeClassName='activeLink'>
+                <h3>Login</h3>
+              </NavLink>
             </Grid>
             <Grid item style={{ padding: "0 10px" }}>
-              <h3
-                onClick={() => {
-                  redirectTo("/register");
-                }}>
-                Register
-              </h3>
+              <NavLink to='/register' activeClassName='activeLink'>
+                <h3>Register</h3>
+              </NavLink>
             </Grid>
           </>
         )}

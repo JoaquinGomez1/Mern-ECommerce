@@ -36,12 +36,6 @@ img {
   animation: 0.1s linear ErrorPopUp;
 }
 
-.activeLink {
-  font-weight: bold;
-  font-size: 1.5rem;
-  color: rgb(231, 36, 68) !important;
-}
-
 #searchIconWrapper {
   cursor: pointer;
   padding: 0.9rem;

@@ -1,5 +1,4 @@
-import React, { useContext, useLayoutEffect, useRef, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useContext, useRef, useEffect } from "react";
 
 import NavbarView from "./NavbarView";
 import { myShoppingCartContext } from "../context/ShoppingCartContext";
@@ -8,24 +7,9 @@ import "../static/css/Navbar.css";
 
 export default function Navbar() {
   const { shoppingCartItems } = useContext(myShoppingCartContext);
-  const { currentUser, setCurrentUser } = useContext(myUserContext);
-  const history = useHistory();
+  const { currentUser } = useContext(myUserContext);
 
   const pRef = useRef();
-
-  const redirectTo = (route) => {
-    history.push(route);
-  };
-
-  useLayoutEffect(() => {
-    // Since navbar is the only consistent component throughout the entire website.
-    // I'll use it to check if there is currently a user logged in and to set the current user into the context
-    const user = localStorage.getItem("user");
-    const parsedUser = JSON.parse(user);
-    if (parsedUser) {
-      setCurrentUser(parsedUser);
-    }
-  }, [setCurrentUser]);
 
   useEffect(() => {
     // check if there is any items in the shopping cart and change its styling
@@ -37,9 +21,9 @@ export default function Navbar() {
 
   return (
     <NavbarView
-      redirectTo={redirectTo}
       currentUser={currentUser}
       pRef={pRef}
-      shoppingCartItems={shoppingCartItems}></NavbarView>
+      shoppingCartItems={shoppingCartItems}
+    />
   );
 }

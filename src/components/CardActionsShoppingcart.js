@@ -4,12 +4,20 @@ import useShoppingCart from "../hooks/useShoppingCart";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import RemoveCircleIcon from "@material-ui/icons/RemoveCircle";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 // This component only contains the bottom part of the view for a ProductCard
 // it is meant to be passed as prop to ProductCard for this to work
 export default function CardActionsShoppingcart({ _id, qty }) {
-  const { addItem, removeOneItem, removeItem, addToFav } = useShoppingCart(_id);
+  const {
+    addItem,
+    removeOneItem,
+    removeItem,
+    addToFav,
+    isInFavorites,
+  } = useShoppingCart(_id);
+
   return (
     <CardActions>
       <Grid container justify='center'>
@@ -36,7 +44,11 @@ export default function CardActionsShoppingcart({ _id, qty }) {
 
           <Grid item style={{ margin: "0 5px" }}>
             <Button>
-              <FavoriteBorderIcon onClick={addToFav} />
+              {isInFavorites() ? (
+                <FavoriteIcon />
+              ) : (
+                <FavoriteBorderIcon onClick={addToFav} />
+              )}
             </Button>
           </Grid>
         </Grid>

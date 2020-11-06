@@ -223,6 +223,22 @@
   text-decoration: none;
 }
 
+.activeLink {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: rgb(231, 36, 68) !important;
+  text-decoration: none;
+}
+
+.NavBarContainer a {
+  color: white;
+  text-decoration: none;
+}
+
+.NavBarContainer a:hover {
+  color: rgb(231, 36, 68);
+}
+
 /* Responsive view */
 
 @media (max-width: 800px) {
@@ -241,5 +257,12 @@
     position: fixed;
     z-index: 5;
     bottom: 0;
+  }
+
+  .activeLink {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: rgb(231, 36, 68) !important;
+    text-decoration: none;
   }
 }

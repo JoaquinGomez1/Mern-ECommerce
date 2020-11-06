@@ -1,10 +1,12 @@
 import { useContext } from "react";
 import { myShoppingCartContext } from "../context/ShoppingCartContext";
+import { myUserContext } from "../context/UserContext";
 
 export default function useShoppingCart(id, itemObject) {
   const { shoppingCartItems, setShoppingCartItems } = useContext(
     myShoppingCartContext
   );
+  const { currentUser, setCurrentUser } = useContext(myUserContext);
 
   // Utility function reused by each function in this file
   const findThisItem = () => {
@@ -74,13 +76,16 @@ export default function useShoppingCart(id, itemObject) {
 
   const addToFav = async () => {
     const thisItem = findThisItem();
-    let userId = await JSON.parse(localStorage.getItem("user"));
-    if (!userId) return "Login first";
 
-    userId = userId._id;
+    if (!currentUser) return "Login first";
 
-    const body = { userId, item: thisItem };
-    fetch("http://192.168.0.8:3100/favorites", {
+    const body = { item: thisItem };
+    const newArray = [...currentUser.favoriteProducts, thisItem];
+    setCurrentUser({
+      ...currentUser,
+      favoriteProducts: newArray,
+    });
+    fetch("/favorites", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -89,12 +94,25 @@ export default function useShoppingCart(id, itemObject) {
     });
   };
 
+  const isInFavorites = () => {
+    const isInFavs = currentUser.favoriteProducts.find((item) => {
+      if (item._id === id) {
+        return item;
+      } else {
+        return null;
+      }
+    });
+
+    return isInFavs;
+  };
+
   return {
     addItem,
     addToShoppingCart,
     removeOneItem,
     removeItem,
     addToFav,
+    isInFavorites,
     findThisItem,
   };
 }

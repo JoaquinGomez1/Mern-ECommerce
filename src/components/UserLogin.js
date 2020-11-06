@@ -25,8 +25,6 @@ export default function UserLogin() {
 
     if (req.status === 200) {
       setCurrentUser(data);
-      localStorage.setItem("user", JSON.stringify(data));
-      console.log(data);
     } else {
       setWasError(data.message);
     }
