@@ -44,12 +44,7 @@ export default function CardPayment(props) {
         body: JSON.stringify({ shoppingHistory: shoppingDetails }),
       };
 
-      const req = await fetch("/user/historyy", reqHeaders);
-      const res = await req.json();
-      console.log(res);
-
-      const data = JSON.stringify({ ...currentUser, shoppingDetails });
-      localStorage.setItem("user", data);
+      fetch("/user/historyy", reqHeaders);
     }
     handleClose();
   };
@@ -61,8 +56,9 @@ export default function CardPayment(props) {
       </Button>
       <Modal open={open} onClose={handleClose}>
         <form
+          className='transition'
           style={{
-            margin: "0 auto",
+            margin: "4rem auto",
             backgroundColor: "#eee",
             display: "grid",
             width: "350px",

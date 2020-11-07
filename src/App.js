@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./App.css";
 import "./transition.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 // Components
 import Navbar from "./components/Navbar";
@@ -22,6 +27,9 @@ import ShoppingCartContext from "./context/ShoppingCartContext";
 import UserContext from "./context/UserContext";
 import UserView from "./components/UserView";
 import ViewFavorites from "./components/ViewFavorites";
+import AdminPanel from "./components/AdminPanel";
+
+import { myUserContext } from "./context/UserContext";
 
 function App() {
   return (
@@ -44,8 +52,8 @@ function App() {
                   <Route path='/products/:id' component={ProductReview} />
                   <Route path='/login' component={UserLogin} />
                   <Route path='/register' component={UserRegister} />
-                  <Route path='/user' exact component={UserView} />
-                  <Route path='/user/favorites' component={ViewFavorites} />
+                  <ProtRoute path='/user' exact component={UserView} />
+                  <ProtRoute path='/user/favorites' component={ViewFavorites} />
                   <Route
                     path='/categories'
                     exact
@@ -57,7 +65,8 @@ function App() {
                     key='catSearch'
                     component={CategoriesPage}
                   />
-                  <Route path='/user/history' component={ShoppingHistory} />
+                  <ProtRoute path='/user/history' component={ShoppingHistory} />
+                  <ProtRoute path='/user/admin' component={AdminPanel} />
                   <Route path='*' component={NotFound404} />
                 </Switch>
               </Router>
@@ -68,5 +77,17 @@ function App() {
     </MainProductsContext>
   );
 }
+
+const ProtRoute = ({ component: Component, ...rest }) => {
+  const { currentUser } = useContext(myUserContext);
+  return (
+    <Route
+      {...rest}
+      render={(props) => {
+        return currentUser ? <Component {...props} /> : <Redirect to='/' />;
+      }}
+    />
+  );
+};
 
 export default App;

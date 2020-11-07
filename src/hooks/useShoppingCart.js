@@ -95,12 +95,14 @@ export default function useShoppingCart(id, itemObject) {
   };
 
   const isInFavorites = () => {
+    if (!currentUser) return false;
+    // Initialize favorite products as an emptyArray
+    if (!currentUser.favoriteProducts)
+      setCurrentUser({ ...currentUser, favoriteProducts: [] });
+
     const isInFavs = currentUser.favoriteProducts.find((item) => {
-      if (item._id === id) {
-        return item;
-      } else {
-        return null;
-      }
+      if (item._id === id) return item;
+      else return null;
     });
 
     return isInFavs;

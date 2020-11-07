@@ -10,7 +10,6 @@ export default function UserView() {
   const handleLogout = () => {
     setCurrentUser(); // ---> Sets current user to undefined
     fetch("/logout");
-    localStorage.removeItem("user");
   };
 
   return (
@@ -45,6 +44,20 @@ export default function UserView() {
                 View Shopping History
               </Button>
             </Grid>
+            {currentUser.role === "admin" && (
+              <Grid item>
+                <Button
+                  variant='contained'
+                  color='primary'
+                  style={{ marginBottom: "50px" }}
+                  onClick={() => {
+                    history.push("/user/admin");
+                  }}>
+                  Admin Panel
+                </Button>
+              </Grid>
+            )}
+
             <Grid item>
               <Button
                 variant='contained'

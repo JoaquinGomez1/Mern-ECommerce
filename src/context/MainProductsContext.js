@@ -6,7 +6,7 @@ export default function MainProductsContext(props) {
   const [mainProducts, setMainProducts] = useState([]);
 
   const fetchData = async () => {
-    const req = await fetch("http://192.168.0.8:3100/products");
+    const req = await fetch("/products");
     const data = await req.json();
     setMainProducts(data.results);
   };

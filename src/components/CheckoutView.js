@@ -49,7 +49,7 @@ export default function CheckoutView() {
       </h3>
       <List style={{ flex: 1 }}>
         {shoppingCartItems.map((each) => (
-          <ListItem>
+          <ListItem key={each._id}>
             <Avatar
               alt={each.name}
               src={each.image}

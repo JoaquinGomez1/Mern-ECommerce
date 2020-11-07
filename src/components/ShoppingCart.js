@@ -49,11 +49,17 @@ export default function ShoppingCart() {
           display: "flex",
           flexDirection: "column",
         }}>
-        <Grid container style={{ flex: 1 }} justify='center'>
+        <Grid container justify='center'>
           <Typography variant='h4' style={{ marginTop: "2rem" }}>
             Shopping Cart <hr />
           </Typography>
-          <Grid container justify='center'>
+          <Grid
+            container
+            justify='center'
+            alignItems='center'
+            style={{ marginBottom: "auto" }}>
+            {" "}
+            {/* Push Elements bellow this to the bottom */}
             {shoppingCartItems.length <= 0 ? (
               <h1 style={{ color: "#f50057" }}>
                 The are no items in the Shopping Cart yet
@@ -76,7 +82,7 @@ export default function ShoppingCart() {
             )}
           </Grid>
         </Grid>
-        <Grid container justify='center'>
+        <Grid container justify='center' style={{ marginTop: "auto" }}>
           <h1>Total price: ${totalPrice}</h1>
           <Grid container justify='center'>
             {shoppingCartItems.length >= 1 && (

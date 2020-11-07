@@ -43,13 +43,15 @@ export default function CardActionsShoppingcart({ _id, qty }) {
           </Grid>
 
           <Grid item style={{ margin: "0 5px" }}>
-            <Button>
-              {isInFavorites() ? (
-                <FavoriteIcon />
-              ) : (
-                <FavoriteBorderIcon onClick={addToFav} />
-              )}
-            </Button>
+            {isInFavorites() ? (
+              <Button>
+                <FavoriteIcon style={{ color: "#3f51b5" }} />
+              </Button>
+            ) : (
+              <Button onClick={addToFav}>
+                <FavoriteBorderIcon />
+              </Button>
+            )}
           </Grid>
         </Grid>
       </Grid>
