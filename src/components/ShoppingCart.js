@@ -58,7 +58,6 @@ export default function ShoppingCart() {
             justify='center'
             alignItems='center'
             style={{ marginBottom: "auto" }}>
-            {" "}
             {/* Push Elements bellow this to the bottom */}
             {shoppingCartItems.length <= 0 ? (
               <h1 style={{ color: "#f50057" }}>

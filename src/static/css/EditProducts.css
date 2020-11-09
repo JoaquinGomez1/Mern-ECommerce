@@ -1,0 +1,64 @@
+.edit-product-item-container {
+  width: 90%;
+  max-width: 1000px;
+  display: flex;
+  padding: 0 1rem;
+}
+
+.edit-product-item-container:active,
+.edit-product-item-container:focus,
+.edit-product-item-summary:focus,
+.edit-product-item-summary:active {
+  outline: none;
+  border: none;
+}
+
+.edit-product-item-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 0.5rem;
+}
+
+.edit-products-textField {
+  margin: 0 auto;
+  max-width: 500px;
+  padding: 1.5rem;
+}
+
+.edit-products-textField > .textField-item {
+  margin: 0.5rem 0;
+}
+
+details summary::-webkit-details-marker {
+  /* Surprisingly, this also works for firefox*/
+  display: none;
+}
+
+.edit-product-item-container:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+
+.edit-product-icons {
+  display: flex;
+}
+
+.edit-product-icons > .icon:hover {
+  opacity: 0.8;
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.edit-product-icons > .edit-icon {
+  color: #33a2e2;
+}
+
+.edit-product-icons > .remove-icon {
+  color: #e63763;
+}
+
+.notInStock {
+  text-decoration: line-through;
+  opacity: 0.4;
+}

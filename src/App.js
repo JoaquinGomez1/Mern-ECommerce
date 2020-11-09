@@ -30,6 +30,7 @@ import ViewFavorites from "./components/ViewFavorites";
 import AdminPanel from "./components/AdminPanel";
 
 import { myUserContext } from "./context/UserContext";
+import EditProducts from "./components/EditProducts";
 
 function App() {
   return (
@@ -66,7 +67,11 @@ function App() {
                     component={CategoriesPage}
                   />
                   <ProtRoute path='/user/history' component={ShoppingHistory} />
-                  <ProtRoute path='/user/admin' component={AdminPanel} />
+                  <ProtRoute path='/user/admin' exact component={AdminPanel} />
+                  <ProtRoute
+                    path='/user/admin/edit-products'
+                    component={EditProducts}
+                  />
                   <Route path='*' component={NotFound404} />
                 </Switch>
               </Router>

@@ -51,6 +51,27 @@
   max-width: 40%;
 }
 
+.flex {
+  display: flex;
+}
+
+.d-column {
+  flex-direction: column;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.admin-buttons-container {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.admin-buttons-container > * {
+  margin: 1rem 0;
+}
+
 @media (max-width: 600px) {
   .add-product-form {
     width: 95vw;

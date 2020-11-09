@@ -46,11 +46,11 @@ export default function SlideShow(props) {
     <RadioButtonUncheckedIcon style={{ cursor: "pointer" }} />
   );
   bullets[state.current] = (
-    <FiberManualRecordIcon style={{ fontSize: "30px" }} />
+    <FiberManualRecordIcon key='current' style={{ fontSize: "30px" }} />
   );
 
   return (
-    <div style={{ marginTop: "20px" }}>
+    <div key={state.current.name} style={{ marginTop: "20px" }}>
       {Children.toArray(childrenArray)[state.current]}
       <div onClick={changeIndex}>{bullets}</div>
       <p>
