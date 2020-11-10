@@ -38,7 +38,7 @@ export default function ProductsListing({ location }) {
               />
             ))}
           {isLoading && <h2>Loading</h2>}
-          {!isLoading && data.results.length < 1 && (
+          {!isLoading && data && data.results.length < 1 && (
             <div>
               <h2>Nothing Found</h2>
               <Link to='/' style={{ textDecoration: "none" }}>

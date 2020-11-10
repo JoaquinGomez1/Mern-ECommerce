@@ -33,7 +33,7 @@ export default function CategoriesPage() {
 
   return (
     <Grid container direction='column' alignItems='center'>
-      <h1>View Our PC Products</h1>
+      <h1>View Our Categories</h1>
       <Grid container direction='row' justify='center'>
         <Pagination data={data} setData={setData} url={url}>
           {!isLoading &&
@@ -61,7 +61,9 @@ export default function CategoriesPage() {
               );
             })}
           {isLoading && <h2>Loading</h2>}
-          {!isLoading && data.results.length < 1 && <h2>Nothing Found</h2>}
+          {!isLoading && data && data.results.length < 1 && (
+            <h2>Nothing Found</h2>
+          )}
         </Pagination>
       </Grid>
     </Grid>
