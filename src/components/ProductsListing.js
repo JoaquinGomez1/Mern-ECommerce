@@ -23,6 +23,7 @@ export default function ProductsListing({ location }) {
       <Grid container direction='row' justify='center'>
         <Pagination data={data} setData={setData} url={url}>
           {!isLoading &&
+            data &&
             data.results &&
             data.results.map((each) => (
               <ProductCard
