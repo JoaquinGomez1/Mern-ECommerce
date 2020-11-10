@@ -9,6 +9,11 @@ body {
   overflow-x: hidden;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .App {
   text-align: center;
 }

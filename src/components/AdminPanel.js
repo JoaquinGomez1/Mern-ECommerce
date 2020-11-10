@@ -103,6 +103,7 @@ const AddProductAdminModal = ({
         <TextareaAutosize
           className='product-form-textarea'
           rowsMin={4}
+          name='description'
           placeholder='Description'
         />
       </div>
