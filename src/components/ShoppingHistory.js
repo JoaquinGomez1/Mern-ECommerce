@@ -3,6 +3,7 @@ import { Typography, Avatar } from "@material-ui/core";
 import useFetch from "../hooks/useFetch";
 import Pagination from "./Pagination";
 import "../static/css/ShoppingHistory.css";
+import LoadingComponent from "./LoadingComponent";
 
 export default function ShoppingHistory() {
   const url = "/user/history";
@@ -13,10 +14,10 @@ export default function ShoppingHistory() {
       <Typography className='componentTransition' variant='h4'>
         Shopping History
       </Typography>
+      {isLoading && <LoadingComponent style={{ margin: "inherit auto" }} />}
       <Pagination>
         {!isLoading && data && data.map((each) => <DateCard data={each} />)}
       </Pagination>
-
       {errorMessage && <Typography variant='h4'>{errorMessage}</Typography>}
     </div>
   );

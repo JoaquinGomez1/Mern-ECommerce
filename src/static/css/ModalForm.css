@@ -63,6 +63,10 @@
   justify-content: space-between;
 }
 
+.justify-center {
+  justify-content: center;
+}
+
 .admin-buttons-container {
   max-width: 300px;
   margin: 0 auto;

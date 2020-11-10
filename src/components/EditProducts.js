@@ -3,6 +3,7 @@ import useFetch from "../hooks/useFetch";
 import Pagination from "./Pagination";
 import "../static/css/EditProducts.css";
 import EditProductItem from "./EditProductItem";
+import LoadingComponent from "./LoadingComponent";
 
 export default function EditProducts() {
   const url = "/products";
@@ -44,7 +45,7 @@ export default function EditProducts() {
   };
 
   return (
-    <div className='componentTransition edit-products-page'>
+    <div className='componentTransition edit-products-page flex d-column'>
       <h2>Edit Products</h2>
       <Pagination data={data} setData={setData} url={url}>
         {!isLoading &&
@@ -59,6 +60,8 @@ export default function EditProducts() {
             />
           ))}
       </Pagination>
+
+      {isLoading && <LoadingComponent />}
     </div>
   );
 }

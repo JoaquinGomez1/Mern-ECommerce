@@ -4,6 +4,7 @@ import Pagination from "./Pagination";
 import useFetch from "../hooks/useFetch";
 import ProductCard from "./ProductCard";
 import { useHistory } from "react-router-dom";
+import LoadingComponent from "./LoadingComponent";
 
 export default function CategoriesPage() {
   const url = "/categories";
@@ -60,7 +61,7 @@ export default function CategoriesPage() {
                 />
               );
             })}
-          {isLoading && <h2>Loading</h2>}
+          {isLoading && <LoadingComponent />}
           {!isLoading && data && data.results.length < 1 && (
             <h2>Nothing Found</h2>
           )}

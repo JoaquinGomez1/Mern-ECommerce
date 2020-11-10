@@ -1,3 +1,8 @@
+.edit-products-page {
+  display: flex;
+  align-items: center;
+}
+
 .edit-product-item-container {
   width: 90%;
   max-width: 1000px;
