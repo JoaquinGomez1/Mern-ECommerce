@@ -16,6 +16,7 @@ export default function CardActionsShoppingcart({ _id, qty }) {
     removeItem,
     addToFav,
     isInFavorites,
+    removeFromFav,
   } = useShoppingCart(_id);
 
   return (
@@ -44,7 +45,7 @@ export default function CardActionsShoppingcart({ _id, qty }) {
 
           <Grid item style={{ margin: "0 5px" }}>
             {isInFavorites() ? (
-              <Button>
+              <Button onClick={removeFromFav}>
                 <FavoriteIcon style={{ color: "#3f51b5" }} />
               </Button>
             ) : (

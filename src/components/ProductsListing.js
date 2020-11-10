@@ -5,6 +5,7 @@ import Pagination from "./Pagination";
 import useFetch from "../hooks/useFetch";
 import { useHistory, Link } from "react-router-dom";
 import "../static/css/ProductListing.css";
+import Loading from "./LoadingComponent";
 
 export default function ProductsListing({ location }) {
   let url = "/products";
@@ -37,7 +38,7 @@ export default function ProductsListing({ location }) {
                 onCardAreaClick={() => redirecTo(each._id)}
               />
             ))}
-          {isLoading && <h2>Loading</h2>}
+          {isLoading && <Loading />}
           {!isLoading && data && data.results.length < 1 && (
             <div>
               <h2>Nothing Found</h2>

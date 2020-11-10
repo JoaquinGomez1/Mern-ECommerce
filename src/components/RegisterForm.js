@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Container,
-  Grid,
   TextField,
   InputLabel,
   Select,
@@ -9,82 +8,90 @@ import {
   Button,
   Typography,
 } from "@material-ui/core";
-import countries from "../static/contries.json";
+import "../static/css/RegisterForm.css";
 
 export default function RegisterForm({
   handleChange,
   handleSubmit,
   errorMessage,
 }) {
+  const genders = ["Male", "Female", "Other"];
   return (
-    <Container className="componentTransition" style={{ minHeigth: "100vh" }}>
-      <form id="UserRegister">
-        <Grid
-          container
-          direction="column"
-          alignItems="center"
-          justify="center"
-          style={{ height: "calc(100vh - 80px)" }}
-        >
-          <Grid container direction="column" style={{ width: "40%" }}>
+    <Container className='componentTransition'>
+      <form id='UserRegister'>
+        <div
+          className='flex d-column credentials-form-wrapper'
+          style={{ height: "calc(100vh - 80px)" }}>
+          <h2 className='register-form-title'>Sign up for free!</h2>
+          <div className='flex d-column credentials-form-container'>
             <TextField
-              label="Username"
-              name="username"
+              style={{ marginTop: "10px" }}
+              label='Username'
+              name='username'
               onChange={handleChange}
             />
             <TextField
-              label="Password"
-              type="password"
-              name="password"
+              style={{ marginTop: "10px" }}
+              label='Password'
+              type='password'
+              name='password'
               onChange={handleChange}
             />
             <TextField
-              label="Email"
-              type="email"
-              name="email"
+              style={{ marginTop: "10px" }}
+              label='Email'
+              type='email'
+              name='email'
               onChange={handleChange}
             />
 
             {/*TODO: Optimize mapping speed */}
-            <InputLabel id="country-select">Country</InputLabel>
+            <InputLabel id='gender-select' style={{ marginTop: "10px" }}>
+              Gender
+            </InputLabel>
             <Select
-              labelId="country-select"
-              defaultValue="-"
-              name="country"
-              onChange={handleChange}
-            >
-              {countries.map((country) => {
-                return <MenuItem value={country.name}>{country.name}</MenuItem>;
+              labelId='gender-select'
+              defaultValue='-'
+              name='gender'
+              onChange={handleChange}>
+              {genders.map((gender) => {
+                return (
+                  <MenuItem key={gender} value={gender}>
+                    {gender}
+                  </MenuItem>
+                );
               })}
             </Select>
-            <TextField label="Address" name="address" onChange={handleChange} />
             <TextField
-              label="Phone Number"
-              name="phoneNumber"
+              style={{ marginTop: "15px" }}
+              label='Address'
+              name='address'
+              onChange={handleChange}
+            />
+            <TextField
+              style={{ marginTop: "15px" }}
+              label='Phone Number'
+              name='phoneNumber'
               onChange={handleChange}
             />
             {errorMessage && (
               <Typography
-                className="errorMessage"
-                variant="h5"
-                style={{ marginTop: "20px", color: "#ed0c5b" }}
-              >
+                className='errorMessage'
+                variant='h5'
+                style={{ marginTop: "20px", color: "#ed0c5b" }}>
                 {errorMessage}
               </Typography>
             )}
 
-            <Grid item>
-              <Button
-                color="secondary"
-                variant="contained"
-                style={{ marginTop: "50px" }}
-                onClick={handleSubmit}
-              >
-                Submit
-              </Button>
-            </Grid>
-          </Grid>
-        </Grid>
+            <Button
+              color='secondary'
+              variant='contained'
+              onClick={handleSubmit}
+              style={{ marginTop: "50px" }}>
+              Submit
+            </Button>
+          </div>
+        </div>
       </form>
     </Container>
   );

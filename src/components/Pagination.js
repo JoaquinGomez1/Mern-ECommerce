@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Grid, Container, Typography } from "@material-ui/core";
+import LoadingComponent from "./LoadingComponent";
 
 export default function Pagination(props) {
   // This component asumes that the url provided can handle pagination
@@ -58,7 +59,7 @@ export default function Pagination(props) {
         </Button>
       </Grid>
       <Grid container justify='center'>
-        {!isLoading ? props.children : <h2>Loading...</h2>}
+        {!isLoading ? props.children : <LoadingComponent />}
       </Grid>
     </Container>
   );

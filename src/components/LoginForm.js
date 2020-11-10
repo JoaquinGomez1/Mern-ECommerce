@@ -6,50 +6,46 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
+import "../static/css/RegisterForm.css";
 
 export default function LoginForm({ wasError, sendData, handleChange }) {
   return (
-    <Container className="componentTransition">
+    <Container className='componentTransition'>
       <Grid
         container
-        direction="column"
-        justify="center"
-        style={{ height: "calc(100vh - 80px)" }}
-      >
+        direction='column'
+        justify='center'
+        style={{ height: "calc(100vh - 80px)" }}>
         <h1>Log in</h1>
-        <form onSubmit={sendData} onChange={handleChange}>
-          <Grid container direction="column" alignItems="center">
+        <form
+          className='flex d-column credentials-form-wrapper'
+          onSubmit={sendData}
+          onChange={handleChange}>
+          <div className='flex d-column credentials-form-container'>
+            <TextField id='login-username' label='Username' name='username' />
             <TextField
-              id="login-username"
-              label="Username"
-              style={{ width: "40%", marginBottom: "20px" }}
-              name="username"
-            />
-            <TextField
-              id="login-password"
-              label="Password"
-              style={{ width: "40%", padding: "1rem 0 " }}
-              type="password"
-              name="password"
+              id='login-password'
+              label='Password'
+              type='password'
+              name='password'
             />
             {wasError && (
               <Typography
-                className="errorMessage"
-                variant="h5"
-                style={{ color: "#f02b66" }}
-              >
+                className='errorMessage'
+                variant='h5'
+                style={{ color: "#f02b66" }}>
                 {wasError}
               </Typography>
             )}
+
             <Button
-              variant="contained"
-              color="secondary"
+              variant='contained'
+              color='secondary'
               style={{ marginTop: "40px" }}
-              type="submit"
-            >
+              type='submit'>
               Log In
             </Button>
-          </Grid>
+          </div>
         </form>
       </Grid>
     </Container>

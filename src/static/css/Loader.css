@@ -1,0 +1,43 @@
+.loader-container {
+  width: 60px;
+  display: flex;
+  height: 60px;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.loader-item {
+  margin: 0 3px;
+  height: 50%;
+  width: 5px;
+  background-color: rgb(243, 53, 85);
+  transition: all 0.1 ease-in-out;
+  animation: growItem linear 0.4s infinite;
+  border-radius: 8px;
+}
+
+.loader-container .loader-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.loader-container .loader-item:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.loader-container .loader-item:nth-child(3) {
+  animation-delay: 0.2s;
+}
+.loader-container .loader-item:nth-child(4) {
+  animation-delay: 0.25s;
+}
+
+.loader-container .loader-item:nth-child(5) {
+  animation-delay: 0.3s;
+}
+
+@keyframes growItem {
+  from {
+    height: 50%;
+  }
+  to {
+    height: 90%;
+  }
+}

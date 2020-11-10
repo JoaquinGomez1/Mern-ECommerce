@@ -3,10 +3,17 @@ import { Grid, Container, Typography } from "@material-ui/core";
 import ProductCard from "./ProductCard";
 import Pagination from "./Pagination";
 import useFetch from "../hooks/useFetch";
+import { useHistory } from "react-router-dom";
+import LoadingComponent from "./LoadingComponent";
 
 export default function ViewFavorites() {
   const url = "/user/favorites";
   const { data, isLoading, errorMessage } = useFetch(url);
+  const history = useHistory();
+
+  const redirectTo = (url) => {
+    history.push(url);
+  };
 
   return (
     <>
@@ -23,11 +30,13 @@ export default function ViewFavorites() {
                     subtitle={each.price}
                     qty={1}
                     isInStock={true}
-                    image={each.img}></ProductCard>
+                    onCardAreaClick={() => redirectTo(`/products/${each._id}`)}
+                    image={each.img}
+                  />
                 ))}
             </Pagination>
           ) : (
-            <h1 style={{ margin: "0 auto" }}>Loading...</h1>
+            <LoadingComponent />
           )}
 
           {errorMessage && (

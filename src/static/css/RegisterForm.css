@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&display=swap");
+
+.credentials-form-container {
+  max-width: 400px;
+  width: 100%;
+  padding: 1.5em;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 6px 4px 8px 1px rgba(0, 0, 0, 0.15);
+  justify-content: center;
+}
+
+.credentials-form-wrapper {
+  /* this class already has set the display:flex property and flex-direction:column */
+  justify-content: center;
+  align-items: center;
+}
+
+.credentials-form-title {
+  font-size: 1.8rem;
+  font-family: "Noto Sans JP", sans-serif;
+  opacity: 0.75;
+}
+
+#login-username,
+#login-password {
+  margin: 1rem 0;
+}

@@ -7,6 +7,7 @@ export default function MainProductsContext(props) {
 
   const fetchData = async () => {
     const req = await fetch("/products");
+    console.log(req);
     const data = await req.json();
     setMainProducts(data.results);
   };

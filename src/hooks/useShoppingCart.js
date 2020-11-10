@@ -108,12 +108,33 @@ export default function useShoppingCart(id, itemObject) {
     return isInFavs;
   };
 
+  const removeFromFav = () => {
+    const thisItem = findThisItem();
+    if (!currentUser) return "Login first";
+    if (!thisItem) return "No item Found";
+
+    const product = { productId: thisItem._id };
+    const indexOfItemInArray = currentUser.favoriteProducts.indexOf(thisItem);
+    const newArray = [...currentUser.favoriteProducts];
+    newArray.splice(indexOfItemInArray, 1);
+    setCurrentUser({ ...currentUser, favoriteProducts: newArray });
+
+    fetch("/user/favorites", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(product),
+    });
+  };
+
   return {
     addItem,
     addToShoppingCart,
     removeOneItem,
     removeItem,
     addToFav,
+    removeFromFav,
     isInFavorites,
     findThisItem,
   };
