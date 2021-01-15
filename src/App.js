@@ -19,18 +19,18 @@ import UserLogin from "./components/UserLogin";
 import UserRegister from "./components/UserRegister";
 import CategoriesPage from "./components/CategoriesPage";
 import ShoppingHistory from "./components/ShoppingHistory";
+import UserView from "./components/UserView";
+import ViewFavorites from "./components/ViewFavorites";
+import AdminPanel from "./components/AdminPanel";
+import EditProducts from "./components/EditProducts";
 
 // Context
 import MainProductsContext from "./context/MainProductsContext";
 import SlideshowContext from "./context/SlideshowContext";
 import ShoppingCartContext from "./context/ShoppingCartContext";
 import UserContext from "./context/UserContext";
-import UserView from "./components/UserView";
-import ViewFavorites from "./components/ViewFavorites";
-import AdminPanel from "./components/AdminPanel";
 
 import { myUserContext } from "./context/UserContext";
-import EditProducts from "./components/EditProducts";
 
 function App() {
   return (
@@ -38,41 +38,43 @@ function App() {
       <SlideshowContext>
         <ShoppingCartContext>
           <UserContext>
-            <div className='App'>
+            <div className="App">
               <Router>
                 <Navbar />
+
                 <Switch>
-                  <Route path='/' exact component={Landing} />
-                  <Route path='/shoppingcart' exact component={ShoppingCart} />
+                  <Route path="/" exact component={Landing} />
+                  <Route path="/shoppingcart" exact component={ShoppingCart} />
                   <Route
-                    path='/products'
-                    key='products'
+                    path="/products"
+                    key="products"
                     exact
                     component={ProductsListing}
                   />
-                  <Route path='/products/:id' component={ProductReview} />
-                  <Route path='/login' component={UserLogin} />
-                  <Route path='/register' component={UserRegister} />
-                  <ProtRoute path='/user' exact component={UserView} />
-                  <ProtRoute path='/user/favorites' component={ViewFavorites} />
+                  <Route path="/products/:id" component={ProductReview} />
+                  <Route path="/login" component={UserLogin} />
+                  <Route path="/register" component={UserRegister} />
+                  <ProtRoute path="/user" exact component={UserView} />
+                  <ProtRoute path="/user/favorites" component={ViewFavorites} />
                   <Route
-                    path='/categories'
+                    path="/categories"
+                    key="categories"
                     exact
-                    key='categories'
                     component={CategoriesPage}
                   />
+
                   <Route
-                    path='/categories/search'
-                    key='catSearch'
+                    path="/categories/search"
+                    key="categories-search"
                     component={CategoriesPage}
                   />
-                  <ProtRoute path='/user/history' component={ShoppingHistory} />
-                  <ProtRoute path='/user/admin' exact component={AdminPanel} />
+                  <ProtRoute path="/user/history" component={ShoppingHistory} />
+                  <ProtRoute path="/user/admin" exact component={AdminPanel} />
                   <ProtRoute
-                    path='/user/admin/edit-products'
+                    path="/user/admin/edit-products"
                     component={EditProducts}
                   />
-                  <Route path='*' component={NotFound404} />
+                  <Route path="*" component={NotFound404} />
                 </Switch>
               </Router>
             </div>
@@ -89,7 +91,7 @@ const ProtRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) => {
-        return currentUser ? <Component {...props} /> : <Redirect to='/' />;
+        return currentUser ? <Component {...props} /> : <Redirect to="/" />;
       }}
     />
   );

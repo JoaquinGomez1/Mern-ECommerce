@@ -5,21 +5,23 @@ import useFetch from "../hooks/useFetch";
 import ProductCard from "./ProductCard";
 import { useHistory } from "react-router-dom";
 import LoadingComponent from "./LoadingComponent";
+import CategoryCard from "./CategoryCard";
 
 export default function CategoriesPage() {
   const url = "/categories";
-  const { data, setData, isLoading } = useFetch(url);
+  const { data, setData, isLoading, setIsLoading } = useFetch(url);
   const [wasFetched, setWasFetched] = useState(false);
 
   const history = useHistory();
 
   const lookForCategory = async (categoryName) => {
+    setIsLoading(true);
     const url = `/categories/search?search=${categoryName}`;
-    history.push(url);
     const req = await fetch(url);
     const res = await req.json();
     setWasFetched(true);
     res && setData(res);
+    setIsLoading(false);
   };
 
   const redirecTo = (id) => {
@@ -33,34 +35,31 @@ export default function CategoriesPage() {
   }, []);
 
   return (
-    <Grid container direction='column' alignItems='center'>
+    <Grid container direction="column" alignItems="center">
       <h1>View Our Categories</h1>
-      <Grid container direction='row' justify='center'>
+      <Grid container direction="row" justify="center">
         <Pagination data={data} setData={setData} url={url}>
-          {!isLoading &&
-            data &&
-            data.results &&
-            data.results.map((each) => {
-              return !wasFetched ? (
-                <ProductCard
-                  key={each._id}
-                  _id={each._id}
-                  title={each.name}
-                  image={null}
-                  onCardAreaClick={() => lookForCategory(each.name)}
-                />
-              ) : (
-                <ProductCard
-                  _id={each._id}
-                  title={each.name}
-                  subtitle={each.price}
-                  image={each.img}
-                  qty={each.qty}
-                  isInStock={each.isInStock}
-                  onCardAreaClick={() => redirecTo(each._id)}
-                />
-              );
-            })}
+          <div className="flex d-column">
+            {!isLoading &&
+              data?.results?.map((each) => {
+                return !wasFetched ? (
+                  <CategoryCard
+                    onClick={() => lookForCategory(each.name)}
+                    name={each.name}
+                  />
+                ) : (
+                  <ProductCard
+                    _id={each._id}
+                    title={each.name}
+                    subtitle={each.price}
+                    image={each.img}
+                    qty={each.qty}
+                    isInStock={each.isInStock}
+                    onCardAreaClick={() => redirecTo(each._id)}
+                  />
+                );
+              })}
+          </div>
           {isLoading && <LoadingComponent />}
           {!isLoading && data && data.results.length < 1 && (
             <h2>Nothing Found</h2>
