@@ -27,7 +27,7 @@ export default function ProductReview(props) {
   }
 
   return (
-    <div className="componentTransition" style={{ marginTop: "50px" }}>
+    <div style={{ marginTop: "50px" }}>
       {isLoading ? (
         <LoadingComponent />
       ) : (
@@ -35,6 +35,7 @@ export default function ProductReview(props) {
           container
           style={{ maxWidth: "1000px", margin: "0 auto" }}
           justify="center"
+          className="componentTransition"
         >
           <Box display="flex" className="product-listing-container">
             <img style={{ maxWidth: "100%" }} src={data.img} alt={data.name} />

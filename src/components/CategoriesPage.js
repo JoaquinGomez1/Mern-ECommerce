@@ -37,29 +37,27 @@ export default function CategoriesPage() {
   return (
     <Grid container direction="column" alignItems="center">
       <h1>View Our Categories</h1>
-      <Grid container direction="row" justify="center">
+      <Grid container justify="center">
         <Pagination data={data} setData={setData} url={url}>
-          <div className="flex d-column">
-            {!isLoading &&
-              data?.results?.map((each) => {
-                return !wasFetched ? (
-                  <CategoryCard
-                    onClick={() => lookForCategory(each.name)}
-                    name={each.name}
-                  />
-                ) : (
-                  <ProductCard
-                    _id={each._id}
-                    title={each.name}
-                    subtitle={each.price}
-                    image={each.img}
-                    qty={each.qty}
-                    isInStock={each.isInStock}
-                    onCardAreaClick={() => redirecTo(each._id)}
-                  />
-                );
-              })}
-          </div>
+          {!isLoading &&
+            data?.results?.map((each) => {
+              return !wasFetched ? (
+                <CategoryCard
+                  onClick={() => lookForCategory(each.name)}
+                  name={each.name}
+                />
+              ) : (
+                <ProductCard
+                  _id={each._id}
+                  title={each.name}
+                  subtitle={each.price}
+                  image={each.img}
+                  qty={each.qty}
+                  isInStock={each.isInStock}
+                  onCardAreaClick={() => redirecTo(each._id)}
+                />
+              );
+            })}
           {isLoading && <LoadingComponent />}
           {!isLoading && data && data.results.length < 1 && (
             <h2>Nothing Found</h2>

@@ -5,6 +5,9 @@ const theme = createMuiTheme({
     primary: {
       main: "#474747",
     },
+    white: {
+      main: "#fff",
+    },
   },
   props: {
     MuiButtonBase: {

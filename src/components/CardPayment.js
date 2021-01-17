@@ -51,46 +51,50 @@ export default function CardPayment(props) {
 
   return (
     <>
-      <Button variant='contained' color='primary' onClick={handleOpen}>
+      <Button variant="contained" color="primary" onClick={handleOpen}>
         {props.actionName}
       </Button>
       <Modal open={open} onClose={handleClose}>
         <form
-          className='transition'
+          className="transition"
           style={{
             margin: "4rem auto",
             backgroundColor: "#eee",
             display: "grid",
-            width: "350px",
+            width: "400px",
             padding: "15px",
             textAlign: "center",
+            borderRadius: "5px",
           }}
           noValidate
-          autoComplete='off'>
+          autoComplete="off"
+        >
           <div
             style={{
               display: "flex",
-              maxWidth: "100%",
+              width: "100%",
               justifyContent: "space-between",
-            }}>
-            <TextField id='creditCardId' label='Credit Card Number' />
-            <TextField id='creditCardId' label='Full Name' />
+            }}
+          >
+            <TextField id="creditCardId" label="Credit Card Number" />
+            <TextField id="creditCardId" label="Full Name" />
           </div>
           <div
             style={{
               display: "flex",
-              maxWidth: "100%",
+              width: "100%",
               justifyContent: "space-between",
-            }}>
-            <TextField id='creditCardId' label='Expire Date' />
-            <TextField id='creditCardId' label='CVC' />
+            }}
+          >
+            <TextField id="creditCardId" label="Expire Date" />
+            <TextField id="creditCardId" label="CVC" />
           </div>
           <h3>
             This order will be delivered to:{" "}
             {currentUser ? (
               currentUser.address
             ) : (
-              <TextField label='Enter your address' />
+              <TextField label="Enter your address" />
             )}
           </h3>
           <p style={{ opacity: 0.4 }}>
@@ -98,13 +102,14 @@ export default function CardPayment(props) {
             fields, this is a dummy project for learning purposes only
           </p>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <Button variant='contained' color='secondary' onClick={handleClose}>
+            <Button variant="contained" color="secondary" onClick={handleClose}>
               Cancel
             </Button>
             <Button
-              variant='contained'
-              color='primary'
-              onClick={addToShoppingHistory}>
+              variant="contained"
+              color="primary"
+              onClick={addToShoppingHistory}
+            >
               Confirm
             </Button>
           </div>

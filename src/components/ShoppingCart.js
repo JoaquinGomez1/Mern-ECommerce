@@ -4,7 +4,7 @@ import ProductCard from "./ProductCard";
 import { Grid, Typography, Button, SwipeableDrawer } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import CheckoutView from "./CheckoutView";
-import CardActions from "./CardActionsShoppingcart";
+import CardActionsShoppingCart from "./CardActionsShoppingcart";
 
 export default function ShoppingCart() {
   const { shoppingCartItems } = useContext(myShoppingCartContext);
@@ -43,21 +43,23 @@ export default function ShoppingCart() {
   return (
     <React.Fragment>
       <div
-        className='componentTransition'
+        className="componentTransition"
         style={{
           height: "calc(100vh - 80px)",
           display: "flex",
           flexDirection: "column",
-        }}>
-        <Grid container justify='center'>
-          <Typography variant='h4' style={{ marginTop: "2rem" }}>
+        }}
+      >
+        <Grid container justify="center">
+          <Typography variant="h4" style={{ marginTop: "2rem" }}>
             Shopping Cart <hr />
           </Typography>
           <Grid
             container
-            justify='center'
-            alignItems='center'
-            style={{ marginBottom: "auto" }}>
+            justify="center"
+            alignItems="center"
+            style={{ marginBottom: "auto" }}
+          >
             {/* Push Elements bellow this to the bottom */}
             {shoppingCartItems.length <= 0 ? (
               <h1 style={{ color: "#f50057" }}>
@@ -74,32 +76,35 @@ export default function ShoppingCart() {
                   qty={each.qty}
                   isInShoppingCart
                   isInStock={each.isInStock}
-                  onCardAreaClick={() => redirectTo(each._id)}>
-                  <CardActions _id={each._id} qty={each.qty} />
+                  onCardAreaClick={() => redirectTo(each._id)}
+                >
+                  <CardActionsShoppingCart _id={each._id} qty={each.qty} />
                 </ProductCard>
               ))
             )}
           </Grid>
         </Grid>
-        <Grid container justify='center' style={{ marginTop: "auto" }}>
+        <Grid container justify="center" style={{ marginTop: "auto" }}>
           <h1>Total price: ${totalPrice}</h1>
-          <Grid container justify='center'>
+          <Grid container justify="center">
             {shoppingCartItems.length >= 1 && (
               <>
                 <Button
-                  variant='contained'
-                  color='secondary'
-                  size='large'
+                  variant="contained"
+                  color="secondary"
+                  size="large"
                   style={{ marginBottom: "6rem" }}
-                  onClick={handleSwipeableDrawer}>
+                  onClick={handleSwipeableDrawer}
+                >
                   Proceed To Checkout
                 </Button>
                 <SwipeableDrawer
-                  className='MuiDrawer-modal'
-                  anchor='right'
+                  className="MuiDrawer-modal"
+                  anchor="right"
                   open={isSwipeableDrawerOpen}
                   onClose={handleSwipeableDrawer}
-                  onOpen={handleSwipeableDrawer}>
+                  onOpen={handleSwipeableDrawer}
+                >
                   <CheckoutView />
                 </SwipeableDrawer>
               </>

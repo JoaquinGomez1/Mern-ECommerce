@@ -7,6 +7,8 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import DeleteIcon from "@material-ui/icons/Delete";
 
+import { useTheme } from "@material-ui/core/styles";
+
 // This component only contains the bottom part of the view for a ProductCard
 // it is meant to be passed as prop to ProductCard for this to work
 export default function CardActionsShoppingcart({ _id, qty }) {
@@ -18,16 +20,19 @@ export default function CardActionsShoppingcart({ _id, qty }) {
     isInFavorites,
     removeFromFav,
   } = useShoppingCart(_id);
+  const theme = useTheme();
+  const primaryMainColor = theme.palette.primary.main;
 
   return (
     <CardActions>
-      <Grid container justify='center'>
-        <Typography variant='h5'>Quantity: {qty}</Typography>
+      <Grid container justify="center">
+        <Typography variant="h5">Quantity: {qty}</Typography>
         <Grid
           container
-          direction='row'
-          alignItems='center'
-          justify='space-between'>
+          direction="row"
+          alignItems="center"
+          justify="space-between"
+        >
           <Button onClick={removeItem}>
             <DeleteIcon />
           </Button>
@@ -35,10 +40,11 @@ export default function CardActionsShoppingcart({ _id, qty }) {
             <Button
               style={{ margin: "0px 10px" }}
               onClick={removeOneItem}
-              size='large'>
+              size="large"
+            >
               <RemoveCircleIcon />
             </Button>
-            <Button color='secondary' size='large' onClick={addItem}>
+            <Button color="secondary" size="large" onClick={addItem}>
               <AddCircleIcon />
             </Button>
           </Grid>
@@ -46,7 +52,7 @@ export default function CardActionsShoppingcart({ _id, qty }) {
           <Grid item style={{ margin: "0 5px" }}>
             {isInFavorites() ? (
               <Button onClick={removeFromFav}>
-                <FavoriteIcon style={{ color: "#3f51b5" }} />
+                <FavoriteIcon style={{ color: primaryMainColor }} />
               </Button>
             ) : (
               <Button onClick={addToFav}>

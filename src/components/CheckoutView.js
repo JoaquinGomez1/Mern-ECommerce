@@ -35,14 +35,15 @@ export default function CheckoutView() {
 
   return (
     <div
-      className='shoppingcart-drawer'
+      className="shoppingcart-drawer"
       style={{
         padding: "1rem",
         height: "100%",
         width: "calc(100% - 2rem)", // minus padding and margin of children
         display: "flex",
         flexDirection: "column",
-      }}>
+      }}
+    >
       <h2>Items Quantity: {shoppingCartItems.length} </h2>
       <h3>
         Item List: <hr />
@@ -62,18 +63,20 @@ export default function CheckoutView() {
       </List>
 
       <div
-        className='checkout-bottom'
-        style={{ display: "flex", flexWrap: "wrap", alignItems: "center" }}>
+        className="checkout-bottom"
+        style={{ display: "flex", flexWrap: "wrap", alignItems: "center" }}
+      >
         <h4 style={{ margin: "0 1rem 0" }}>Total Price: ${totalPrice}</h4>
         <Button
           onClick={() => setShoppingCartItems([])}
-          variant='contained'
-          color='secondary'
-          size='small'
-          style={{ margin: "0 1rem 0" }}>
+          variant="contained"
+          color="secondary"
+          size="small"
+          style={{ margin: "0 1rem 0" }}
+        >
           Clear Cart
         </Button>
-        <CardPayment actionName='Buy Now' />
+        <CardPayment actionName="Buy Now" />
       </div>
     </div>
   );
