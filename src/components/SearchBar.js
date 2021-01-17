@@ -14,19 +14,24 @@ export default function SearchBar() {
     history.push(searchUrl);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") fetchProduct();
+  };
+
   return (
-    <Grid container className='SearchBar' justify='center'>
+    <Grid container className="SearchBar" justify="center">
       <Grid item style={{ display: "flex" }}>
         <TextField
-          label='Search'
-          variant='outlined'
+          label="Search"
+          variant="outlined"
           onChange={(e) => {
             setSearchInput(e.target.value);
           }}
+          onKeyDown={handleKeyDown}
         />
 
-        <div id='searchIconWrapper' onClick={fetchProduct}>
-          <SearchIcon id='searchIcon' />
+        <div id="searchIconWrapper" onClick={fetchProduct}>
+          <SearchIcon id="searchIcon" />
         </div>
       </Grid>
     </Grid>
