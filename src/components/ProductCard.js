@@ -10,32 +10,26 @@ import {
 import BuyButton from "./BuyButton";
 
 export default function ProductCard(props) {
-  const { title, subtitle, image, _id, qty, isInStock } = props;
+  const { itemObject } = props;
+  const { name, price, img } = itemObject;
 
   return (
-    <Card className='transition' style={{ width: 310, margin: "10px" }}>
+    <Card className="transition" style={{ width: 310, margin: "10px" }}>
       <CardActionArea onClick={props.onCardAreaClick}>
-        <CardMedia style={{ height: 180 }} image={image} title={title} />
+        <CardMedia style={{ height: 180 }} image={img} title={name} />
         <CardContent>
-          <Typography gutterBottom variant='h5' component='h2'>
-            {title}
+          <Typography gutterBottom variant="h5" component="h2">
+            {name}
           </Typography>
-          <Typography variant='body2' color='textSecondary' component='p'>
-            {subtitle ? `$${subtitle}` : null}
+          <Typography variant="body2" color="textSecondary" component="p">
+            {price ? `$${price}` : null}
           </Typography>
         </CardContent>
       </CardActionArea>
 
       {!props.children ? (
         <CardActions>
-          <BuyButton
-            isInStock={isInStock}
-            _id={_id}
-            name={title}
-            price={subtitle}
-            image={image}
-            qty={qty}
-          />
+          <BuyButton itemObject={itemObject} />
         </CardActions>
       ) : (
         props.children

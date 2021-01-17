@@ -30,8 +30,9 @@ export default function useShoppingCart(id, itemObject) {
           _id: itemObject._id,
           name: itemObject.name,
           qty: 1,
+          maxQty: itemObject.qty,
           price: itemObject.price,
-          image: itemObject.image,
+          img: itemObject.img,
         },
       ]);
     }
@@ -46,7 +47,10 @@ export default function useShoppingCart(id, itemObject) {
 
     shoppingCartCopy[itemIndex] = {
       ...shoppingCartCopy[itemIndex],
-      qty: selectedItem.qty + 1,
+      qty:
+        selectedItem.qty + 1 <= selectedItem.maxQty
+          ? selectedItem.qty + 1
+          : selectedItem.qty,
     };
 
     setShoppingCartItems(shoppingCartCopy);
@@ -100,7 +104,7 @@ export default function useShoppingCart(id, itemObject) {
     if (!currentUser.favoriteProducts)
       setCurrentUser({ ...currentUser, favoriteProducts: [] });
 
-    const isInFavs = currentUser.favoriteProducts.find((item) => {
+    const isInFavs = currentUser?.favoriteProducts?.find((item) => {
       if (item._id === id) return item;
       else return null;
     });

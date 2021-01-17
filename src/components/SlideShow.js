@@ -1,13 +1,17 @@
 import React, { useContext, Children, useEffect } from "react";
 import { mySlideshowContext } from "../context/SlideshowContext.js";
-import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
+import RadioButtonCheckedIcon from "@material-ui/icons/RadioButtonChecked";
 import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
+import { useTheme } from "@material-ui/core/styles";
 
 export default function SlideShow(props) {
   const [state, setState] = useContext(mySlideshowContext);
   const childrenArray = props.children.slice(0, 4); // Allow a maximum of 4 children
   const defaultInterval = 2000;
   const intervalDuration = props.duration ? props.duration : defaultInterval;
+
+  const theme = useTheme();
+  const secondaryMainColor = theme.palette.secondary.main;
 
   useEffect(() => {
     const myInterval = setInterval(moveNext, intervalDuration);
@@ -26,7 +30,7 @@ export default function SlideShow(props) {
   }, [props, setState]);
 
   const changeIndex = (e) => {
-    //Create a new array from the html collection of children of the div that contains each child
+    // Create a new array from the html collection of children of the div that contains each child
     //and get the index of the one that was clicked
     const index = Array.from(e.currentTarget.children).indexOf(e.target);
     if (index !== -1) {
@@ -46,7 +50,10 @@ export default function SlideShow(props) {
     <RadioButtonUncheckedIcon style={{ cursor: "pointer" }} />
   );
   bullets[state.current] = (
-    <FiberManualRecordIcon key='current' style={{ fontSize: "30px" }} />
+    <RadioButtonCheckedIcon
+      key="current"
+      style={{ color: secondaryMainColor }}
+    />
   );
 
   return (

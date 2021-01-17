@@ -11,7 +11,7 @@ export default function UserRegister() {
     username: "",
     password: "",
     email: "",
-    country: "",
+    gender: "",
     address: "",
     phoneNumber: "",
   });
@@ -50,7 +50,8 @@ export default function UserRegister() {
         <RegisterForm
           handleSubmit={handleSubmit}
           handleChange={handleChange}
-          errorMessage={errorMessage}></RegisterForm>
+          errorMessage={errorMessage}
+        ></RegisterForm>
       )}
     </>
   );

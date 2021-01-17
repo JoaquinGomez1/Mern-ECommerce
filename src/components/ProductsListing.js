@@ -19,9 +19,9 @@ export default function ProductsListing({ location }) {
   };
 
   return (
-    <Grid container direction='column' alignItems='center'>
+    <Grid container direction="column" alignItems="center">
       <h1>View Our PC Products</h1>
-      <Grid container direction='row' justify='center'>
+      <Grid container direction="row" justify="center">
         <Pagination data={data} setData={setData} url={url}>
           {!isLoading &&
             data &&
@@ -29,12 +29,7 @@ export default function ProductsListing({ location }) {
             data.results.map((each) => (
               <ProductCard
                 key={each._id}
-                _id={each._id}
-                title={each.name}
-                subtitle={each.price}
-                image={each.img}
-                qty={each.qty}
-                isInStock={each.isInStock}
+                itemObject={each}
                 onCardAreaClick={() => redirecTo(each._id)}
               />
             ))}
@@ -42,8 +37,8 @@ export default function ProductsListing({ location }) {
           {!isLoading && data && data.results.length < 1 && (
             <div>
               <h2>Nothing Found</h2>
-              <Link to='/' style={{ textDecoration: "none" }}>
-                <Button variant='contained' color='secondary'>
+              <Link to="/" style={{ textDecoration: "none" }}>
+                <Button variant="contained" color="secondary">
                   Go back Home
                 </Button>
               </Link>

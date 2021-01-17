@@ -69,13 +69,7 @@ export default function ShoppingCart() {
               shoppingCartItems.map((each) => (
                 <ProductCard
                   key={each._id}
-                  _id={each._id}
-                  title={each.name}
-                  subtitle={each.price}
-                  image={each.image}
-                  qty={each.qty}
-                  isInShoppingCart
-                  isInStock={each.isInStock}
+                  itemObject={each}
                   onCardAreaClick={() => redirectTo(each._id)}
                 >
                   <CardActionsShoppingCart _id={each._id} qty={each.qty} />

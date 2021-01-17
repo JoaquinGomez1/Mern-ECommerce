@@ -20,22 +20,17 @@ export default function Landing() {
   };
 
   return (
-    <div className='componentTransition'>
-      <Grid container justify='center' style={{ margin: "1rem 0" }}>
+    <div className="componentTransition">
+      <Grid container justify="center" style={{ margin: "1rem 0" }}>
         <SearchBar />
       </Grid>
-      <Grid container justify='center' style={{ overflow: "hidden" }}>
+      <Grid container justify="center" style={{ overflow: "hidden" }}>
         <Slideshow duration={5000}>
           {products.map((product) => (
             <ProductCard
               key={product._id}
-              className='transition'
-              _id={product._id}
-              title={product.name}
-              subtitle={product.price}
-              image={product.img}
-              isInStock={product.isInStock}
-              qty={product.qty}
+              className="transition"
+              itemObject={product}
               onCardAreaClick={() => redirecTo(product._id)}
             />
           ))}

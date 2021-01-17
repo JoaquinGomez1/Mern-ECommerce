@@ -66,14 +66,7 @@ export default function ProductReview(props) {
                     >
                       Products available: {data.qty}
                     </Typography>
-                    <BuyButton
-                      _id={data._id}
-                      image={data.img}
-                      name={data.name}
-                      price={data.price}
-                      isInStock={data.isInStock}
-                      qty={data.qty}
-                    />
+                    <BuyButton itemObject={data} />
                   </>
                 )}
 

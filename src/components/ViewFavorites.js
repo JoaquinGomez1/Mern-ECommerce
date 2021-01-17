@@ -5,11 +5,15 @@ import Pagination from "./Pagination";
 import useFetch from "../hooks/useFetch";
 import { useHistory } from "react-router-dom";
 import LoadingComponent from "./LoadingComponent";
+import { useTheme } from "@material-ui/core/styles";
 
 export default function ViewFavorites() {
   const url = "/user/favorites";
   const { data, isLoading, errorMessage } = useFetch(url);
   const history = useHistory();
+
+  const theme = useTheme();
+  const secondaryMainColor = theme.palette.secondary.main;
 
   const redirectTo = (url) => {
     history.push(url);
@@ -20,27 +24,35 @@ export default function ViewFavorites() {
       <Container style={{ minWidth: "80%" }}>
         <Grid container>
           {!isLoading ? (
-            <Pagination>
-              {data &&
-                data.map((each) => (
-                  <ProductCard
-                    key={each._id}
-                    _id={each._id}
-                    title={each.name}
-                    subtitle={each.price}
-                    qty={1}
-                    isInStock={true}
-                    onCardAreaClick={() => redirectTo(`/products/${each._id}`)}
-                    image={each.img}
-                  />
-                ))}
-            </Pagination>
+            data.length > 0 ? (
+              <Pagination>
+                {data &&
+                  data.map((each) => (
+                    <ProductCard
+                      key={each._id}
+                      itemObject={each}
+                      onCardAreaClick={() =>
+                        redirectTo(`/products/${each._id}`)
+                      }
+                      image={each.img}
+                    />
+                  ))}
+              </Pagination>
+            ) : (
+              <Typography
+                variant="h5"
+                style={{ color: secondaryMainColor, margin: "40px auto" }}
+              >
+                {" "}
+                There are no favorites in your account yet{" "}
+              </Typography>
+            )
           ) : (
             <LoadingComponent />
           )}
 
           {errorMessage && (
-            <Typography variant='h5' style={{ margin: "0 auto", color: "red" }}>
+            <Typography variant="h5" style={{ margin: "0 auto", color: "red" }}>
               {errorMessage}
             </Typography>
           )}

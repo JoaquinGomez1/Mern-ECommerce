@@ -49,11 +49,7 @@ export default function CategoriesPage() {
               ) : (
                 <ProductCard
                   _id={each._id}
-                  title={each.name}
-                  subtitle={each.price}
-                  image={each.img}
-                  qty={each.qty}
-                  isInStock={each.isInStock}
+                  itemObject={each}
                   onCardAreaClick={() => redirecTo(each._id)}
                 />
               );

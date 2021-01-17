@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Avatar } from "@material-ui/core";
+import { Typography, Avatar, useTheme } from "@material-ui/core";
 import useFetch from "../hooks/useFetch";
 import Pagination from "./Pagination";
 import "../static/css/ShoppingHistory.css";
@@ -8,18 +8,27 @@ import LoadingComponent from "./LoadingComponent";
 export default function ShoppingHistory() {
   const url = "/user/history";
   const { data, isLoading, errorMessage } = useFetch(url);
+  const theme = useTheme();
+  const secondaryMainColor = theme.palette.secondary.main;
 
   return (
     <div className="shoppingHistory-page">
-      <Typography className="componentTransition" variant="h4">
+      <Typography className="componentTransition" variant="h2">
         Shopping History
       </Typography>
       {isLoading ? (
         <LoadingComponent />
-      ) : (
+      ) : data.length > 0 ? (
         <Pagination>
           {!isLoading && data && data.map((each) => <DateCard data={each} />)}
         </Pagination>
+      ) : (
+        <Typography
+          variant="h4"
+          style={{ color: secondaryMainColor, margin: "30px 0" }}
+        >
+          You have not bougth anything yet
+        </Typography>
       )}
       {errorMessage && <Typography variant="h4">{errorMessage}</Typography>}
     </div>
