@@ -36,9 +36,9 @@ export default function FavoriteButton({ _id }) {
   return (
     <>
       {isInFavorites() ? (
-        <Button onClick={removeFromFav}>
+        <Button onClick={() => removeFromFav(_id)}>
           <FavoriteIcon
-            onClick={removeFromFav}
+            onClick={() => removeFromFav(_id)}
             style={{ color: primaryMainColor }}
           />
         </Button>

@@ -81,7 +81,7 @@ export default function useShoppingCart(id, itemObject) {
 
   const addToFav = async (itemId) => {
     const itemInShoppingCart = findThisItem();
-    const thisItem = itemInShoppingCart ? itemInShoppingCart : itemId;
+    const thisItem = itemInShoppingCart ? itemInShoppingCart : { _id: itemId };
     if (!currentUser) return "Login first";
 
     const body = { item: thisItem };
@@ -113,8 +113,10 @@ export default function useShoppingCart(id, itemObject) {
     return isInFavs;
   };
 
-  const removeFromFav = () => {
-    const thisItem = findThisItem();
+  const removeFromFav = (itemId) => {
+    const itemInShoppingCart = findThisItem();
+    const thisItem = itemInShoppingCart ? itemInShoppingCart : { _id: itemId };
+
     if (!currentUser) return "Login first";
     if (!thisItem) return "No item Found";
 
