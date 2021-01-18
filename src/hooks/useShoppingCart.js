@@ -57,7 +57,7 @@ export default function useShoppingCart(id, itemObject) {
     setShoppingCartItems(shoppingCartCopy);
   };
 
-  // Remove one element from any given item
+  // Remove one from any item's qty counter
   const removeOneItem = () => {
     const thisItem = findThisItem();
     const itemIndex = shoppingCartItems.indexOf(thisItem);
@@ -121,7 +121,9 @@ export default function useShoppingCart(id, itemObject) {
     if (!thisItem) return "No item Found";
 
     const product = { productId: thisItem._id };
-    const indexOfItemInArray = currentUser.favoriteProducts.indexOf(thisItem);
+    const indexOfItemInArray = currentUser.favoriteProducts.indexOf(
+      thisItem._id
+    );
     const newArray = [...currentUser.favoriteProducts];
     newArray.splice(indexOfItemInArray, 1);
     setCurrentUser({ ...currentUser, favoriteProducts: newArray });

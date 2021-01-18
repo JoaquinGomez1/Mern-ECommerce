@@ -61,7 +61,7 @@ const DateCard = ({ data }) => {
             </div>
           ))}
       </div>
-      <Typography variant="h5" className="date-card-date">
+      <Typography variant="p" className="date-card-date">
         Bought on Date: {date}
       </Typography>
     </div>

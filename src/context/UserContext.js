@@ -10,7 +10,7 @@ export default function UserContext(props) {
   // At this point we are trying to determine if the user is already logged in the server or not
   // the data.email condition verifies that the response from the server is in fact a user and not a message
   useEffect(() => {
-    if (!currentUser && !isLoading && data.email) setCurrentUser(data);
+    if (!currentUser && !isLoading && data?.email) setCurrentUser(data);
 
     // eslint-disable-next-line
   }, [data, isLoading, setCurrentUser]);
