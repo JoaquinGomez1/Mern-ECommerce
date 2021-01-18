@@ -42,9 +42,13 @@ const DateCard = ({ data }) => {
     <div className="date-card-container full-width">
       <div>
         {products &&
-          products.map(({ image, name, price, qty }) => (
+          products.map(({ img, image, name, price, qty }) => (
             <div className="date-card-row">
-              <Avatar className="date-card-avatar" src={image} alt={name} />
+              <Avatar
+                className="date-card-avatar"
+                src={img || image}
+                alt={name}
+              />
               <h4 className="date-card-text" variant="h6">
                 {name}
               </h4>

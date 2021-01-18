@@ -10,7 +10,6 @@
   margin: 0 3px;
   height: 50%;
   width: 5px;
-  background-color: rgb(243, 53, 85);
   transition: all 0.05 cubic-bezier(0.165, 0.84, 0.44, 1);
   animation: growItem linear 0.4s infinite;
   border-radius: 8px;

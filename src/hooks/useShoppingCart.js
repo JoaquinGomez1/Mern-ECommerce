@@ -11,8 +11,9 @@ export default function useShoppingCart(id, itemObject) {
   // Utility function reused by each function in this file
   const findThisItem = () => {
     return shoppingCartItems.find((item) => {
-      if (item._id === id) return item;
-      else return null;
+      if (item._id === id) {
+        return item;
+      } else return null;
     });
   };
 
@@ -78,9 +79,9 @@ export default function useShoppingCart(id, itemObject) {
     setShoppingCartItems(filteredCart);
   };
 
-  const addToFav = async () => {
-    const thisItem = findThisItem();
-
+  const addToFav = async (itemId) => {
+    const itemInShoppingCart = findThisItem();
+    const thisItem = itemInShoppingCart ? itemInShoppingCart : itemId;
     if (!currentUser) return "Login first";
 
     const body = { item: thisItem };

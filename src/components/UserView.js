@@ -16,9 +16,12 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import HistoryIcon from "@material-ui/icons/History";
 
 import AdminPanel from "./AdminPanel";
 import ViewFavorites from "./ViewFavorites";
+import UserInformation from "./UserInformation";
+import ShoppingHistory from "./ShoppingHistory";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,13 +32,12 @@ const useStyles = makeStyles((theme) => ({
   },
   list: {
     margin: theme.spacing(4),
+    userSelect: "none",
 
     "& > *:hover": {
-      backgroundColor: "#e2e2e2",
+      backgroundColor: "#eaeaea",
       cursor: "pointer",
       transition: "all .2s ease",
-      transform: "translateY(-2px)",
-      boxShadow: "4px 4px 4px rgba(0,0,0,.2)",
     },
     "& > *:hover > .MuiListItemIcon-root": {
       color: theme.palette.secondary.main,
@@ -43,6 +45,13 @@ const useStyles = makeStyles((theme) => ({
   },
   mainView: {
     padding: theme.spacing(2),
+    width: "100%",
+  },
+  active: {
+    "& > .MuiListItemIcon-root": { color: theme.palette.secondary.main },
+    borderRight: `solid 3px ${theme.palette.secondary.main}`,
+    boxShadow: "4px 4px 4px rgba(0,0,0,.2)",
+    backgroundColor: "#f0f0f0",
   },
 }));
 
@@ -54,69 +63,99 @@ export default function UserView() {
     setCurrentUser(); // ---> Sets current user to undefined
     fetch("/logout");
   };
-  const views = [
+  const [views, setViews] = useState([
     {
       name: "Account Info",
       Icon: PermIdentityIcon,
       mustBeAdmin: false,
-      View: undefined,
+      View: UserInformation,
+      active: true,
     },
     {
       name: "Admin Panel",
       Icon: SupervisorAccountIcon,
       mustBeAdmin: true,
       View: AdminPanel,
+      active: false,
     },
     {
-      name: "View Favorites",
+      name: "Favorites",
       Icon: FavoriteIcon,
       mustBeAdmin: false,
       View: ViewFavorites,
+      active: false,
     },
-  ];
+    {
+      name: "Shopping history",
+      Icon: HistoryIcon,
+      mustBeAdmin: false,
+      View: ShoppingHistory,
+      active: false,
+    },
+  ]);
 
   // Set state MUST be a function returning an object for React to consider it a component
-  const [CurrentView, setCurrentView] = useState(() => views[2].View);
+  const [CurrentView, setCurrentView] = useState(() => views[0].View);
+
+  const handleActiveChange = (index, view) => {
+    setCurrentView(() => view);
+    const viewsCopy = [...views];
+    viewsCopy.forEach((object) => {
+      object.active = false;
+    });
+    viewsCopy[index].active = true;
+    setViews(viewsCopy);
+  };
 
   return (
     <>
       <Container className="componentTransition">
         <List>
           <Grid container>
-            <List className={classes.list}>
-              <Paper elevation={2} className={classes.root}>
-                <ListItem>
+            <Grid item sm={4} xs={12} alignContent="flex-start">
+              <List className={classes.list}>
+                <Paper elevation={2} className={classes.root}>
+                  <ListItem>
+                    <ListItemIcon>
+                      <PersonIcon />
+                    </ListItemIcon>
+                    <Typography variant="p">
+                      Hello{" "}
+                      <Typography variant="h6">
+                        {currentUser.username}
+                      </Typography>
+                    </Typography>
+                  </ListItem>
+                </Paper>
+                {views.map(
+                  ({ name, Icon, mustBeAdmin, View, active }, index) => {
+                    if (currentUser.role !== "admin" && mustBeAdmin)
+                      return null;
+                    else
+                      return (
+                        <ListItem
+                          className={active && classes.active}
+                          onClick={() => handleActiveChange(index, View)}
+                        >
+                          <ListItemIcon>
+                            <Icon />
+                          </ListItemIcon>
+                          <Typography variant="p">{name}</Typography>
+                        </ListItem>
+                      );
+                  }
+                )}
+
+                <ListItem onClick={handleLogout}>
                   <ListItemIcon>
-                    <PersonIcon />
+                    <ExitToAppIcon />
                   </ListItemIcon>
-                  <Typography variant="p">
-                    Hello{" "}
-                    <Typography variant="h6">{currentUser.username}</Typography>
-                  </Typography>
+                  <Typography variant="p">Log out</Typography>
                 </ListItem>
-              </Paper>
-              {views.map(({ name, Icon, mustBeAdmin, View }) => {
-                if (currentUser.role !== "admin" && mustBeAdmin) return null;
-                else
-                  return (
-                    <ListItem onClick={() => setCurrentView(() => View)}>
-                      <ListItemIcon>
-                        <Icon />
-                      </ListItemIcon>
-                      <Typography variant="p">{name}</Typography>
-                    </ListItem>
-                  );
-              })}
+              </List>
+            </Grid>
 
-              <ListItem onClick={handleLogout}>
-                <ListItemIcon>
-                  <ExitToAppIcon />
-                </ListItemIcon>
-                <Typography variant="p">Log out</Typography>
-              </ListItem>
-            </List>
-
-            <Grid item xs={8}>
+            <Grid item sm={8} xs={12}>
               <Paper className={classes.mainView}>
                 <CurrentView />
               </Paper>

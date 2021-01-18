@@ -24,10 +24,10 @@ export default function ViewFavorites() {
       <Container style={{ minWidth: "80%" }}>
         <Grid container>
           {!isLoading ? (
-            data.length > 0 ? (
+            data?.length > 0 ? (
               <Pagination>
                 {data &&
-                  data.map((each) => (
+                  data?.map((each) => (
                     <ProductCard
                       key={each._id}
                       itemObject={each}

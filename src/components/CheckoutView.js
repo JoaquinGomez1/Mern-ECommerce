@@ -53,7 +53,7 @@ export default function CheckoutView() {
           <ListItem key={each._id}>
             <Avatar
               alt={each.name}
-              src={each.image}
+              src={each.img}
               style={{ marginRight: ".8rem" }}
             />
             <ListItemText primary={each.name} secondary={`x${each.qty}`} />
