@@ -121,11 +121,12 @@ export default function useShoppingCart(id, itemObject) {
     if (!thisItem) return "No item Found";
 
     const product = { productId: thisItem._id };
-    const indexOfItemInArray = currentUser.favoriteProducts.indexOf(
-      thisItem._id
-    );
-    const newArray = [...currentUser.favoriteProducts];
-    newArray.splice(indexOfItemInArray, 1);
+
+    const newArray = [
+      ...currentUser.favoriteProducts.filter(
+        (objectId) => objectId._id !== thisItem._id
+      ),
+    ];
     setCurrentUser({ ...currentUser, favoriteProducts: newArray });
 
     fetch("/user/favorites", {
