@@ -87,13 +87,13 @@ export default function CardPayment(props) {
     const req = await fetch(url, reqHeaders);
     const successfullResponse = req.status === 200;
 
-    setShowSnackbar(true);
-    addToShoppingHistory();
-    setIsLoading(false);
     if (successfullResponse) {
+      addToShoppingHistory();
       setWasSuccess(true);
       handleModalClose();
     } else setWasSuccess(false);
+    setShowSnackbar(true);
+    setIsLoading(false);
   };
 
   return (
