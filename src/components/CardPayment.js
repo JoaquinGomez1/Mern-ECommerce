@@ -1,19 +1,40 @@
 import React, { useState, useContext } from "react";
-import { Modal, Button, TextField } from "@material-ui/core";
+import {
+  Modal,
+  Button,
+  TextField,
+  Snackbar,
+  Typography,
+  CircularProgress,
+} from "@material-ui/core";
 import { myUserContext } from "../context/UserContext";
 import { myShoppingCartContext } from "../context/ShoppingCartContext";
 import FormatedTodayDate from "../static/functions/FormatedTodayDate";
 
+import ErrorIcon from "@material-ui/icons/Error";
+import CheckIcon from "@material-ui/icons/Check";
+import ClearIcon from "@material-ui/icons/Clear";
+
+import Alert from "./Alert";
+
 export default function CardPayment(props) {
-  const [open, setOpen] = useState(false);
   const { currentUser, setCurrentUser } = useContext(myUserContext);
   const { shoppingCartItems } = useContext(myShoppingCartContext);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleClose = () => {
+  const [open, setOpen] = useState(false);
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [wasSuccess, setWasSuccess] = useState(false); // Determines which snackbar to show to the user
+  const [clientName, setClientName] = useState("");
+  const [clientAddress, setClientAddress] = useState(
+    currentUser?.address || ""
+  );
+
+  const handleModalClose = () => {
     setOpen(false);
   };
 
-  const handleOpen = () => {
+  const handleModalOpen = () => {
     setOpen(true);
   };
 
@@ -46,15 +67,41 @@ export default function CardPayment(props) {
 
       fetch("/user/historyy", reqHeaders);
     }
-    handleClose();
+  };
+
+  const processOrder = async () => {
+    setIsLoading(true);
+    const data = {
+      clientName,
+      products: shoppingCartItems,
+      address: clientAddress,
+    };
+    const reqHeaders = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+    const url = "/orders/new";
+    const req = await fetch(url, reqHeaders);
+    const successfullResponse = req.status === 200;
+
+    setShowSnackbar(true);
+    addToShoppingHistory();
+    setIsLoading(false);
+    if (successfullResponse) {
+      setWasSuccess(true);
+      handleModalClose();
+    } else setWasSuccess(false);
   };
 
   return (
     <>
-      <Button variant="contained" color="primary" onClick={handleOpen}>
+      <Button variant="contained" color="primary" onClick={handleModalOpen}>
         {props.actionName}
       </Button>
-      <Modal open={open} onClose={handleClose}>
+      <Modal open={open} onClose={handleModalClose}>
         <form
           className="transition"
           style={{
@@ -77,7 +124,12 @@ export default function CardPayment(props) {
             }}
           >
             <TextField id="creditCardId" label="Credit Card Number" />
-            <TextField id="creditCardId" label="Full Name" />
+            <TextField
+              id="creditCardId"
+              value={clientName}
+              onChange={(e) => setClientName(e.target.value)}
+              label="Credit card's name"
+            />
           </div>
           <div
             style={{
@@ -94,27 +146,66 @@ export default function CardPayment(props) {
             {currentUser ? (
               currentUser.address
             ) : (
-              <TextField label="Enter your address" />
+              <TextField
+                value={clientAddress}
+                onChange={(e) => setClientAddress(e.target.value)}
+                label="Enter your address"
+              />
             )}
           </h3>
           <p style={{ opacity: 0.4 }}>
             Note: This website will NOT save any data provided in any of this
-            fields, this is a dummy project for learning purposes only
+            fields, this is a project for learning purposes only
           </p>
           <div style={{ display: "flex", justifyContent: "space-around" }}>
-            <Button variant="contained" color="secondary" onClick={handleClose}>
-              Cancel
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={addToShoppingHistory}
-            >
-              Confirm
-            </Button>
+            {isLoading ? (
+              <CircularProgress />
+            ) : (
+              <>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={handleModalClose}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={processOrder}
+                >
+                  Confirm
+                </Button>
+              </>
+            )}
           </div>
         </form>
       </Modal>
+      <Snackbar
+        open={showSnackbar}
+        autoHideDuration={5000}
+        onClose={() => setShowSnackbar(false)}
+      >
+        {wasSuccess ? (
+          <Alert success={wasSuccess}>
+            <CheckIcon />
+            <Typography variant="p">Order registered succesfully !</Typography>
+            <ClearIcon
+              onClick={() => setShowSnackbar(false)}
+              style={{ marginLeft: "20px", cursor: "pointer" }}
+            />
+          </Alert>
+        ) : (
+          <Alert success={wasSuccess}>
+            <ErrorIcon />
+            <Typography variant="p">Something failed</Typography>
+            <ClearIcon
+              onClick={() => setShowSnackbar(false)}
+              style={{ marginLeft: "20px", cursor: "pointer" }}
+            />
+          </Alert>
+        )}
+      </Snackbar>
     </>
   );
 }
