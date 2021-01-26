@@ -17,11 +17,13 @@ import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 import PersonIcon from "@material-ui/icons/Person";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import HistoryIcon from "@material-ui/icons/History";
+import LocalShippingIcon from "@material-ui/icons/LocalShipping";
 
 import AdminPanel from "./AdminPanel";
 import ViewFavorites from "./ViewFavorites";
 import UserInformation from "./UserInformation";
 import ShoppingHistory from "./ShoppingHistory";
+import ViewOrders from "./ViewOrders";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,6 +81,13 @@ export default function UserView() {
       active: false,
     },
     {
+      name: "Orders",
+      Icon: LocalShippingIcon,
+      mustBeAdmin: true,
+      View: ViewOrders,
+      active: false,
+    },
+    {
       name: "Favorites",
       Icon: FavoriteIcon,
       mustBeAdmin: false,
@@ -112,7 +121,7 @@ export default function UserView() {
       <Container className="componentTransition">
         <List>
           <Grid container>
-            <Grid item sm={4} xs={12} alignContent="flex-start">
+            <Grid item md={4} sm={12} alignContent="flex-start">
               <List className={classes.list}>
                 <Paper elevation={2} className={classes.root}>
                   <ListItem>
@@ -155,8 +164,8 @@ export default function UserView() {
               </List>
             </Grid>
 
-            <Grid item sm={8} xs={12}>
-              <Paper className={classes.mainView}>
+            <Grid item md={8} ms={12}>
+              <Paper style={{ width: "100%" }} className={classes.mainView}>
                 <CurrentView />
               </Paper>
             </Grid>

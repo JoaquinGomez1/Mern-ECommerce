@@ -19,7 +19,9 @@ import Alert from "./Alert";
 
 export default function CardPayment(props) {
   const { currentUser, setCurrentUser } = useContext(myUserContext);
-  const { shoppingCartItems } = useContext(myShoppingCartContext);
+  const { shoppingCartItems, shoppingCartTotalPrice } = useContext(
+    myShoppingCartContext
+  );
   const [isLoading, setIsLoading] = useState(false);
 
   const [open, setOpen] = useState(false);
@@ -75,6 +77,7 @@ export default function CardPayment(props) {
       clientName,
       products: shoppingCartItems,
       address: clientAddress,
+      total: shoppingCartTotalPrice,
     };
     const reqHeaders = {
       method: "POST",

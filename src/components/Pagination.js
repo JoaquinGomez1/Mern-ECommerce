@@ -12,11 +12,14 @@ export default function Pagination(props) {
   const [prevPage, setPrevPage] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
+  console.log(data);
+
   useEffect(() => {
     if (data) {
       setNextPage(data.nextPage);
       setPrevPage(data.prevPage);
     }
+    console.log(data);
   }, [setNextPage, setPrevPage, data]);
 
   const NewFetch = async (param) => {
@@ -33,32 +36,34 @@ export default function Pagination(props) {
       url = url + pageToGo;
     }
     const req = await fetch(url);
-    const data = await req.json();
-    setData(data);
+    const response = await req.json();
+    setData(response);
     setCurrentPage(pageToGo);
     setIsLoading(false);
   };
 
   return (
     <Container style={{ minWidth: "90%" }}>
-      <Grid container justify='space-between'>
+      <Grid container justify="space-between">
         <Button
-          color='secondary'
-          variant='contained'
+          color="secondary"
+          variant="contained"
           disabled={prevPage ? false : true}
-          onClick={NewFetch}>
+          onClick={NewFetch}
+        >
           Previous
         </Button>
-        <Typography variant='h6'>Page: {currentPage}</Typography>
+        <Typography variant="h6">Page: {currentPage}</Typography>
         <Button
-          color='secondary'
-          variant='contained'
+          color="secondary"
+          variant="contained"
           disabled={nextPage ? false : true}
-          onClick={() => NewFetch("next")}>
+          onClick={() => NewFetch("next")}
+        >
           Next
         </Button>
       </Grid>
-      <Grid container justify='center'>
+      <Grid container justify="center">
         {!isLoading ? props.children : <LoadingComponent />}
       </Grid>
     </Container>
