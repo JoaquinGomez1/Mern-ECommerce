@@ -9,6 +9,8 @@ export default function MainProductsContext(props) {
     ? process.env.REACT_APP_FETCH_LOCATION + "/products"
     : "/products";
 
+  console.log(url, process.env.REACT_APP_FETCH_LOCATION);
+
   const fetchData = async () => {
     setIsLoading(true);
     const req = await fetch(url);
