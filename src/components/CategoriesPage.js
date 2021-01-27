@@ -8,7 +8,9 @@ import LoadingComponent from "./LoadingComponent";
 import CategoryCard from "./CategoryCard";
 
 export default function CategoriesPage() {
-  const url = "/categories";
+  const url = process.env.REACT_APP_FETCH_LOCATION
+    ? process.env.REACT_APP_FETCH_LOCATION + "/categories"
+    : "/categories";
   const { data, setData, isLoading, setIsLoading } = useFetch(url);
   const [wasFetched, setWasFetched] = useState(false);
 
@@ -17,7 +19,7 @@ export default function CategoriesPage() {
   const lookForCategory = async (categoryName) => {
     setIsLoading(true);
     const url = `/categories/search?search=${categoryName}`;
-    const req = await fetch(url);
+    const req = await fetch(process.env.REACT_APP_FETCH_LOCATION || url);
     const res = await req.json();
     setWasFetched(true);
     res && setData(res);

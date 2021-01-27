@@ -8,6 +8,9 @@ export default function AdminPanel() {
   const [open, setOpen] = useState(false);
   const [product, setProduct] = useState({});
   const [message, setMessage] = useState();
+  const url = process.env.REACT_APP_FETCH_LOCATION
+    ? process.env.REACT_APP_FETCH_LOCATION + "/products/add"
+    : "/products/add";
 
   const handleClose = () => {
     setOpen(false);
@@ -25,7 +28,7 @@ export default function AdminPanel() {
       },
       body: JSON.stringify({ product }),
     };
-    const req = await fetch("/products/add", reqHeaders);
+    const req = await fetch(url, reqHeaders);
     const res = await req.json();
 
     setMessage(res);

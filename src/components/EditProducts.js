@@ -6,7 +6,9 @@ import EditProductItem from "./EditProductItem";
 import LoadingComponent from "./LoadingComponent";
 
 export default function EditProducts() {
-  const url = "/products";
+  const url = process.env.REACT_APP_FETCH_LOCATION
+    ? process.env.REACT_APP_FETCH_LOCATION + "/products/"
+    : "/products/";
   const { data, setData, isLoading } = useFetch(url);
   const detailsRef = useRef();
 
@@ -23,6 +25,9 @@ export default function EditProducts() {
 
   const sendDeleteRequest = async (product) => {
     if (!product._id) return console.log("No product Id provided");
+    const url = process.env.REACT_APP_FETCH_LOCATION
+      ? process.env.REACT_APP_FETCH_LOCATION + "/products/modify"
+      : "/products/modify";
 
     const reqHeaders = {
       method: "DELETE",
@@ -31,7 +36,7 @@ export default function EditProducts() {
       },
       body: JSON.stringify({ productId: product._id }),
     };
-    const req = await fetch("/products/modify", reqHeaders);
+    const req = await fetch(url, reqHeaders);
     if (req.status === 200) {
       const dataCopy = { ...data };
       // Get the item index in the same object used to store the product.
@@ -45,7 +50,7 @@ export default function EditProducts() {
   };
 
   return (
-    <div className='componentTransition edit-products-page flex d-column'>
+    <div className="componentTransition edit-products-page flex d-column">
       <h2>Edit Products</h2>
       <Pagination data={data} setData={setData} url={url}>
         {!isLoading &&

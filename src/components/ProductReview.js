@@ -5,7 +5,10 @@ import BuyButton from "./BuyButton";
 import LoadingComponent from "./LoadingComponent";
 
 export default function ProductReview(props) {
-  const url = `/products/${props.match.params.id}`;
+  const url = process.env.REACT_APP_FETCH_LOCATION
+    ? process.env.REACT_APP_FETCH_LOCATION +
+      `/products/${props.match.params.id}`
+    : `/products/${props.match.params.id}`;
   const { data, isLoading, errorMessage } = useFetch(url);
 
   if (errorMessage) {

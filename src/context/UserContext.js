@@ -6,6 +6,9 @@ export default function UserContext(props) {
   const [currentUser, setCurrentUser] = useState();
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const url = process.env.REACT_APP_FETCH_LOCATION
+    ? process.env.REACT_APP_FETCH_LOCATION + "/user"
+    : "/user";
 
   // At this point we are trying to determine if the user is already logged in the server or not
   // the data.email condition verifies that the response from the server is in fact a user and not a message
@@ -16,7 +19,7 @@ export default function UserContext(props) {
   }, [data, isLoading, setCurrentUser]);
 
   const fetchCurrentlyLoggedIn = async () => {
-    const req = await fetch("/user");
+    const req = await fetch(url);
     const res = await req.json();
     setData(res);
     setIsLoading(false);
@@ -26,6 +29,7 @@ export default function UserContext(props) {
   // otherwise the conditions to verify that the user is not logged in will never be true
   useEffect(() => {
     fetchCurrentlyLoggedIn();
+    //eslint-disable-next-line
   }, []);
 
   return (

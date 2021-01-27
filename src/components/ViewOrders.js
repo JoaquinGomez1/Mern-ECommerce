@@ -6,7 +6,9 @@ import green from "@material-ui/core/colors/green";
 import LoadingComponent from "./LoadingComponent";
 
 export default function ViewOrders() {
-  const url = "/orders";
+  const url = process.env.REACT_APP_FETCH_LOCATION
+    ? process.env.REACT_APP_FETCH_LOCATION + "/orders"
+    : "/orders";
   const { data, isLoading } = useFetch(url);
 
   return (

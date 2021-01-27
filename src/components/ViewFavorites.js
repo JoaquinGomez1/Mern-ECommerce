@@ -8,7 +8,9 @@ import LoadingComponent from "./LoadingComponent";
 import { useTheme } from "@material-ui/core/styles";
 
 export default function ViewFavorites() {
-  const url = "/user/favorites";
+  const url = process.env.REACT_APP_FETCH_LOCATION
+    ? process.env.REACT_APP_FETCH_LOCATION + "/user/favorites"
+    : "/user/favorites";
   const { data, isLoading, errorMessage } = useFetch(url);
   const history = useHistory();
 

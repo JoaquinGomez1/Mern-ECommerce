@@ -31,6 +31,9 @@ export default function CardPayment(props) {
   const [clientAddress, setClientAddress] = useState(
     currentUser?.address || ""
   );
+  const url = process.env.REACT_APP_FETCH_LOCATION
+    ? process.env.REACT_APP_FETCH_LOCATION + "/user/historyy"
+    : "/user/historyy";
 
   const handleModalClose = () => {
     setOpen(false);
@@ -67,7 +70,7 @@ export default function CardPayment(props) {
         body: JSON.stringify({ shoppingHistory: shoppingDetails }),
       };
 
-      fetch("/user/historyy", reqHeaders);
+      fetch(url, reqHeaders);
     }
   };
 
@@ -87,7 +90,10 @@ export default function CardPayment(props) {
       body: JSON.stringify(data),
     };
     const url = "/orders/new";
-    const req = await fetch(url, reqHeaders);
+    const req = await fetch(
+      process.env.REACT_APP_FETCH_LOCATION || url,
+      reqHeaders
+    );
     const successfullResponse = req.status === 200;
 
     if (successfullResponse) {

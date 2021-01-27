@@ -12,14 +12,11 @@ export default function Pagination(props) {
   const [prevPage, setPrevPage] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log(data);
-
   useEffect(() => {
     if (data) {
       setNextPage(data.nextPage);
       setPrevPage(data.prevPage);
     }
-    console.log(data);
   }, [setNextPage, setPrevPage, data]);
 
   const NewFetch = async (param) => {

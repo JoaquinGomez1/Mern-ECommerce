@@ -17,10 +17,13 @@ export default function UserLogin() {
     },
     body: JSON.stringify(loginData),
   };
+  const url = process.env.REACT_APP_FETCH_LOCATION
+    ? process.env.REACT_APP_FETCH_LOCATION + "/login"
+    : "/login";
 
   const sendData = async (e) => {
     e.preventDefault();
-    const req = await fetch("/login", reqHeaders);
+    const req = await fetch(url, reqHeaders);
     const data = await req.json();
 
     if (req.status === 200) {

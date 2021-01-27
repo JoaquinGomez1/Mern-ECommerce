@@ -28,6 +28,9 @@ export default function EditProductItem({
 
   const sendUpdateRequest = async () => {
     if (!product._id) return console.log("No product Id provided"); // Debuging only
+    const url = process.env.REACT_APP_FETCH_LOCATION
+      ? process.env.REACT_APP_FETCH_LOCATION + "/products/modify"
+      : "/products/modify";
 
     const reqHeaders = {
       method: "POST",
@@ -36,7 +39,7 @@ export default function EditProductItem({
       },
       body: JSON.stringify({ fields }),
     };
-    const req = await fetch("/products/modify", reqHeaders);
+    const req = await fetch(url, reqHeaders);
     const res = await req.json();
     if (req.status === 200)
       setResponse({ message: "Succesfully Updated", status: true });

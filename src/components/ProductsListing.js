@@ -8,7 +8,9 @@ import "../static/css/ProductListing.css";
 import Loading from "./LoadingComponent";
 
 export default function ProductsListing({ location }) {
-  let url = "/products";
+  let url = process.env.REACT_APP_FETCH_LOCATION
+    ? process.env.REACT_APP_FETCH_LOCATION + "/products/"
+    : "/products/";
   if (location.search) url += location.search;
   const { data, setData, isLoading } = useFetch(url);
 

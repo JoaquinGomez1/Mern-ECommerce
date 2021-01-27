@@ -60,10 +60,13 @@ const useStyles = makeStyles((theme) => ({
 export default function UserView() {
   const { currentUser, setCurrentUser } = useContext(myUserContext);
   const classes = useStyles();
+  const url = process.env.REACT_APP_FETCH_LOCATION
+    ? process.env.REACT_APP_FETCH_LOCATION + "/logout"
+    : "/logout";
 
   const handleLogout = () => {
     setCurrentUser(); // ---> Sets current user to undefined
-    fetch("/logout");
+    fetch(url);
   };
   const [views, setViews] = useState([
     {

@@ -6,7 +6,9 @@ import "../static/css/ShoppingHistory.css";
 import LoadingComponent from "./LoadingComponent";
 
 export default function ShoppingHistory() {
-  const url = "/user/history";
+  const url = process.env.REACT_APP_FETCH_LOCATION
+    ? process.env.REACT_APP_FETCH_LOCATION + "/user/history"
+    : "/user/history";
   const { data, isLoading, errorMessage } = useFetch(url);
   const theme = useTheme();
   const secondaryMainColor = theme.palette.secondary.main;

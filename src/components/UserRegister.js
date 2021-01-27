@@ -23,6 +23,9 @@ export default function UserRegister() {
     },
     body: JSON.stringify(registerData),
   };
+  const url = process.env.REACT_APP_FETCH_LOCATION
+    ? process.env.REACT_APP_FETCH_LOCATION + "/register"
+    : "/register";
 
   const handleChange = (event) => {
     const field = event.target.name;
@@ -31,7 +34,7 @@ export default function UserRegister() {
   };
 
   const handleSubmit = async () => {
-    const req = await fetch("/register", reqHeaders);
+    const req = await fetch(url, reqHeaders);
     const response = await req.json();
 
     if (req.status < 300) {

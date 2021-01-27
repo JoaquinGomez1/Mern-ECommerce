@@ -5,10 +5,13 @@ export const MainProductsListContext = React.createContext();
 export default function MainProductsContext(props) {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const url = process.env.REACT_APP_FETCH_LOCATION
+    ? process.env.REACT_APP_FETCH_LOCATION + "/products"
+    : "/products";
 
   const fetchData = async () => {
     setIsLoading(true);
-    const req = await fetch("/products");
+    const req = await fetch(url);
     const data = await req.json();
     setProducts(data.results);
     setIsLoading(false);
@@ -16,6 +19,7 @@ export default function MainProductsContext(props) {
 
   useLayoutEffect(() => {
     fetchData();
+    //eslint-disable-next-line
   }, []);
 
   return (
