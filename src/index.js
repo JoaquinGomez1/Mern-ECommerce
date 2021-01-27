@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
+import Provider from "./Provider";
 
 import { ThemeProvider } from "@material-ui/core/styles";
 import MuiCustomTheme from "./MuiTheme";
@@ -9,7 +9,7 @@ import MuiCustomTheme from "./MuiTheme";
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={MuiCustomTheme}>
-      <App />
+      <Provider />
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")

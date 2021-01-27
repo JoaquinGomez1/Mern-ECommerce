@@ -7,7 +7,7 @@ import { useTheme } from "@material-ui/core/styles";
 import "../static/css/ProductCarousel.css";
 
 export default function FeaturedProducts() {
-  const [products] = useContext(MainProductsListContext);
+  const { products } = useContext(MainProductsListContext);
   const history = useHistory();
 
   const redirectTo = (id) => {

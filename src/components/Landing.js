@@ -12,7 +12,7 @@ import "../transition.css";
 import { MainProductsListContext } from "../context/MainProductsContext";
 
 export default function Landing() {
-  const [products] = useContext(MainProductsListContext);
+  const { products } = useContext(MainProductsListContext);
   const history = useHistory();
 
   const redirecTo = (id) => {

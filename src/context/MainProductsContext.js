@@ -3,13 +3,15 @@ import React, { useState, useLayoutEffect } from "react";
 export const MainProductsListContext = React.createContext();
 
 export default function MainProductsContext(props) {
-  const [mainProducts, setMainProducts] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async () => {
+    setIsLoading(true);
     const req = await fetch("/products");
-    console.log(req);
     const data = await req.json();
-    setMainProducts(data.results);
+    setProducts(data.results);
+    setIsLoading(false);
   };
 
   useLayoutEffect(() => {
@@ -18,7 +20,7 @@ export default function MainProductsContext(props) {
 
   return (
     <MainProductsListContext.Provider
-      value={[mainProducts, setMainProducts]}
+      value={{ products, setProducts, isLoading }}
       {...props}
     />
   );
