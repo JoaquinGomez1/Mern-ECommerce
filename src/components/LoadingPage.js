@@ -29,8 +29,10 @@ export default function LoadingPage() {
           Welcome!
         </Typography>
         <Typography variant="h6" style={{ color: "rgba(255,255,255,.8)" }}>
-          If this is your first time today, please wait a few seconds for our
-          backend to respond.
+          If this is your first time visiting us today
+        </Typography>
+        <Typography variant="h6" style={{ color: "rgba(255,255,255,.8)" }}>
+          please wait a few seconds for our backend to respond.
         </Typography>
       </div>
     </div>
