@@ -3,40 +3,51 @@ import { Typography } from "@material-ui/core";
 import useFetch from "../hooks/useFetch";
 import Chip from "@material-ui/core/Chip";
 import green from "@material-ui/core/colors/green";
+import LoadingComponent from "./LoadingComponent";
 
 export default function ViewOrders() {
   const url = "/orders";
-  const { data } = useFetch(url);
+  const { data, isLoading } = useFetch(url);
 
   return (
-    <div className="componentTransition">
-      <Typography variant="h4">View orders</Typography>
-      <table>
-        <tr>
-          <th>Order Id #</th>
-          <th>Date of Order</th>
-          <th>Client's Name</th>
-          <th>Total</th>
-          <th>Completed</th>
-          <th>Actions</th>
-        </tr>
-        {data?.results?.map((order) => (
-          <OrderView order={order} />
-        ))}
-      </table>
+    <div className="componentTransition shoppingHistory-page">
+      {isLoading ? (
+        <LoadingComponent />
+      ) : (
+        <>
+          <Typography variant="h4" style={{ margin: "20px 0" }}>
+            View orders
+          </Typography>
+          <table>
+            <tr>
+              <th>Order Id #</th>
+              <th>Date of Order</th>
+              <th>Client's Name</th>
+              <th>Client's Address</th>
+              <th>Total</th>
+              <th>Completed</th>
+              <th>Actions</th>
+            </tr>
+            {data?.results?.map((order) => (
+              <OrderView order={order} />
+            ))}
+          </table>
+        </>
+      )}
     </div>
   );
 }
 
 const OrderView = ({ order }) => {
-  const [completed, setCompleted] = useState(order.completed);
+  const [completed] = useState(order.completed);
 
   return (
     <tr>
       <td>{order._id}</td>
       <td>{order.date}</td>
       <td>{order.clientName}</td>
-      <td>{order.total}</td>
+      <td>{order.address}</td>
+      <td>$ {order.total || 0}</td>
       <td>
         <Chip
           label={completed ? "Completed" : "Not Completed"}
@@ -45,6 +56,7 @@ const OrderView = ({ order }) => {
           {" "}
         </Chip>
       </td>
+      <div className="flex"></div>
     </tr>
   );
 };

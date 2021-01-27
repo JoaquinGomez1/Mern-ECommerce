@@ -1,6 +1,7 @@
 {
   "name": "electroniks-ecommerce",
   "proxy": "http://localhost:3100/",
+  "secure": false,
   "version": "0.1.0",
   "private": true,
   "dependencies": {
