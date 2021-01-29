@@ -6,7 +6,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { myUserContext } from "../context/UserContext";
 
 const useStyles = makeStyles((theme) => ({
-  header: {},
   headerIcon: {
     padding: theme.spacing(4),
   },

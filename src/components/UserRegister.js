@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { myUserContext } from "../context/UserContext";
 import RegisterForm from "./RegisterForm";
+import { HEADERS_POST } from "../headers";
 
 export default function UserRegister() {
   // Container - view Pattern --- Container component
@@ -16,13 +17,8 @@ export default function UserRegister() {
     phoneNumber: "",
   });
   const history = useHistory();
-  const reqHeaders = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(registerData),
-  };
+  const reqHeaders = HEADERS_POST;
+  reqHeaders.body = JSON.stringify(registerData);
   const url = process.env.REACT_APP_FETCH_LOCATION
     ? process.env.REACT_APP_FETCH_LOCATION + "/register"
     : "/register";

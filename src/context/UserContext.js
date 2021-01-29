@@ -10,6 +10,15 @@ export default function UserContext(props) {
     ? process.env.REACT_APP_FETCH_LOCATION + "/user"
     : "/user";
 
+  const reqHeaders = {
+    method: "GET",
+    headers: {
+      "Access-Control-Allow-Origin": "http://localhost:3000/user",
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  };
+
   // At this point we are trying to determine if the user is already logged in the server or not
   // the data.email condition verifies that the response from the server is in fact a user and not a message
   useEffect(() => {
@@ -19,7 +28,7 @@ export default function UserContext(props) {
   }, [data, isLoading, setCurrentUser]);
 
   const fetchCurrentlyLoggedIn = async () => {
-    const req = await fetch(url);
+    const req = await fetch(url, reqHeaders);
     const res = await req.json();
     setData(res);
     setIsLoading(false);

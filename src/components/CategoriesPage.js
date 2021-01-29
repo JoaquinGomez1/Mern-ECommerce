@@ -6,12 +6,13 @@ import ProductCard from "./ProductCard";
 import { useHistory } from "react-router-dom";
 import LoadingComponent from "./LoadingComponent";
 import CategoryCard from "./CategoryCard";
+import { HEADERS_GET } from "../headers";
 
 export default function CategoriesPage() {
   const url = process.env.REACT_APP_FETCH_LOCATION
     ? process.env.REACT_APP_FETCH_LOCATION + "/categories"
     : "/categories";
-  const { data, setData, isLoading, setIsLoading } = useFetch(url);
+  const { data, setData, isLoading, setIsLoading } = useFetch(url, HEADERS_GET);
   const [wasFetched, setWasFetched] = useState(false);
 
   const history = useHistory();
@@ -19,7 +20,7 @@ export default function CategoriesPage() {
   const lookForCategory = async (categoryName) => {
     setIsLoading(true);
     const url = `/categories/search?search=${categoryName}`;
-    const req = await fetch(process.env.REACT_APP_FETCH_LOCATION || url);
+    const req = await fetch(url, HEADERS_GET);
     const res = await req.json();
     setWasFetched(true);
     res && setData(res);

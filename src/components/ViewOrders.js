@@ -9,7 +9,15 @@ export default function ViewOrders() {
   const url = process.env.REACT_APP_FETCH_LOCATION
     ? process.env.REACT_APP_FETCH_LOCATION + "/orders"
     : "/orders";
-  const { data, isLoading } = useFetch(url);
+  const reqHeaders = {
+    method: "GET",
+    headers: {
+      "Access-Control-Allow-Origin": "http://localhost:3000",
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  };
+  const { data, isLoading } = useFetch(url, reqHeaders);
 
   return (
     <div className="componentTransition shoppingHistory-page">

@@ -11,7 +11,15 @@ export default function ViewFavorites() {
   const url = process.env.REACT_APP_FETCH_LOCATION
     ? process.env.REACT_APP_FETCH_LOCATION + "/user/favorites"
     : "/user/favorites";
-  const { data, isLoading, errorMessage } = useFetch(url);
+  const reqHeaders = {
+    method: "GET",
+    headers: {
+      "Access-Control-Allow-Origin": "http://localhost:3000",
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  };
+  const { data, isLoading, errorMessage } = useFetch(url, reqHeaders);
   const history = useHistory();
 
   const theme = useTheme();

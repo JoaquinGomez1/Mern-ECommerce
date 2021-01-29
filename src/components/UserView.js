@@ -25,6 +25,8 @@ import UserInformation from "./UserInformation";
 import ShoppingHistory from "./ShoppingHistory";
 import ViewOrders from "./ViewOrders";
 
+import { HEADERS_GET } from "../headers";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -60,13 +62,14 @@ const useStyles = makeStyles((theme) => ({
 export default function UserView() {
   const { currentUser, setCurrentUser } = useContext(myUserContext);
   const classes = useStyles();
+  const reqHeaders = HEADERS_GET;
   const url = process.env.REACT_APP_FETCH_LOCATION
     ? process.env.REACT_APP_FETCH_LOCATION + "/logout"
     : "/logout";
 
   const handleLogout = () => {
     setCurrentUser(); // ---> Sets current user to undefined
-    fetch(url);
+    fetch(url, reqHeaders);
   };
   const [views, setViews] = useState([
     {

@@ -4,12 +4,14 @@ import useFetch from "../hooks/useFetch";
 import Pagination from "./Pagination";
 import "../static/css/ShoppingHistory.css";
 import LoadingComponent from "./LoadingComponent";
+import { HEADERS_GET } from "../headers";
 
 export default function ShoppingHistory() {
   const url = process.env.REACT_APP_FETCH_LOCATION
     ? process.env.REACT_APP_FETCH_LOCATION + "/user/history"
     : "/user/history";
-  const { data, isLoading, errorMessage } = useFetch(url);
+
+  const { data, isLoading, errorMessage } = useFetch(url, HEADERS_GET);
   const theme = useTheme();
   const secondaryMainColor = theme.palette.secondary.main;
 
@@ -22,7 +24,11 @@ export default function ShoppingHistory() {
         <LoadingComponent />
       ) : data.length > 0 ? (
         <Pagination>
-          {!isLoading && data && data.map((each) => <DateCard data={each} />)}
+          {!isLoading &&
+            data &&
+            data
+              .slice(0, 15)
+              .map((each) => <DateCard key={Math.random()} data={each} />)}
         </Pagination>
       ) : (
         <Typography
