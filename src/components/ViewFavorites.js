@@ -7,19 +7,13 @@ import { useHistory } from "react-router-dom";
 import LoadingComponent from "./LoadingComponent";
 import { useTheme } from "@material-ui/core/styles";
 
+import { HEADERS_GET } from "../headers";
+const url = process.env.REACT_APP_FETCH_LOCATION
+  ? process.env.REACT_APP_FETCH_LOCATION + "/user/favorites"
+  : "/user/favorites";
+
 export default function ViewFavorites() {
-  const url = process.env.REACT_APP_FETCH_LOCATION
-    ? process.env.REACT_APP_FETCH_LOCATION + "/user/favorites"
-    : "/user/favorites";
-  const reqHeaders = {
-    method: "GET",
-    headers: {
-      "Access-Control-Allow-Origin": "http://localhost:3000",
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-  };
-  const { data, isLoading, errorMessage } = useFetch(url, reqHeaders);
+  const { data, isLoading, errorMessage } = useFetch(url, HEADERS_GET);
   const history = useHistory();
 
   const theme = useTheme();
