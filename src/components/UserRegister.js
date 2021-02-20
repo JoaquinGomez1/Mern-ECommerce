@@ -4,6 +4,10 @@ import { myUserContext } from "../context/UserContext";
 import RegisterForm from "./RegisterForm";
 import { HEADERS_POST } from "../headers";
 
+const url = process.env.REACT_APP_FETCH_LOCATION
+  ? process.env.REACT_APP_FETCH_LOCATION + "/register"
+  : "/register";
+
 export default function UserRegister() {
   // Container - view Pattern --- Container component
   const { currentUser, setCurrentUser } = useContext(myUserContext);
@@ -19,9 +23,6 @@ export default function UserRegister() {
   const history = useHistory();
   const reqHeaders = HEADERS_POST;
   reqHeaders.body = JSON.stringify(registerData);
-  const url = process.env.REACT_APP_FETCH_LOCATION
-    ? process.env.REACT_APP_FETCH_LOCATION + "/register"
-    : "/register";
 
   const handleChange = (event) => {
     const field = event.target.name;

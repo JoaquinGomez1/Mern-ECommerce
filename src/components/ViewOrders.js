@@ -4,20 +4,14 @@ import useFetch from "../hooks/useFetch";
 import Chip from "@material-ui/core/Chip";
 import green from "@material-ui/core/colors/green";
 import LoadingComponent from "./LoadingComponent";
+import { HEADERS_GET } from "../headers";
+
+const url = process.env.REACT_APP_FETCH_LOCATION
+  ? process.env.REACT_APP_FETCH_LOCATION + "/orders"
+  : "/orders";
 
 export default function ViewOrders() {
-  const url = process.env.REACT_APP_FETCH_LOCATION
-    ? process.env.REACT_APP_FETCH_LOCATION + "/orders"
-    : "/orders";
-  const reqHeaders = {
-    method: "GET",
-    headers: {
-      "Access-Control-Allow-Origin": "http://localhost:3000",
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-  };
-  const { data, isLoading } = useFetch(url, reqHeaders);
+  const { data, isLoading } = useFetch(url, HEADERS_GET);
 
   return (
     <div className="componentTransition shoppingHistory-page">

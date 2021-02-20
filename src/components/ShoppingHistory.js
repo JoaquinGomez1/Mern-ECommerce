@@ -6,11 +6,11 @@ import "../static/css/ShoppingHistory.css";
 import LoadingComponent from "./LoadingComponent";
 import { HEADERS_GET } from "../headers";
 
-export default function ShoppingHistory() {
-  const url = process.env.REACT_APP_FETCH_LOCATION
-    ? process.env.REACT_APP_FETCH_LOCATION + "/user/history"
-    : "/user/history";
+const url = process.env.REACT_APP_FETCH_LOCATION
+  ? process.env.REACT_APP_FETCH_LOCATION + "/user/history"
+  : "/user/history";
 
+export default function ShoppingHistory() {
   const { data, isLoading, errorMessage } = useFetch(url, HEADERS_GET);
   const theme = useTheme();
   const secondaryMainColor = theme.palette.secondary.main;

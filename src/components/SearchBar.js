@@ -14,8 +14,8 @@ export default function SearchBar() {
     history.push(searchUrl);
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") fetchProduct();
+  const handleKeyDown = ({ key }) => {
+    if (key === "Enter") fetchProduct();
   };
 
   return (

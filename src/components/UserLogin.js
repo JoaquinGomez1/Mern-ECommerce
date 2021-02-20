@@ -5,6 +5,10 @@ import { myUserContext } from "../context/UserContext";
 import LoginForm from "./LoginForm";
 import { HEADERS_POST } from "../headers";
 
+const url = process.env.REACT_APP_FETCH_LOCATION
+  ? process.env.REACT_APP_FETCH_LOCATION + "/login"
+  : "/login";
+
 export default function UserLogin() {
   const [loginData, setLoginData] = useState({ username: "", password: "" });
   const history = useHistory();
@@ -12,10 +16,6 @@ export default function UserLogin() {
   const [wasError, setWasError] = useState();
   const reqHeaders = HEADERS_POST;
   reqHeaders.body = JSON.stringify(loginData);
-
-  const url = process.env.REACT_APP_FETCH_LOCATION
-    ? process.env.REACT_APP_FETCH_LOCATION + "/login"
-    : "/login";
 
   const sendData = async (e) => {
     e.preventDefault();
