@@ -58,14 +58,14 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#f0f0f0",
   },
 }));
+const url = process.env.REACT_APP_FETCH_LOCATION
+  ? process.env.REACT_APP_FETCH_LOCATION + "/logout"
+  : "/logout";
 
 export default function UserView() {
   const { currentUser, setCurrentUser } = useContext(myUserContext);
   const classes = useStyles();
   const reqHeaders = HEADERS_GET;
-  const url = process.env.REACT_APP_FETCH_LOCATION
-    ? process.env.REACT_APP_FETCH_LOCATION + "/logout"
-    : "/logout";
 
   const handleLogout = () => {
     setCurrentUser(); // ---> Sets current user to undefined
