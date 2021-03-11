@@ -64,7 +64,7 @@ export default function CheckoutView() {
 
       <div
         className="checkout-bottom"
-        style={{ display: "flex", flexWrap: "wrap", alignItems: "center" }}
+        style={{ display: "flex", flexWrap: "no-wrap", alignItems: "center" }}
       >
         <h4 style={{ margin: "0 1rem 0" }}>Total Price: ${totalPrice}</h4>
         <Button

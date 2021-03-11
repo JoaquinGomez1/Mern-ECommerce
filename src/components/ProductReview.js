@@ -1,6 +1,7 @@
 import React from "react";
 import useFetch from "../hooks/useFetch";
 import { Grid, Typography, Box, Paper } from "@material-ui/core";
+import { useTheme } from "@material-ui/core/styles";
 import BuyButton from "./BuyButton";
 import LoadingComponent from "./LoadingComponent";
 
@@ -10,6 +11,7 @@ export default function ProductReview(props) {
       `/products/${props.match.params.id}`
     : `/products/${props.match.params.id}`;
   const { data, isLoading, errorMessage } = useFetch(url);
+  const theme = useTheme();
 
   if (errorMessage) {
     return <h1>{errorMessage}</h1>;
@@ -40,7 +42,13 @@ export default function ProductReview(props) {
           justify="center"
           className="componentTransition"
         >
-          <Paper style={{ padding: "30px" }}>
+          <Paper
+            style={{
+              padding: "30px",
+              width: "80vw",
+              maxWidth: theme.breakpoints.values.md,
+            }}
+          >
             <Box display="flex" className="product-listing-container">
               <img
                 style={{ maxWidth: "100%" }}
@@ -70,6 +78,7 @@ export default function ProductReview(props) {
                             data.qty < 1 || !data.isInStock
                               ? "red"
                               : "rgba(0,0,0,.5)",
+                          margin: "32px 0",
                         }}
                       >
                         Products available: {data.qty}

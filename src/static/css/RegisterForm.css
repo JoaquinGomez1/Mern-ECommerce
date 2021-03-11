@@ -22,6 +22,10 @@
   opacity: 0.75;
 }
 
+.credentials-inputs {
+  padding: 0 32px;
+}
+
 #login-username,
 #login-password {
   margin: 1rem 0;

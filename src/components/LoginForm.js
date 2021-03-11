@@ -16,15 +16,15 @@ export default function LoginForm({ wasError, sendData, handleChange }) {
         container
         direction="column"
         justify="center"
-        style={{ height: "calc(100vh - 80px)" }}
+        style={{ minHeight: "calc(100vh - 80px)" }}
       >
-        <h1>Log in</h1>
         <form
           className="flex d-column credentials-form-wrapper"
           onSubmit={sendData}
           onChange={handleChange}
         >
           <div className="flex d-column credentials-form-container">
+            <h1>Log in</h1>
             <TextField id="login-username" label="Username" name="username" />
             <TextField
               id="login-password"
